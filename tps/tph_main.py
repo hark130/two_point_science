@@ -24,7 +24,7 @@ def main() -> None:
 
     # DO IT
     # Form Graph
-    print(f'NUMBER OF NODES: {graph_obj.number_of_nodes()}')  # DEBUGGING
+    # print(f'NUMBER OF NODES: {graph_obj.number_of_nodes()}')  # DEBUGGING
     for illness_obj in hospital_obj.get_illness_objects():
         # Diagnostic room edges
         temp_diag_list = illness_obj.get_diag()
@@ -39,8 +39,8 @@ def main() -> None:
         if temp_treat_str:
             graph_obj.add_edge(temp_diag_list[len(temp_diag_list) - 1], temp_treat_str)
         else:
-            print(hospital_obj.get_name())
-            print(illness_obj.get_name())
+            # print(hospital_obj.get_name())  # DEBUGGING
+            # print(illness_obj.get_name())  # DEBUGGING
             raise NotImplementedError(f'{hospital_obj.get_name()} has an illness, '
                 f'{illness_obj.get_name()}, missing a treatment room.')
 

@@ -80,7 +80,7 @@ class TPHIllness:
         illness_treat = None  # Treatment room
 
         # INTERNAL VALIDATION
-        print(f'ILLNESS TREATMENT ROOM: {self._illness_treat}')  # DEBUGGING
+        # print(f'ILLNESS TREATMENT ROOM: {self._illness_treat}')  # DEBUGGING
         if isinstance(self._illness_treat, str) and self._illness_treat in self.treat_room_list:
             illness_treat = self._illness_treat
 

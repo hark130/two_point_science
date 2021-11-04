@@ -46,7 +46,7 @@ class TPHHospital:
         illness_list = None  # List of illnesses
 
         # INTERNAL VALIDATION
-        print(self._hospital_illnesses)  # DEBUGGING
+        # print(self._hospital_illnesses)  # DEBUGGING
         if isinstance(self._hospital_illnesses, list):
             illness_list = self._hospital_illnesses
         elif isinstance(self._hospital_illnesses, str):
