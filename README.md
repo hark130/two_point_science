@@ -28,22 +28,24 @@ python -m tps
 ### Future Feature Table
 
 | Feature Number | Status | Branch Name | Description |
-| :------------: | :---------- | :---------- |
-| 1 |  | wheel | Programmatically build a wheel that can be installed |
-| 2 |  | cli | Create a user interface (e.g., CLI menu, config file)  |
-| 3 |  | color | [Color code nodes](https://networkx.org/documentation/latest/auto_examples/drawing/plot_custom_node_icons.html#sphx-glr-auto-examples-drawing-plot-custom-node-icons-py) based on room type |
-| 4 |  | alignment | Is there a better way to align the node labels? |
-| 5 |  | names | Refactor tph_constants to use MACROS for proper names |
-| 6 |  | weight | Define key illneses per hospital (e.g., Grockle Bay + Cubism) |
-| 7 |  | suggest_rooms | Suggest number of rooms based on hospital illness list |
-| 8 |  | suggest_staff | Suggest staff list based on suggested room list |
+| :------------: | :----: | :---------- | :---------- |
+| 1 | ❔ | wheel | Programmatically build a wheel that can be installed |
+| 2 | ❔ | cli | Create a user interface (e.g., CLI menu, config file)  |
+| 3 | ❔ | color | [Color code nodes](https://networkx.org/documentation/latest/auto_examples/drawing/plot_custom_node_icons.html#sphx-glr-auto-examples-drawing-plot-custom-node-icons-py) based on room type |
+| 4 | ❔ | alignment | Is there a better way to align the node labels? |
+| 5 | ❔ | names | Refactor tph_constants to use MACROS for proper names |
+| 6 | ❔ | weight | Define key illneses per hospital (e.g., Grockle Bay + Cubism) |
+| 7 | ❔ | suggest_rooms | Suggest number of rooms based on hospital illness list |
+| 8 | ❔ | suggest_staff | Suggest staff list based on suggested room list |
 |   |  |  |
 
 ### Table Legend
 
 | Icon | Meaning |
 | :--: | :------ |
-|  |  |
+| ❔ | Not yet started |
+| 🚧 | In progress |
+| ✔️ | Finished |
 
 ## RESOURCES
 
