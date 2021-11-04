@@ -10,10 +10,10 @@ def main() -> None:
     # LOCAL VARIABLES
     user_input = 'Grockle Bay'              # Hard-coded in lieu of menu feature
     hospital_obj = TPHHospital(user_input)  # The TPH Hospital object
-    graph_obj = nx.Graph()                  # Networkx Graph object
+    # graph_obj = nx.Graph()                  # Networkx Graph object (Doesn't do bi-directional arrows)
     # graph_obj = nx.DiGraph()                # Networkx DiGraph object
     # graph_obj = nx.MultiGraph()             # Networkx MultiGraph object
-    # graph_obj = nx.MultiDiGraph()           # Networkx MultiDiGraph object draws arrows (CURRENT FAV)
+    graph_obj = nx.MultiDiGraph()           # Networkx MultiDiGraph object draws bi-directional arrows (CURRENT FAV)
     # graph_obj = nx.OrderedDiGraph()         # Networkx OrderedDiGraph object draws arrows
     # graph_obj = nx.dodecahedral_graph()     # From the help (Don't like the extra graph)
     temp_diag_list = []                     # Temporary list of diag rooms for a given illness
