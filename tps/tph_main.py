@@ -6,9 +6,14 @@ import networkx as nx
 from tps.tph_hospital import TPHHospital
 
 
+# CURR_HOSPITAL = 'Blighton'  # Placeholder for user input
+# CURR_HOSPITAL = 'Smogley'  # Placeholder for user input
+CURR_HOSPITAL = 'Grockle Bay'  # Placeholder for user input
+
+
 def main() -> None:
     # LOCAL VARIABLES
-    user_input = 'Grockle Bay'              # Hard-coded in lieu of menu feature
+    user_input = CURR_HOSPITAL              # Hard-coded in lieu of menu feature
     hospital_obj = TPHHospital(user_input)  # The TPH Hospital object
     # graph_obj = nx.Graph()                  # Networkx Graph object (Doesn't do bi-directional arrows)
     # graph_obj = nx.DiGraph()                # Networkx DiGraph object
@@ -46,9 +51,7 @@ def main() -> None:
 
     print(f'NUMBER OF NODES: {graph_obj.number_of_nodes()}')  # DEBUGGING
     # Print Graph
-    # nx.draw(graph_obj, with_labels=True)
-    # nx.draw(graph_obj, pos=nx.spring_layout(graph_obj), with_labels=True)  # use spring layout
-    nx.draw(graph_obj, arrows=True, arrowsize=20, with_labels=True, node_shape='8', node_size=900)
+    ##############################################################################################
     # import networkx as nx
     # help(nx.draw_networkx)  # For options
     # OPTIONS:
@@ -65,6 +68,31 @@ def main() -> None:
     #   p - Plus (filled)
     #   h - Hexagon1
     #   8 - Octagon
+    ##############################################################################################
+
+    ##############################################################################################
+    # import networkx as nx
+    # help(nx.drawing.layout)
+    # FUNCTIONS
+    # bipartite_layout  # Nodes are in a straight line... do not like
+    # circular_layout  # I kinda like this
+    # fruchterman_reingold_layout  # This is the layout that made me look for a better layout
+    # kamada_kawai_layout  # Better distribution of nodes, facilitates intuitive interpretation
+    # multipartite_layout  # Needs a subset_key
+    # planar_layout  # Apparently, my graph is not planar
+    # random_layout  # Tough to read; Even if this layout is useful, it's not useful here
+    # rescale_layout  # Needs a shape attribute
+    # shell_layout  # A better version of the circle; More intuitive than circle but not as much as kamada
+    # spectral_layout  # Zero use here
+    # spiral_layout  # Not as good as circle but better than random
+    # spring_layout  # Tough to read; This is the layout that made me look for a better layout
+    #
+    # FINALISTS
+    # kamada_kawai_layout  # Better distribution of nodes, facilitates intuitive interpretation
+    # shell_layout  # A better version of the circle; More intuitive than circle but not as much as kamada
+    #
+    ##############################################################################################
+    nx.draw(graph_obj, pos=nx.kamada_kawai_layout(graph_obj), arrows=True, arrowsize=20, with_labels=True, node_shape='8', node_size=900)
     plt.show()
 
 if __name__ == '__main__':
