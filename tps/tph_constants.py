@@ -9,8 +9,11 @@ Defines types and values used by the entire package.
 
 # Standard
 from collections import namedtuple
+
 # Third Party
+
 # Local
+
 
 # Data Types
 HospitalDetails = namedtuple('HospitalDetails', 'illness')

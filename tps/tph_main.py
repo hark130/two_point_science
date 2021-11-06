@@ -9,10 +9,12 @@ Defines main() which will construct and print a graphy for one Two Point Hospita
 """
 
 # Standard
+
 # Third Party
 # import matplotlib.pyplot as plt
 # import networkx as nx
 import graphviz as gv
+
 # Local
 from tps.tph_hospital import TPHHospital
 
