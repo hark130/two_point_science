@@ -120,6 +120,15 @@ TPH_HOSPITAL_DICT = {
     'Flemington': HospitalDetails(illness=[]),
     'Flottering': HospitalDetails(illness=[]),
     'Goldpan': HospitalDetails(illness=[]),
+    # https://two-point-hospital.fandom.com/wiki/Grockle_Bay
+    # TPH_NAME_HOSPITAL_GB:
+    # HospitalDetails(illness=['Denim Genes', 'Leopard Skin', 'Touch of Midas', 'Broken Face',
+    #                          'Hurty Leg', 'Shattered', 'Turtle Head', 'Pudding Blood',
+    #                          'Rock Bottom', 'Spontaneous Combustion', 'Misery Guts',
+    #                          'Verbal Diarrhoea', 'Emperor Complex', 'Inflated Ego', 'Mime Crisis',
+    #                          'Cubism', '8-bitten', 'Shock Horror', 'Floppy Discs', 'Heart Throb',
+    #                          'Gurning Loins', 'Jazz Hand', 'Lazy Bones', 'Mucky Feet']),
+    # Observed in game (see: res/Grockle Bay ?.png)
     TPH_NAME_HOSPITAL_GB:
     HospitalDetails(illness=[TPH_NAME_DISEASE_VD, 'Lazy Bones', 'Misery Guts', 'Mucky Feet',
                              'Mime Crisis', 'Cubism', 'Inflated Ego', 'Jazz Hand', 'Rock Bottom',
