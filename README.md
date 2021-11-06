@@ -71,11 +71,12 @@ python -m tps
 
 - [X] Add a CHANGELOG
 - [ ] Consider adding edges between the first diagnostic room and treatement room (to represent skilled staff with upgraded equipment (new feature?  Hospital Age: new (full path), skilled (GP->diag1->treat))
-- [ ] Add file comment blocks
-- [ ] Run Pylint
-- [ ] Run Pycodestyle
-- [ ] Define wiki (e.g., Usage, Release Steps, Code Review)
+- [X] Add file comment blocks
+- [X] Run Pylint
+- [X] Run Pycodestyle
+- [X] Define wiki (e.g., Usage, Release Steps, Code Review)
 - [ ] Find a way to deconflict "public record" and observations when it comes to the illness list for a given hospital
+	- [X] Grockle Bay
 
 ### BUGS
 
