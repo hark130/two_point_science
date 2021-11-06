@@ -2,6 +2,7 @@
 # Third Party
 import matplotlib.pyplot as plt
 import networkx as nx
+import graphviz as gv
 # Local
 from tps.tph_hospital import TPHHospital
 
@@ -18,7 +19,12 @@ def main() -> None:
     # graph_obj = nx.Graph()                  # Networkx Graph object (Doesn't do bi-directional arrows)
     # graph_obj = nx.DiGraph()                # Networkx DiGraph object
     # graph_obj = nx.MultiGraph()             # Networkx MultiGraph object
-    graph_obj = nx.MultiDiGraph()           # Networkx MultiDiGraph object draws bi-directional arrows (CURRENT FAV)
+    # graph_obj = nx.MultiDiGraph()           # Networkx MultiDiGraph object draws bi-directional arrows (CURRENT FAV)
+    # graph_obj = gv.Digraph('G', filename='test_none')  # Default is dot
+    graph_obj = gv.Digraph(name=CURR_HOSPITAL, filename=CURR_HOSPITAL+' (dot)', engine='dot', format='png')  # This is ok; Good arrangement
+    # graph_obj = gv.Digraph('G', filename='test_neato', engine='neato')  # Cluttered but consider this for smaller graphs
+    # graph_obj = gv.Digraph('G', filename='test_sfdp', engine='sfdp')  # Busy and small
+    # graph_obj = gv.Digraph('G', filename='test_fdp', engine='fdp')  # Busy
     # graph_obj = nx.OrderedDiGraph()         # Networkx OrderedDiGraph object draws arrows
     # graph_obj = nx.dodecahedral_graph()     # From the help (Don't like the extra graph)
     temp_diag_list = []                     # Temporary list of diag rooms for a given illness
@@ -35,21 +41,29 @@ def main() -> None:
         temp_diag_list = illness_obj.get_diag()
         if temp_diag_list:
             for index in range(0, len(temp_diag_list) - 1):
-                graph_obj.add_edge(temp_diag_list[index], temp_diag_list[index + 1])
+                # graph_obj.add_edge(temp_diag_list[index], temp_diag_list[index + 1])  # nx
+                graph_obj.edge(temp_diag_list[index], temp_diag_list[index + 1])  # gv
+                # graph_obj.edge(temp_diag_list[index], temp_diag_list[index + 1], label=illness_obj.get_name())  # gv
         else:
             raise NotImplementedError(f'{hospital_obj.get_name()} has an illness, '
                 f'{illness_obj.get_name()}, missing a list of diagnostic rooms.')
         # Treatment room edge
         temp_treat_str = illness_obj.get_treat()
         if temp_treat_str:
-            graph_obj.add_edge(temp_diag_list[len(temp_diag_list) - 1], temp_treat_str)
+            # graph_obj.add_edge(temp_diag_list[len(temp_diag_list) - 1], temp_treat_str)  # nx
+            graph_obj.edge(temp_diag_list[len(temp_diag_list) - 1], temp_treat_str)  # gv
+            # graph_obj.edge(temp_diag_list[len(temp_diag_list) - 1], temp_treat_str, label=illness_obj.get_name())  # gv
         else:
             # print(hospital_obj.get_name())  # DEBUGGING
             # print(illness_obj.get_name())  # DEBUGGING
             raise NotImplementedError(f'{hospital_obj.get_name()} has an illness, '
                 f'{illness_obj.get_name()}, missing a treatment room.')
 
-    print(f'NUMBER OF NODES: {graph_obj.number_of_nodes()}')  # DEBUGGING
+    ##############################################################################################
+    ########################################## NETWORKX ##########################################
+    ##############################################################################################
+
+    # print(f'NUMBER OF NODES: {graph_obj.number_of_nodes()}')  # DEBUGGING
     # Print Graph
     ##############################################################################################
     # import networkx as nx
@@ -92,8 +106,17 @@ def main() -> None:
     # shell_layout  # A better version of the circle; More intuitive than circle but not as much as kamada
     #
     ##############################################################################################
-    nx.draw(graph_obj, pos=nx.kamada_kawai_layout(graph_obj), arrows=True, arrowsize=20, with_labels=True, node_shape='8', node_size=900)
-    plt.show()
+    # graph_obj = nx.MultiDiGraph()           # Networkx MultiDiGraph object draws bi-directional arrows (CURRENT FAV)
+    # nx.draw(graph_obj, pos=nx.kamada_kawai_layout(graph_obj), arrows=True, arrowsize=20, with_labels=True, node_shape='8', node_size=900)  # nx
+    # nx.draw(graph_obj, pos=nx.kamada_kawai_layout(graph_obj), arrows=True, arrowsize=20, with_labels=True, node_shape='8', node_size=900)  # gv
+    # plt.show()
+
+    ##############################################################################################
+    ########################################## GRAPHVIZ ##########################################
+    ##############################################################################################
+    graph_obj.view()
+
+    # DONE
 
 if __name__ == '__main__':
     main()
