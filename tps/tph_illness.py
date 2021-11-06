@@ -17,7 +17,7 @@ class TPHIllness:
 
     def __init__(self, illness_name: str) -> None:
         """TPHIllness class ctor.
-        
+
         Creates an object for illness_name
 
         Raises:

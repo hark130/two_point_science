@@ -16,7 +16,7 @@ class TPHHospital:
 
     def __init__(self, hospital_name: str) -> None:
         """TPHHospital class ctor.
-        
+
         Creates an object for hospital_name
 
         Raises:
