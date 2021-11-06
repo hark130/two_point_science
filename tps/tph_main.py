@@ -25,10 +25,11 @@ def main() -> None:
     """Constructs and prints a graph for a hospital."""
     # LOCAL VARIABLES
     user_input = CURR_HOSPITAL              # Hard-coded in lieu of menu feature
+    engine = 'dot'                          # Engine used by graphviz
     hospital_obj = TPHHospital(user_input)  # The TPH Hospital object
     # graph_obj = gv.Digraph('G', filename='test_none')  # Default is dot
-    graph_obj = gv.Digraph(name=CURR_HOSPITAL, filename=CURR_HOSPITAL+' (dot)', engine='dot',
-                           format='png')  # This is ok; Good arrangement
+    graph_obj = gv.Digraph(name=CURR_HOSPITAL, filename=CURR_HOSPITAL+f' ({engine})',
+                           engine=engine, format='png')  # This is ok; Good arrangement
     # graph_obj = gv.Graph(name=CURR_HOSPITAL, filename=CURR_HOSPITAL+' (dot)', engine='dot',
     #                      format='png')  # Not as good... no arrows
     # graph_obj = gv.Digraph('G', filename='test_neato', engine='neato')  # Cluttered but useable
