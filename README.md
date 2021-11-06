@@ -12,7 +12,7 @@ The goal of this project is to programmatically aid the planning of each unique 
 
 ## DETAILS
 
-two_point_science is written in Python 3.8.10 and relies heavily on the matplotlib and networkx Python libraries.  It was developed in Ubuntu 20.04.3 LTS.
+two_point_science is written in Python 3.8.10 and relies heavily on the graphviz Python library.  It was developed in Ubuntu 20.04.3 LTS.
 
 ## FEATURES
 
