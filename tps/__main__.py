@@ -1,3 +1,12 @@
+"""Executes the Two Point Science package.
+
+Executes main() from the tph_main module.
+
+    Typical usage example:
+
+    python3 -m tps
+"""
+
 # Standard
 import sys
 # Third Party

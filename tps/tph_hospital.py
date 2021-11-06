@@ -1,3 +1,15 @@
+"""Defines the TPHHospital class.
+
+TPHHospital class validates and parses one hospital from the game Two Point Hospital.
+
+    Typical usage example:
+
+    site = TPHHospital('Grockle Bay')
+    print(f'Hospital: {site.get_name()}')     # Grockle Bay
+    for illness in site.get_illness_names():
+        print(f'    {illness}')
+"""
+
 # Standard
 from typing import List
 # Third Party

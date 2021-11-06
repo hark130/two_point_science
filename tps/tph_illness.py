@@ -1,3 +1,15 @@
+"""Defines the TPHIllness class.
+
+TPHIllness class validates and parses one illness from the game Two Point Hospital.
+
+    Typical usage example:
+
+    illness = TPHIllness('Clamp')
+    print(f'Illness: {illness.get_name()}')  # Clamp
+    diag_rooms = illness.get_diag()          # ["GP's Office"]
+    treat_rooms = illness.get_treat()        # 'Pharmacy'
+"""
+
 # Standard
 from typing import List
 # Third Party
@@ -52,7 +64,7 @@ class TPHIllness:
         # INTERNAL VALIDATION
         if isinstance(self._illness_diag, list):
             illness_diag = self._illness_diag
-        elif isinstance(self._illness_diag, 'str'):
+        elif isinstance(self._illness_diag, str):
             illness_diag = [self._illness_diag]
         if illness_diag:
             # Prepend GP's Room

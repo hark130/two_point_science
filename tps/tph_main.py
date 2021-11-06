@@ -1,3 +1,13 @@
+"""Defines the Two Point Science package entry point.
+
+Defines main() which will construct and print a graphy for one Two Point Hospital hospital.
+
+    Typical usage example:
+
+    from tps.tph_main import main
+    main()
+"""
+
 # Standard
 # Third Party
 # import matplotlib.pyplot as plt
@@ -12,6 +22,7 @@ CURR_HOSPITAL = 'Grockle Bay'  # Placeholder for user input
 
 
 def main() -> None:
+    """Constructs and prints a graph for a hospital."""
     # LOCAL VARIABLES
     user_input = CURR_HOSPITAL              # Hard-coded in lieu of menu feature
     hospital_obj = TPHHospital(user_input)  # The TPH Hospital object
