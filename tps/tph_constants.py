@@ -9,14 +9,65 @@ Illness_Details = namedtuple('Illness_Details', 'diagnostic treatment')
 Room_Details = namedtuple('Room_Details', 'purpose')
 
 # MACROS
+
+##################################################################################################
+######################################### DISEASE NAMES ##########################################
+##################################################################################################
+# NOTE: Disease macro names were truncated to represent the acronym (for names with more than
+#   one word) or just enough letters of the name to be unique (min: 2).
+TPH_NAME_DISEASE_PM = 'Premature Mummification'
+TPH_NAME_DISEASE_VD = 'Verbal Diarrhoea'
+
+##################################################################################################
+######################################### HOSPITAL NAMES #########################################
+##################################################################################################
+# NOTE: Hospital macro names were truncated to represent the acronym (for names with more than
+#   one word) or just enough letters of the name to be unique (min: 2).
+TPH_NAME_HOSPITAL_BL = 'Blighton'
+TPH_NAME_HOSPITAL_CF = 'Camouflage Falls'
+TPH_NAME_HOSPITAL_C24 = 'Chasm 24'
+TPH_NAME_HOSPITAL_CAT = 'Clockwise-above-Thyme'
+TPH_NAME_HOSPITAL_CBT = 'Clockwise-before-Thyme'
+TPH_NAME_HOSPITAL_CUT = 'Clockwise-upon-Thyme'
+TPH_NAME_HOSPITAL_CR = 'Croquembouche'
+TPH_NAME_HOSPITAL_DUB = 'Duckworth-upon-Bilge'
+TPH_NAME_HOSPITAL_FA = 'Fitzpocket Academy'
+TPH_NAME_HOSPITAL_FLE = 'Flemington'
+TPH_NAME_HOSPITAL_FLO = 'Flottering'
+TPH_NAME_HOSPITAL_GO = 'Goldpan'
+TPH_NAME_HOSPITAL_GB = 'Grockle Bay'
+TPH_NAME_HOSPITAL_HO = 'Hogsport'
+TPH_NAME_HOSPITAL_LB = 'Lower Bullocks'
+TPH_NAME_HOSPITAL_MD = 'Melt Downs'
+TPH_NAME_HOSPITAL_MU = 'Mitton University'
+TPH_NAME_HOSPITAL_MF = 'Mudbury Festival'
+TPH_NAME_HOSPITAL_ON = 'Old Newpoint'
+TPH_NAME_HOSPITAL_OV = 'Overgrowth'
+TPH_NAME_HOSPITAL_PR = 'Pebberley Reef'
+TPH_NAME_HOSPITAL_PW = 'Pelican Wharf'
+TPH_NAME_HOSPITAL_PS = 'Plywood Studios'
+TPH_NAME_HOSPITAL_RC = 'Roquefort Castle'
+TPH_NAME_HOSPITAL_RH = 'Rotting Hill'
+TPH_NAME_HOSPITAL_SM = 'Smogley'
+TPH_NAME_HOSPITAL_SP = 'Sweaty Palms'
+TPH_NAME_HOSPITAL_SW = 'Swelbard'
+TPH_NAME_HOSPITAL_TM = 'Topless Mountain'
+TPH_NAME_HOSPITAL_TU = 'Tumble'
+TPH_NAME_HOSPITAL_UH = 'Underlook Hotel'
+TPH_NAME_HOSPITAL_WA = 'Wanderoff'
+TPH_NAME_HOSPITAL_WI = 'Windsock'
+
+##################################################################################################
+########################################### ROOM NAMES ###########################################
+##################################################################################################
 TPH_NAME_ROOM_GP = "GP's Office"
-TPH_NAME_DISEASE_VERBAL = 'Verbal Diarrhoea'
+TPH_NAME_ROOM_CR = 'Cryptology'
 
 TPH_ROOM_DICT = {
     'Cardiology':Room_Details(purpose='Diagnostic'),
     'Chromatherapy':Room_Details(purpose='Treatment'),
     'Clown Clinic':Room_Details(purpose='Treatment'),
-    'Cryptology':Room_Details(purpose='Treatment'),
+    TPH_NAME_ROOM_CR:Room_Details(purpose='Treatment'),
     'De-Lux Clinic':Room_Details(purpose='Treatment'),
     'DNA Lab':Room_Details(purpose='Both'),
     'Fluid Analysis':Room_Details(purpose='Diagnostic'),
@@ -45,7 +96,12 @@ TPH_DIAGNOSTIC_LIST = [room for room, value in TPH_ROOM_DICT.items() if value.pu
 TPH_TREATMENT_LIST = [room for room, value in TPH_ROOM_DICT.items() if value.purpose in ['Treatment', 'Both']]
 
 TPH_HOSPITAL_DICT = {
-    'Blighton':Hospital_Details(illness=[]),
+    TPH_NAME_HOSPITAL_BL:Hospital_Details(illness=['8-bitten', 'Animal Magnetism', 'Cubism',
+        'Decision Rash', 'Emperor Complex', 'Freudian Lips', 'Grey Anatomy', 'Gurning Loins',
+        'Heart Throb', 'Leopard Skin', 'Litter Bug', 'Lycanthropy', 'Mime Crisis', 'Misery Guts',
+        'Mock Star', 'Mood Poisoning', 'Night Fever', 'Potty Mouth', TPH_NAME_DISEASE_PM,
+        'Pudding Blood', 'Rock Bottom', 'Shock Horror', 'Spinal Bap', 'Spontaneous Combustion',
+        'Touch of Midas', 'Turtle Head', 'Verbal Diarrhoea']),
     'Camouflage Falls':Hospital_Details(illness=[]),
     'Chasm 24':Hospital_Details(illness=[]),
     'Clockwise-above-Thyme':Hospital_Details(illness=[]),
@@ -57,12 +113,12 @@ TPH_HOSPITAL_DICT = {
     'Flemington':Hospital_Details(illness=[]),
     'Flottering':Hospital_Details(illness=[]),
     'Goldpan':Hospital_Details(illness=[]),
-    'Grockle Bay':Hospital_Details(illness=[TPH_NAME_DISEASE_VERBAL, 'Lazy Bones', 'Misery Guts',
+    TPH_NAME_HOSPITAL_GB:Hospital_Details(illness=[TPH_NAME_DISEASE_VD, 'Lazy Bones', 'Misery Guts',
         'Mucky Feet', 'Mime Crisis', 'Cubism', 'Inflated Ego', 'Jazz Hand', 'Rock Bottom',
         'Hurty Leg', 'Broken Face', '8-bitten', 'Floppy Discs', 'Emperor Complex', 'Denim Genes',
         'Turtle Head', 'Shock Horror', 'Pudding Blood', 'Leopard Skin', 'Heart Throb', 'Shattered',
         'Spontaneous Combustion', 'Jumbo DNA', 'Gurning Loins', 'Touch of Midas']),
-    'Hostport':Hospital_Details(illness=[]),
+    'Hogsport':Hospital_Details(illness=[]),
     'Lower Bullocks':Hospital_Details(illness=[]),
     'Melt Downs':Hospital_Details(illness=[]),
     'Mitton University':Hospital_Details(illness=[]),
@@ -74,6 +130,17 @@ TPH_HOSPITAL_DICT = {
     'Plywood Studios':Hospital_Details(illness=[]),
     'Roquefort Castle':Hospital_Details(illness=[]),
     'Rotting Hill':Hospital_Details(illness=[]),
+    TPH_NAME_HOSPITAL_SM:Hospital_Details(illness=['Grey Anatomy', 'Cross Bones', 'Humerus Injury', 'Hurty Leg',
+        'Turtle Head', 'Decision Rash', 'Mood Poisoning', 'Spontaneous Combustion', 'Pandemic',
+        'Animal Magnetism', 'Floppy Discs', 'Gurning Loins', 'Heart Throb', 'Pipe Organs',
+        'Spinal Bap', 'Bed Face', 'Jazz Hand', 'Portishead']),
+    'Sweaty Palms':Hospital_Details(illness=[]),
+    'Swelbard':Hospital_Details(illness=[]),
+    'Topless Mountain':Hospital_Details(illness=[]),
+    'Tumble':Hospital_Details(illness=[]),
+    'Underlook Hotel':Hospital_Details(illness=[]),
+    'Wanderoff':Hospital_Details(illness=[]),
+    'Windsock':Hospital_Details(illness=[]),
 }
 
 TPH_HOSPITAL_LIST = TPH_HOSPITAL_DICT.keys()
@@ -136,7 +203,7 @@ TPH_ILLNESS_DICT = {
     'Portishead':Illness_Details(diagnostic=['General Diagnosis', 'Cardiology'], treatment='Ward'),
     'Potty Mouth':Illness_Details(diagnostic=['Ward', 'Fluid Analysis'], treatment='Pharmacy'),
     'Predestinitis':Illness_Details(diagnostic=[TPH_NAME_ROOM_GP], treatment='Ward'),
-    'Premature Mummification':Illness_Details(diagnostic=['Psychiatry', 'X-Ray'], treatment='Decrypter'),
+    TPH_NAME_DISEASE_PM:Illness_Details(diagnostic=['Psychiatry', 'X-Ray'], treatment=TPH_NAME_ROOM_CR),
     'Pudding Blood':Illness_Details(diagnostic=['Psychiatry', 'X-Ray'], treatment='Injection Room'),
     'Reptile Dysfunction':Illness_Details(diagnostic=[TPH_NAME_ROOM_GP], treatment='Psychiatry'),
     'Rock Bottom':Illness_Details(diagnostic=['Fluid Analysis', 'DNA Lab'], treatment='Injection Room'),
@@ -151,7 +218,7 @@ TPH_ILLNESS_DICT = {
     'Time Warts':Illness_Details(diagnostic=[TPH_NAME_ROOM_GP], treatment='DNA Lab'),
     'Touch of Midas':Illness_Details(diagnostic=['DNA Lab', 'M.E.G.A Scan'], treatment='DNA Lab'),
     'Turtle Head':Illness_Details(diagnostic=['Fluid Analysis', 'X-Ray'], treatment='Head Office'),
-    TPH_NAME_DISEASE_VERBAL:Illness_Details(diagnostic=['General Diagnosis'], treatment='Pharmacy'),
+    TPH_NAME_DISEASE_VD:Illness_Details(diagnostic=['General Diagnosis'], treatment='Pharmacy'),
     'Woolly Man-Mouth':Illness_Details(diagnostic=[TPH_NAME_ROOM_GP, 'Ward'], treatment='DNA Lab'),
 }
 
