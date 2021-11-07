@@ -14,6 +14,18 @@ import sys
 
 # Local
 from tps.tph_main import main
+from tps.tph_misc import print_exception
 
 if __name__ == '__main__':
-    sys.exit(main())
+    # LOCAL VARIABLES
+    exit_val = 0  # 0 on success, 1 on error
+
+    # DO IT
+    try:
+        main()
+    except Exception as err:
+        print_exception(err)
+        exit_val = 1
+
+    # DONE
+    sys.exit(exit_val)
