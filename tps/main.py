@@ -9,10 +9,8 @@ Defines main() which will construct and print a graphy for one Two Point Hospita
 """
 
 # Standard
-import sys
 
 # Third Party
-import graphviz as gv
 
 # Local
 from tps.arguments import parse_arguments, separate_rooms
@@ -29,10 +27,7 @@ def main() -> None:
     tps_args = parse_arguments()            # Arguments parsed from sys.argv
     # Hospital chosen by the user
     user_input = get_choice(HOSPITAL_MENU, choice_type=int, clear_screen=clear_screen)
-    engine = 'dot'                          # Engine used by graphviz
     hospital_obj = TPHHospital(user_input)  # The TPH Hospital object
-    temp_diag_list = []                     # Temporary list of diag rooms for a given illness
-    temp_treat_str = ''                     # Temporary treat room for a given illness
     graph_obj = None                        # GraphViz object for hospital's directed graph
 
     # DO IT
