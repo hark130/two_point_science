@@ -38,7 +38,7 @@ python -m tps
 | 3  | ❔ | color | Color code things (e.g., nodes, edges) based on what's happening (e.g., diag, treat) |
 | 4  | ❔ | graph_polish | Is there a better way to align the node labels?  Reduce noisy parallel edges? |
 | 5  | ❔ | names | Refactor tph_constants to use MACROS for proper names |
-| 6  | ❔ | weight | Define key illneses per hospital (e.g., Grockle Bay + Cubism) |
+| 6  | ❔ | weight | Define key illneses per hospital (e.g., Grockle Bay + Cubism) and add graph callout (e.g., bold?) |
 | 7  | ❔ | suggest_rooms | Suggest number of rooms based on hospital illness list |
 | 8  | ❔ | suggest_staff | Suggest staff list based on suggested room list |
 | 9  | ❔ | treat_path | Plot all paths to a given treatment room |
@@ -87,3 +87,4 @@ python -m tps
 ### BUGS
 
 - [X] Blighton was listed with Premature Mummification.  Loading Blighton resulted in a `NotImplementedError: Blighton has an illness, Premature Mummification, missing a treatment room.`.  Theory: The treatment room for Premature Mummification wasn't part of the room list, it wasn't validated, so it didn't load into the Illness class.  Reason: Treatment room was incorrectly configured for the given illness.
+- [ ] Add quit feature to menu functionality.  Take care to avoid a dict.keys() collision.
