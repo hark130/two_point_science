@@ -44,7 +44,7 @@ python -m tps
 | 9  | ❔ | treat_path | Plot all paths to a given treatment room |
 | 10 | ❔ | ill_path | Plot all paths for a given illness |
 | 11 | ❔ | diag_path | Plot all paths to and from a given diagnostic room |
-| 12 | ❔ | cli | Add support for CLI arguments (e.g., --distinct-rooms) |
+| 12 | 🚧 | cli | Add support for CLI arguments (e.g., --distinct-rooms) |
 |   |  |  |
 
 ### Table Legend
