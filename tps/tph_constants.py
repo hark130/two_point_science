@@ -104,6 +104,8 @@ TPH_DIAGNOSTIC_LIST = [room for room, value in TPH_ROOM_DICT.items()
 TPH_TREATMENT_LIST = [room for room, value in TPH_ROOM_DICT.items()
                       if value.purpose in ['Treatment', 'Both']]
 
+TPH_DUAL_PURPOSE_LIST = [room for room, value in TPH_ROOM_DICT.items() if value.purpose == 'Both']
+
 TPH_HOSPITAL_DICT = {
     TPH_NAME_HOSPITAL_BL:
     HospitalDetails(illness=['8-bitten', 'Animal Magnetism', 'Cubism', 'Decision Rash',
