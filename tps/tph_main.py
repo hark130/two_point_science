@@ -59,7 +59,7 @@ def main() -> None:
                                       f'{illness_obj.get_name()}, missing a treatment room.')
 
     # DONE
-    print(f'Creating a directed graphy of {hospital_obj.get_name()}')
+    print(f'Creating a directed graph of {hospital_obj.get_name()}')
     graph_obj.view()
 
 
