@@ -132,7 +132,7 @@ TPH_HOSPITAL_DICT = {
     #                          'Verbal Diarrhoea', 'Emperor Complex', 'Inflated Ego', 'Mime Crisis',
     #                          'Cubism', '8-bitten', 'Shock Horror', 'Floppy Discs', 'Heart Throb',
     #                          'Gurning Loins', 'Jazz Hand', 'Lazy Bones', 'Mucky Feet']),
-    # Observed in game (see: res/Grockle Bay ?.png)
+    # Observed in game (see: res/Grockle_Bay-Illness_List-?.png)
     TPH_NAME_HOSPITAL_GB:
     HospitalDetails(illness=[TPH_NAME_DISEASE_VD, 'Lazy Bones', 'Misery Guts', 'Mucky Feet',
                              'Mime Crisis', 'Cubism', 'Inflated Ego', 'Jazz Hand', 'Rock Bottom',
@@ -144,7 +144,13 @@ TPH_HOSPITAL_DICT = {
     'Hogsport': HospitalDetails(illness=[]),
     'Lower Bullocks': HospitalDetails(illness=[]),
     'Melt Downs': HospitalDetails(illness=[]),
-    'Mitton University': HospitalDetails(illness=[]),
+    # Observed in game (see: res/Mitton_University-Illness_List-?.png)
+    TPH_NAME_HOSPITAL_MU:
+    HospitalDetails(illness=['Bogwarts', 'Misery Guts', 'Lazy Bones', 'Grey Anatomy',
+                             'Lightheadedness', 'Mucky Feet', 'Potty Mouth', 'Jest Infection',
+                             'Mock Star', 'Night Fever', 'Freudian Lips', 'Inflated Ego',
+                             'Mood Poisoning', 'Rock Bottom', 'Lycanthropy', 'Decision Rash',
+                             'Boggled Mind', 'Headcrabedness']),
     'Mudbury Festival': HospitalDetails(illness=[]),
     'Old Newpoint': HospitalDetails(illness=[]),
     'Overgrowth': HospitalDetails(illness=[]),
