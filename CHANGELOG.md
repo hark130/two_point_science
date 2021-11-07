@@ -31,6 +31,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	- tph_hospital: Defines the TPHHospital class
 	- tph_illness: Defines the TPHIllness class
 	- tph_main: Defines the package entry point
+	- tph_menu: Defines menu functionality
+	- tph_misc: Defines misc functionality
 
 ### Changed
 
