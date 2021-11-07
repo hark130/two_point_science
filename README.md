@@ -24,10 +24,7 @@ The `tps` package currently implements the following hospitals:
 
 ### Usage
 
-```
-git clone https://github.com/hark130/two_point_science.git
-python -m tps
-```
+See: [Usage](https://github.com/hark130/two_point_science/wiki/usage) wiki page
 
 ### Future Feature Table
 
@@ -44,7 +41,7 @@ python -m tps
 | 9  | ❔ | treat_path | Plot all paths to a given treatment room |
 | 10 | ❔ | ill_path | Plot all paths for a given illness |
 | 11 | ❔ | diag_path | Plot all paths to and from a given diagnostic room |
-| 12 | 🚧 | cli | Add support for CLI arguments (e.g., --distinct-rooms) |
+| 12 | ✔️ | cli | Add support for CLI arguments (e.g., --distinct-rooms) |
 |   |  |  |
 
 ### Table Legend
