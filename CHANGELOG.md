@@ -27,12 +27,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CHANGELOG initial commit
 - README initial commit
 - tps package initial commit
-	- tph_constants: Defines standardized values for the package
-	- tph_hospital: Defines the TPHHospital class
-	- tph_illness: Defines the TPHIllness class
-	- tph_main: Defines the package entry point
-	- tph_menu: Defines menu functionality
-	- tph_misc: Defines misc functionality
+    - main: Defines the package entry point
+    - menu: Defines menu functionality
+    - misc: Defines misc functionality
+    - tph_constants: Defines standardized values for the package
+    - tph_hospital: Defines the TPHHospital class
+    - tph_illness: Defines the TPHIllness class
 
 ### Changed
 
