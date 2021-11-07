@@ -18,6 +18,7 @@ two_point_science is written in Python 3.8.10 and relies heavily on the graphviz
 
 The `tps` package currently implements the following hospitals:
 
+- Clockwise-above-Thyme
 - Grockle Bay
 - Mitton University
 - Smogley
