@@ -11,57 +11,37 @@ Defines main() which will construct and print a graphy for one Two Point Hospita
 # Standard
 
 # Third Party
-# import matplotlib.pyplot as plt
-# import networkx as nx
-import graphviz as gv
 
 # Local
+from tps.arguments import parse_arguments, separate_rooms
+from tps.dgraph import create_graph
 from tps.menu import get_choice
 from tps.tph_constants import HOSPITAL_MENU
 from tps.tph_hospital import TPHHospital
-
-# CURR_HOSPITAL = 'Blighton'  # Placeholder for user input
-# CURR_HOSPITAL = 'Smogley'  # Placeholder for user input
-CURR_HOSPITAL = 'Grockle Bay'  # Placeholder for user input
 
 
 def main() -> None:
     """Constructs and prints a graph for a hospital."""
     # LOCAL VARIABLES
+    clear_screen = True                     # Clear the screen before the menu prints
+    tps_args = parse_arguments()            # Arguments parsed from sys.argv
     # Hospital chosen by the user
-    user_input = get_choice(HOSPITAL_MENU, choice_type=int)
-    engine = 'dot'                          # Engine used by graphviz
+    user_input = get_choice(HOSPITAL_MENU, choice_type=int, clear_screen=clear_screen)
     hospital_obj = TPHHospital(user_input)  # The TPH Hospital object
-    temp_diag_list = []                     # Temporary list of diag rooms for a given illness
-    temp_treat_str = ''                     # Temporary treat room for a given illness
-    # GraphViz object used to create the directed graph of the user's chosen hospital
-    graph_obj = gv.Digraph(name=hospital_obj.get_name(),
-                           filename=hospital_obj.get_name()+f' ({engine})',
-                           engine=engine, format='png')
+    graph_obj = None                        # GraphViz object for hospital's directed graph
 
     # DO IT
+    # Separate Rooms?
+    sep_rooms = separate_rooms(tps_args)
     # Form Graph
-    for illness_obj in hospital_obj.get_illness_objects():
-        # Diagnostic room edges
-        temp_diag_list = illness_obj.get_diag()
-        if temp_diag_list:
-            for index in range(0, len(temp_diag_list) - 1):
-                graph_obj.edge(temp_diag_list[index], temp_diag_list[index + 1])  # gv
-        else:
-            raise NotImplementedError(
-                f'{hospital_obj.get_name()} has an illness, '
-                f'{illness_obj.get_name()}, missing a list of diagnostic rooms.')
-        # Treatment room edge
-        temp_treat_str = illness_obj.get_treat()
-        if temp_treat_str:
-            graph_obj.edge(temp_diag_list[len(temp_diag_list) - 1], temp_treat_str)  # gv
-        else:
-            raise NotImplementedError(f'{hospital_obj.get_name()} has an illness, '
-                                      f'{illness_obj.get_name()}, missing a treatment room.')
+    graph_obj = create_graph(hospital=hospital_obj, sep_rooms=sep_rooms)
 
     # DONE
-    print(f'Creating a directed graph of {hospital_obj.get_name()}...')
-    graph_obj.view()
+    if graph_obj:
+        print(f'Creating a directed graph of {hospital_obj.get_name()}...')
+        graph_obj.view()
+    else:
+        raise RuntimeError('Call to create_graph() failed to return an object')
 
 
 if __name__ == '__main__':

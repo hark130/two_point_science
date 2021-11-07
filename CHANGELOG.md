@@ -27,6 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CHANGELOG initial commit
 - README initial commit
 - tps package initial commit
+    - arguments: Parses command line arguments
+    - dgraph: Directed graph functionality
     - main: Defines the package entry point
     - menu: Defines menu functionality
     - misc: Defines misc functionality
