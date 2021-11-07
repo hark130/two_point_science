@@ -9,15 +9,19 @@ Defines types and values used by the entire package.
 
 # Standard
 from collections import namedtuple
-# Third Party
-# Local
 
-# Data Types
+# Third Party
+
+# Local
+from tps.menu import Menu
+
+
+# 1. DATA TYPES
 HospitalDetails = namedtuple('HospitalDetails', 'illness')
 IllnessDetails = namedtuple('IllnessDetails', 'diagnostic treatment')
 RoomDetails = namedtuple('RoomDetails', 'purpose')
 
-# MACROS
+# 2. MACROS
 
 # DISEASE NAMES
 # NOTE: Disease macro names were truncated to represent the acronym (for names with more than
@@ -92,7 +96,7 @@ TPH_ROOM_DICT = {
     'X-Ray': RoomDetails(purpose='Diagnostic'),
 }
 
-TPH_ROOM_LIST = TPH_ROOM_DICT.keys()
+TPH_ROOM_LIST = list(TPH_ROOM_DICT.keys())
 
 TPH_DIAGNOSTIC_LIST = [room for room, value in TPH_ROOM_DICT.items()
                        if value.purpose in ['Diagnostic', 'Both']]
@@ -128,7 +132,7 @@ TPH_HOSPITAL_DICT = {
     #                          'Verbal Diarrhoea', 'Emperor Complex', 'Inflated Ego', 'Mime Crisis',
     #                          'Cubism', '8-bitten', 'Shock Horror', 'Floppy Discs', 'Heart Throb',
     #                          'Gurning Loins', 'Jazz Hand', 'Lazy Bones', 'Mucky Feet']),
-    # Observed in game (see: res/Grockle Bay ?.png)
+    # Observed in game (see: res/Grockle_Bay-Illness_List-?.png)
     TPH_NAME_HOSPITAL_GB:
     HospitalDetails(illness=[TPH_NAME_DISEASE_VD, 'Lazy Bones', 'Misery Guts', 'Mucky Feet',
                              'Mime Crisis', 'Cubism', 'Inflated Ego', 'Jazz Hand', 'Rock Bottom',
@@ -140,7 +144,13 @@ TPH_HOSPITAL_DICT = {
     'Hogsport': HospitalDetails(illness=[]),
     'Lower Bullocks': HospitalDetails(illness=[]),
     'Melt Downs': HospitalDetails(illness=[]),
-    'Mitton University': HospitalDetails(illness=[]),
+    # Observed in game (see: res/Mitton_University-Illness_List-?.png)
+    TPH_NAME_HOSPITAL_MU:
+    HospitalDetails(illness=['Bogwarts', 'Misery Guts', 'Lazy Bones', 'Grey Anatomy',
+                             'Lightheadedness', 'Mucky Feet', 'Potty Mouth', 'Jest Infection',
+                             'Mock Star', 'Night Fever', 'Freudian Lips', 'Inflated Ego',
+                             'Mood Poisoning', 'Rock Bottom', 'Lycanthropy', 'Decision Rash',
+                             'Boggled Mind', 'Headcrabedness']),
     'Mudbury Festival': HospitalDetails(illness=[]),
     'Old Newpoint': HospitalDetails(illness=[]),
     'Overgrowth': HospitalDetails(illness=[]),
@@ -164,7 +174,7 @@ TPH_HOSPITAL_DICT = {
     'Windsock': HospitalDetails(illness=[]),
 }
 
-TPH_HOSPITAL_LIST = TPH_HOSPITAL_DICT.keys()
+TPH_HOSPITAL_LIST = list(TPH_HOSPITAL_DICT.keys())
 
 TPH_ILLNESS_DICT = {
     '8-bitten': IllnessDetails(diagnostic=['General Diagnosis', 'Cardiology'],
@@ -275,4 +285,9 @@ TPH_ILLNESS_DICT = {
     'Woolly Man-Mouth': IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, 'Ward'], treatment='DNA Lab'),
 }
 
-TPH_ILLNESS_LIST = TPH_ILLNESS_DICT.keys()
+TPH_ILLNESS_LIST = list(TPH_ILLNESS_DICT.keys())
+
+# 3. MENUS
+
+HOSPITAL_MENU = Menu('TWO POINT HOSPITALS', {i+1: TPH_HOSPITAL_LIST[i] for i in
+                                             range(0, len(TPH_HOSPITAL_LIST))})

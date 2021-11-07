@@ -12,7 +12,9 @@ TPHHospital class validates and parses one hospital from the game Two Point Hosp
 
 # Standard
 from typing import List
+
 # Third Party
+
 # Local
 from tps.tph_constants import TPH_HOSPITAL_DICT, TPH_HOSPITAL_LIST, TPH_ILLNESS_LIST
 from tps.tph_illness import TPHIllness

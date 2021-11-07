@@ -12,7 +12,9 @@ TPHIllness class validates and parses one illness from the game Two Point Hospit
 
 # Standard
 from typing import List
+
 # Third Party
+
 # Local
 from tps.tph_constants import (TPH_DIAGNOSTIC_LIST, TPH_ILLNESS_DICT, TPH_ILLNESS_LIST,
                                TPH_NAME_ROOM_GP, TPH_TREATMENT_LIST)

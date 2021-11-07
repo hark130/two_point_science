@@ -30,7 +30,7 @@ python -m tps
 | Feature Number | Status | Branch Name | Description |
 | :------------: | :----: | :---------- | :---------- |
 | 1  | ❔ | wheel | Programmatically build a wheel that can be installed |
-| 2  | ❔ | cli | Create a user interface (e.g., CLI menu, config file)  |
+| 2  | ✔️ | menu | Create a user interface (e.g., CLI menu, config file)  |
 | 3  | ❔ | color | Color code things (e.g., nodes, edges) based on what's happening (e.g., diag, treat) |
 | 4  | ❔ | graph_polish | Is there a better way to align the node labels?  Reduce noisy parallel edges? |
 | 5  | ❔ | names | Refactor tph_constants to use MACROS for proper names |
