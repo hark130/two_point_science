@@ -28,7 +28,8 @@ CURR_HOSPITAL = 'Grockle Bay'  # Placeholder for user input
 def main() -> None:
     """Constructs and prints a graph for a hospital."""
     # LOCAL VARIABLES
-    user_input = get_choice(HOSPITAL_MENU)  # Hard-coded in lieu of menu feature
+    # Hospital chosen by the user
+    user_input = get_choice(HOSPITAL_MENU, choice_type=int)
     engine = 'dot'                          # Engine used by graphviz
     hospital_obj = TPHHospital(user_input)  # The TPH Hospital object
     temp_diag_list = []                     # Temporary list of diag rooms for a given illness
