@@ -8,7 +8,7 @@ An attempt at applying analytical science to the game Two Point Hospital.
 
 ## GOAL
 
-The goal of this project is to programmatically aid the planning of each unique hospital based on room density and patient "pathing", if "pathing" is defined as "the a->b->c->d room path each patient takes as they are diagnosed and treated."
+The goal of this project is to programmatically aid the planning of each unique hospital based on room density and patient "pathing", if "pathing" is defined as "the a->b->c->d room path each patient takes as they are diagnosed and treated".
 
 ## DETAILS
 
@@ -16,7 +16,11 @@ two_point_science is written in Python 3.8.10 and relies heavily on the graphviz
 
 ## FEATURES
 
-The `tps` package currently generates an undirected acyclic graph for [Grockle Bay](https://two-point-hospital.fandom.com/wiki/Grockle_Bay).
+The `tps` package currently implements the following hospitals:
+
+- Grockle Bay
+- Mitton University
+- Smogley
 
 ### Usage
 
@@ -30,7 +34,7 @@ python -m tps
 | Feature Number | Status | Branch Name | Description |
 | :------------: | :----: | :---------- | :---------- |
 | 1  | ❔ | wheel | Programmatically build a wheel that can be installed |
-| 2  | ✔️ | menu | Create a user interface (e.g., CLI menu, config file)  |
+| 2  | ✔️ | menu | Create a user interface (e.g., CLI menu, config file) |
 | 3  | ❔ | color | Color code things (e.g., nodes, edges) based on what's happening (e.g., diag, treat) |
 | 4  | ❔ | graph_polish | Is there a better way to align the node labels?  Reduce noisy parallel edges? |
 | 5  | ❔ | names | Refactor tph_constants to use MACROS for proper names |
@@ -40,6 +44,7 @@ python -m tps
 | 9  | ❔ | treat_path | Plot all paths to a given treatment room |
 | 10 | ❔ | ill_path | Plot all paths for a given illness |
 | 11 | ❔ | diag_path | Plot all paths to and from a given diagnostic room |
+| 12 | ❔ | cli | Add support for CLI arguments (e.g., --distinct-rooms) |
 |   |  |  |
 
 ### Table Legend
@@ -70,13 +75,14 @@ python -m tps
 ### TO DO: DON'T DO NOW
 
 - [X] Add a CHANGELOG
-- [ ] Consider adding edges between the first diagnostic room and treatement room (to represent skilled staff with upgraded equipment (new feature?  Hospital Age: new (full path), skilled (GP->diag1->treat))
+- [ ] Consider adding edges between the first diagnostic room and treatement room (to represent skilled staff with upgraded equipment (new feature?  Hospital Age: new (full path), skilled (GP->diag1->treat))  EDIT: Maybe this is a CLI argument (e.g., --age={amateur,skilled})
 - [X] Add file comment blocks
 - [X] Run Pylint
 - [X] Run Pycodestyle
 - [X] Define wiki (e.g., Usage, Release Steps, Code Review)
 - [ ] Find a way to deconflict "public record" and observations when it comes to the illness list for a given hospital
 	- [X] Grockle Bay
+	- [X] Mitton University
 
 ### BUGS
 
