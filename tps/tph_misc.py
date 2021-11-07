@@ -1,3 +1,16 @@
+"""Defines miscellaneous Two Point Science functionality.
+
+Defines some general use functionality used in the package.
+
+    Typical usage example:
+
+    from tps.tph_misc import clear_screen, print_exception
+    try:
+        clear_screen()
+    except Exception as err:
+        print_exception(err)
+"""
+
 # Standard Imports
 import subprocess
 import sys
@@ -18,9 +31,9 @@ def clear_screen() -> None:
     os_name = platform.system()  # Operating system name
 
     # CLEAR IT
-    if os_name is 'Linux' or os_name is 'Darwin':
+    if os_name in ('Linux', 'Darwin'):
         command = 'clear'
-    elif os_name is 'Windows':
+    elif os_name == 'Windows':
         command = 'cls'
     else:
         for _ in range(0, 60):
