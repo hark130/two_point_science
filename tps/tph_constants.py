@@ -13,7 +13,7 @@ from collections import namedtuple
 # Third Party
 
 # Local
-from tps.tph_menu import Menu
+from tps.menu import Menu
 
 
 # 1. DATA TYPES

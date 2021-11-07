@@ -17,7 +17,7 @@ from collections import namedtuple
 from typing import Any
 
 # Local Imports
-from tps.tph_misc import clear_screen as clr_screen
+from tps.misc import clear_screen as clr_screen
 
 Menu = namedtuple('Menu', 'name dictionary')
 

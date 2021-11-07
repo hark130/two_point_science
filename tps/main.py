@@ -16,9 +16,9 @@ Defines main() which will construct and print a graphy for one Two Point Hospita
 import graphviz as gv
 
 # Local
+from tps.menu import get_choice
 from tps.tph_constants import HOSPITAL_MENU
 from tps.tph_hospital import TPHHospital
-from tps.tph_menu import get_choice
 
 # CURR_HOSPITAL = 'Blighton'  # Placeholder for user input
 # CURR_HOSPITAL = 'Smogley'  # Placeholder for user input
@@ -60,7 +60,7 @@ def main() -> None:
                                       f'{illness_obj.get_name()}, missing a treatment room.')
 
     # DONE
-    print(f'Creating a directed graph of {hospital_obj.get_name()}')
+    print(f'Creating a directed graph of {hospital_obj.get_name()}...')
     graph_obj.view()
 
 

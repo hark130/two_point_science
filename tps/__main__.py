@@ -13,8 +13,8 @@ import sys
 # Third Party
 
 # Local
-from tps.tph_main import main
-from tps.tph_misc import print_exception
+from tps.main import main
+from tps.misc import print_exception
 
 if __name__ == '__main__':
     # LOCAL VARIABLES
