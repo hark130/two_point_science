@@ -26,7 +26,20 @@ RoomDetails = namedtuple('RoomDetails', 'purpose')
 # DISEASE NAMES
 # NOTE: Disease macro names were truncated to represent the acronym (for names with more than
 #   one word) or just enough letters of the name to be unique (min: 2).
+TPH_NAME_DISEASE_BE = 'Beheadedness'
+TPH_NAME_DISEASE_BOA = 'Bloat of Arms'
+TPH_NAME_DISEASE_BP = 'Bionic Plague'
+TPH_NAME_DISEASE_BY = 'Byteheadedness'
+TPH_NAME_DISEASE_CAR = 'Chewed a Rose'
+TPH_NAME_DISEASE_FU = 'Futurism'
+TPH_NAME_DISEASE_JRI = 'Jester Infection'
+TPH_NAME_DISEASE_GD = 'Glass Dome'
+TPH_NAME_DISEASE_HC = 'Hacking Cough'
+TPH_NAME_DISEASE_HL = 'Historical Laughter'
+TPH_NAME_DISEASE_HOL = 'Hologlands'
+TPH_NAME_DISEASE_HOT = 'Hotheadedness'
 TPH_NAME_DISEASE_PM = 'Premature Mummification'
+TPH_NAME_DISEASE_PT = 'Pneumatic Tubes'
 TPH_NAME_DISEASE_VD = 'Verbal Diarrhoea'
 
 # HOSPITAL NAMES
@@ -114,10 +127,20 @@ TPH_HOSPITAL_DICT = {
                              'Mime Crisis', 'Misery Guts', 'Mock Star', 'Mood Poisoning',
                              'Night Fever', 'Potty Mouth', TPH_NAME_DISEASE_PM, 'Pudding Blood',
                              'Rock Bottom', 'Shock Horror', 'Spinal Bap', 'Spontaneous Combustion',
-                             'Touch of Midas', 'Turtle Head', 'Verbal Diarrhoea']),
+                             'Touch of Midas', 'Turtle Head', TPH_NAME_DISEASE_VD]),
     'Camouflage Falls': HospitalDetails(illness=[]),
     'Chasm 24': HospitalDetails(illness=[]),
-    'Clockwise-above-Thyme': HospitalDetails(illness=[]),
+    TPH_NAME_HOSPITAL_CAT:
+    HospitalDetails(illness=['Jest Infection', TPH_NAME_DISEASE_JRI, TPH_NAME_DISEASE_BE,
+                             TPH_NAME_DISEASE_BY, TPH_NAME_DISEASE_HOT, 'Lightheadedness', 'Fossil Eyes',
+                             'Jumbo DNA', 'Time Warts', 'Woolly Man-Mouth', 'Clockjaw',
+                             'Fractured Timeline', TPH_NAME_DISEASE_GD, 'Missing Link',
+                             TPH_NAME_DISEASE_BOA, 'Dino Sores', TPH_NAME_DISEASE_HC, 'Pudding Blood',
+                             TPH_NAME_DISEASE_CAR, 'Cod Piece', TPH_NAME_DISEASE_HOL, 'Misery Guts', 'Parapox',
+                             'Artificial Intelligence', 'Fomo Sapiens', TPH_NAME_DISEASE_HL,
+                             'Reptile Dysfunction', 'Cubism', TPH_NAME_DISEASE_FU, TPH_NAME_DISEASE_BP,
+                             'Bone Head', 'Rolling Stones', 'Loopy', 'Monobrow', TPH_NAME_DISEASE_PT,
+                             'Predestinitis']),
     'Clockwise-before-Thyme': HospitalDetails(illness=[]),
     'Clockwise-upon-Thyme': HospitalDetails(illness=[]),
     'Croquembouche': HospitalDetails(illness=[]),
@@ -131,7 +154,7 @@ TPH_HOSPITAL_DICT = {
     # HospitalDetails(illness=['Denim Genes', 'Leopard Skin', 'Touch of Midas', 'Broken Face',
     #                          'Hurty Leg', 'Shattered', 'Turtle Head', 'Pudding Blood',
     #                          'Rock Bottom', 'Spontaneous Combustion', 'Misery Guts',
-    #                          'Verbal Diarrhoea', 'Emperor Complex', 'Inflated Ego', 'Mime Crisis',
+    #                          TPH_NAME_DISEASE_VD, 'Emperor Complex', 'Inflated Ego', 'Mime Crisis',
     #                          'Cubism', '8-bitten', 'Shock Horror', 'Floppy Discs', 'Heart Throb',
     #                          'Gurning Loins', 'Jazz Hand', 'Lazy Bones', 'Mucky Feet']),
     # Observed in game (see: res/Grockle_Bay-Illness_List-?.png)
@@ -186,12 +209,18 @@ TPH_ILLNESS_DICT = {
     'Artificial Intelligence': IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, 'Ward'],
                                               treatment='Psychiatry'),
     'Bed Face': IllnessDetails(diagnostic=['General Diagnosis', 'Cardiology'], treatment='Ward'),
+    TPH_NAME_DISEASE_BE: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP], treatment='De-Lux Clinic'),
+    TPH_NAME_DISEASE_BP: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, 'Cardiology'],
+                                        treatment='Surgery'),
+    TPH_NAME_DISEASE_BOA: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP], treatment='Injection Room'),
+    TPH_NAME_DISEASE_BY: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP], treatment='De-Lux Clinic'),
     'Boggled Mind': IllnessDetails(diagnostic=['Ward', 'X-Ray'], treatment='Psychiatry'),
     'Bogwarts': IllnessDetails(diagnostic=['General Diagnosis', 'Cardiology'],
                                treatment='Pharmacy'),
     'Bone Head': IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP], treatment='Surgery'),
     'Broken Face': IllnessDetails(diagnostic=['Cardiology', 'Fluid Analysis'],
                                   treatment='Fracture Ward'),
+    TPH_NAME_DISEASE_CAR: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP], treatment='Pharmacy'),
     'Clamp': IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP], treatment='Pharmacy'),
     'Clockjaw': IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP], treatment='Fracture Ward'),
     'Cod Piece': IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP], treatment='Pharmacy'),
@@ -212,15 +241,22 @@ TPH_ILLNESS_DICT = {
     'Fractured Timeline': IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP], treatment='Fracture Ward'),
     'Freudian Lips': IllnessDetails(diagnostic=['Cardiology', 'Psychiatry'],
                                     treatment='Psychiatry'),
+    TPH_NAME_DISEASE_FU: IllnessDetails(diagnostic=['DNA Lab', 'X-Ray'],
+                                        treatment='Recurvery Room'),
     'Grey Anatomy': IllnessDetails(diagnostic=['Fluid Analysis', 'M.E.G.A Scan'],
                                    treatment='Chromatherapy'),
+    TPH_NAME_DISEASE_GD: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, 'Ward'],
+                                        treatment='Fracture Ward'),
     'Grout': IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP], treatment='Pharmacy'),
     'Gurning Loins': IllnessDetails(diagnostic=['General Diagnosis', 'M.E.G.A Scan'],
                                     treatment='Surgery'),
+    TPH_NAME_DISEASE_HC: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP], treatment='Injection Room'),
     'Headcrabedness': IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP], treatment='De-Lux Clinic'),
     'Heart Throb': IllnessDetails(diagnostic=['Cardiology', 'Fluid Analysis'],
                                   treatment='Surgery'),
-    'Hotheadedness': IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP], treatment='De-Lux Clinic'),
+    TPH_NAME_DISEASE_HL: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP], treatment='Psychiatry'),
+    TPH_NAME_DISEASE_HOL: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, 'X-Ray'], treatment='Pharmacy'),
+    TPH_NAME_DISEASE_HOT: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP], treatment='De-Lux Clinic'),
     'Humerus Injury': IllnessDetails(diagnostic=['General Diagnosis', 'Ward'],
                                      treatment='Fracture Ward'),
     'Hurty Leg': IllnessDetails(diagnostic=['General Diagnosis', 'X-Ray'],
@@ -229,6 +265,7 @@ TPH_ILLNESS_DICT = {
                                    treatment='Psychiatry'),
     'Jazz Hand': IllnessDetails(diagnostic=['X-Ray', 'M.E.G.A Scan'], treatment='Ward'),
     'Jest Infection': IllnessDetails(diagnostic=['Psychiatry', 'X-Ray'], treatment='Clown Clinic'),
+    TPH_NAME_DISEASE_JRI: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP], treatment='Clown Clinic'),
     'Jumbo DNA': IllnessDetails(diagnostic=['M.E.G.A Scan', 'Fluid Analysis'],
                                 treatment='DNA Lab'),
     'Lazy Bones': IllnessDetails(diagnostic=['Cardiology', 'General Diagnosis'],
@@ -260,6 +297,7 @@ TPH_ILLNESS_DICT = {
     'Pandemic': IllnessDetails(diagnostic=['General Diagnosis', 'X-Ray'], treatment='Pans Lab'),
     'Parapox': IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP], treatment='Pharmacy'),
     'Pipe Organs': IllnessDetails(diagnostic=['X-Ray', 'M.E.G.A Scan'], treatment='Surgery'),
+    TPH_NAME_DISEASE_PT: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP], treatment='Ward'),
     'Portishead': IllnessDetails(diagnostic=['General Diagnosis', 'Cardiology'], treatment='Ward'),
     'Potty Mouth': IllnessDetails(diagnostic=['Ward', 'Fluid Analysis'], treatment='Pharmacy'),
     'Predestinitis': IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP], treatment='Ward'),
