@@ -59,7 +59,7 @@ def get_choice(tph_menu: Menu, clear_screen: bool = True, choice_type: type = st
     if clear_screen:
         clr_screen()
     # Print Menu
-    print(tph_menu.name)
+    print('\n' + tph_menu.name)
     for option, description in tph_menu.dictionary.items():
         print(f'{option}: {description}')
     while True:
