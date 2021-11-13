@@ -225,7 +225,7 @@ def _print_table(tuple_list: list, col_headers: tuple) -> None:
 
     # PRINT IT
     # 1. Header
-    temp_line = ''  # Reset temp variable
+    temp_line = '\n'  # Reset temp variable
     for index in range(0, num_columns):
         temp_line = temp_line + '{0: <{width}}'.format(col_headers[index], width=col_widths[index])
     print(temp_line)
