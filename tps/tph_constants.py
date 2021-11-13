@@ -342,5 +342,7 @@ TPH_ILLNESS_LIST = list(TPH_ILLNESS_DICT.keys())
 
 # 3. MENUS
 
-HOSPITAL_MENU = Menu('TWO POINT HOSPITALS', {i+1: TPH_HOSPITAL_LIST[i] for i in
-                                             range(0, len(TPH_HOSPITAL_LIST))})
+MAIN_MENU = Menu('TWO POINT SCIENCE', {1: 'Choose a hospital', 2: 'Print room connections', 999: 'EXIT'})
+
+HOSPITAL_MENU = Menu('TWO POINT HOSPITAL LIST', {i+1: TPH_HOSPITAL_LIST[i] for i in
+                                                 range(0, len(TPH_HOSPITAL_LIST))})
