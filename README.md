@@ -39,7 +39,7 @@ See: [Usage](https://github.com/hark130/two_point_science/wiki/usage) wiki page
 | 6  | ❔ | weight | Define key illneses per hospital (e.g., Grockle Bay + Cubism) and add graph callout (e.g., bold?) |
 | 7  | ❔ | suggest_rooms | Suggest number of rooms based on hospital illness list |
 | 8  | ❔ | suggest_staff | Suggest staff list based on suggested room list |
-| 9  | 🚧 | room_path | Plot all edges for a given room |
+| 9  | ✔️ | room_path | Plot all edges for a given room |
 | 10 | ❔ | ill_path | Plot all paths for a given illness |
 | 11 | ❔ | change_default | Add a "change defaults" entry to the main menu |
 | 12 | ✔️ | cli | Add support for CLI arguments (e.g., --distinct-rooms) |
