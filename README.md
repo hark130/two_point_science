@@ -45,6 +45,8 @@ See: [Usage](https://github.com/hark130/two_point_science/wiki/usage) wiki page
 | 12 | ✔️ | cli | Add support for CLI arguments (e.g., --distinct-rooms) |
 | 13 | 🚧 | edges | CLI menu option to display sorted and/or filtered list of rooms/purpose/number of edges |
 | 14 | ❔ | shell | CLI argument to change the default graphy type (e.g., shell could be of use?) |
+| 15 | ❔ | dyn_menu | Dynamic menu items (e.g., "Choose a hospital" becomes "Change hospitals (Currently: blahblahblah)") |
+| 16 | ❔ | default | Add a "default choice" optional kwarg to the menu module functions |
 |   |  |  |  |
 
 ### Table Legend
@@ -88,3 +90,5 @@ See: [Usage](https://github.com/hark130/two_point_science/wiki/usage) wiki page
 
 - [X] Blighton was listed with Premature Mummification.  Loading Blighton resulted in a `NotImplementedError: Blighton has an illness, Premature Mummification, missing a treatment room.`.  Theory: The treatment room for Premature Mummification wasn't part of the room list, it wasn't validated, so it didn't load into the Illness class.  Reason: Treatment room was incorrectly configured for the given illness.
 - [ ] Add quit feature to menu functionality.  Take care to avoid a dict.keys() collision.
+- [X] distinct-rooms CLI argument does nothing for printing room edge list.  It has to do with room edges are detected in the graph_obj.body.
+- [ ] CLI menu vertical whitespacing could use some polish
