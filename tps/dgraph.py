@@ -357,7 +357,7 @@ def _create_sep_room_dict(room_dict: dict) -> Dict[int, str]:
     return new_dict
 
 
-def _graph_edges(graph: graphviz.dot.Digraph, edges: tuple(str, str),
+def _graph_edges(graph: graphviz.dot.Digraph, edges: tuple,
                  sep_rooms: bool, focus_node: str, all_diag: bool) -> graphviz.dot.Digraph:
     """Adds edges to graph in a particular way on behalf of add_edges().
 
