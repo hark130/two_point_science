@@ -15,10 +15,13 @@ Defines functionality to facilitate the creation of a directed graph based on a 
 
 # Third Party
 import graphviz
+from typing import Dict
 
 # Local
-from tps.tph_constants import TPH_DUAL_PURPOSE_LIST
+from tps.tph_constants import TPH_DUAL_PURPOSE_LIST, TPH_ROOM_DICT, TPH_ROOM_LIST
 from tps.tph_hospital import TPHHospital
+from tps.menu import Menu
+from tps.misc import print_edge_table
 
 
 def add_edges(hospital: TPHHospital, graph: graphviz.dot.Digraph,
@@ -133,6 +136,71 @@ def create_graph(hospital: TPHHospital, sep_rooms: bool = False, engine: str = '
 
     # DONE
     return graph_obj
+
+
+def edge_menu(graph: graphviz.dot.Digraph, sep_rooms: bool) -> None:
+    # LOCAL VARIABLES
+    edge_menu = Menu('EDGE MENU', {1: 'TD: DDN'})
+    user_input = 0  # User selection
+    edge_dict = None  # Dictionary of room counts
+
+    # INPUT VALIDATION
+    # graph
+    if not isinstance(graph, graphviz.dot.Digraph):
+        raise TypeError(f'The graph can not be of type {type(graph)}')
+    # sep_rooms
+    if not isinstance(sep_rooms, bool):
+        raise TypeError(f'The sep_rooms argument must of type bool instead of {type(sep_rooms)}')
+
+    # GET DISPOSITION
+    edge_dict = enumerate_edges(graph, sep_rooms)
+    print_edge_table(edge_dict, TPH_ROOM_DICT)
+
+    # DONE
+
+
+def enumerate_edges(graph: graphviz.dot.Digraph, sep_rooms: bool) -> Dict[str,int]:
+    # LOCAL VARIABLES
+    edge_counts = {}      # Rooms: Room Count
+    temp_room_names = []  # Temporary variable to help resolve dual use rooms
+
+    # INPUT VALIDATION
+    # graph
+    if not isinstance(graph, graphviz.dot.Digraph):
+        raise TypeError(f'The graph can not be of type {type(graph)}')
+    # sep_rooms
+    if not isinstance(sep_rooms, bool):
+        raise TypeError(f'The sep_rooms argument must of type bool instead of {type(sep_rooms)}')
+
+    # ENUMERATE IT
+    for part in graph.body:
+        for room in TPH_ROOM_LIST:
+            if room in part:
+                # List of room names to look for
+                if sep_rooms and TPH_ROOM_DICT[room].purpose == 'Both':
+                    temp_room_names.append(room + ' (diag)')
+                    temp_room_names.append(room + ' (treat)')
+                else:
+                    temp_room_names.append(room)
+                # Look for the room names
+                for temp_room_name in temp_room_names:
+                    if temp_room_name in edge_counts.keys():
+                        edge_counts[temp_room_name] = edge_counts[temp_room_name] + 1
+                    else:
+                        edge_counts[temp_room_name] = 1
+                # print(f'TEMP ROOM NAMES {temp_room_names}')
+                # Clear temp variables
+                temp_room_names = []
+
+    # VALIDATE RESULTS
+    for key, value in edge_counts.items():
+        if not isinstance(key, str):
+            raise TypeError('Invalid key type detected')
+        if not isinstance(value, int):
+            raise TypeError('Invalid value type detected')
+
+    # DONE
+    return edge_counts
 
 
 def _validate_add_edges(hospital: TPHHospital, graph: graphviz.dot.Digraph,
