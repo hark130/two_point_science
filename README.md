@@ -49,6 +49,7 @@ See: [Usage](https://github.com/hark130/two_point_science/wiki/usage) wiki page
 | 16 | ❔ | default | Add a "default choice" optional kwarg to the menu module functions |
 | 17 | ❔ | menu_banner | Add a fancy banner about menu headers |
 | 18 | ❔ | table_banner | Add a fancy banner about table headers |
+| 19 | ❔ | sep_suffix | There's a dangerous amount of hard-coded suffix strings.  SPOT it! |
 |   |  |  |  |
 
 ### Table Legend
