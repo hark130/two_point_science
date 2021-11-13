@@ -64,15 +64,8 @@ def add_edges(hospital: TPHHospital, graph: graphviz.dot.Digraph,
             for index in range(0, len(temp_diag_list) - 1):
                 temp_lead_edge = temp_diag_list[index]
                 temp_trail_edge = temp_diag_list[index + 1]
-                if sep_rooms and temp_lead_edge in TPH_DUAL_PURPOSE_LIST:
-                    temp_lead_edge = temp_lead_edge + ' (diag)'
-                if sep_rooms and temp_trail_edge in TPH_DUAL_PURPOSE_LIST:
-                    temp_trail_edge = temp_trail_edge + ' (diag)'
-                if focus_node:
-                    if focus_node == temp_lead_edge or focus_node == temp_trail_edge:
-                        graph.edge(temp_lead_edge, temp_trail_edge)
-                else:
-                    graph.edge(temp_lead_edge, temp_trail_edge)
+                graph = _graph_edges(graph=graph, edges=(temp_lead_edge, temp_trail_edge),
+                                     sep_rooms=sep_rooms, focus_node=focus_node, all_diag=True)
         else:
             raise NotImplementedError(
                 f'{hospital.get_name()} has an illness, '
@@ -82,15 +75,8 @@ def add_edges(hospital: TPHHospital, graph: graphviz.dot.Digraph,
         if temp_treat_str:
             temp_lead_edge = temp_diag_list[len(temp_diag_list) - 1]
             temp_trail_edge = temp_treat_str
-            if sep_rooms and temp_lead_edge in TPH_DUAL_PURPOSE_LIST:
-                temp_lead_edge = temp_lead_edge + ' (diag)'
-            if sep_rooms and temp_trail_edge in TPH_DUAL_PURPOSE_LIST:
-                temp_trail_edge = temp_trail_edge + ' (treat)'
-            if focus_node:
-                if focus_node == temp_lead_edge or focus_node == temp_trail_edge:
-                    graph.edge(temp_lead_edge, temp_trail_edge)
-            else:
-                graph.edge(temp_lead_edge, temp_trail_edge)
+            graph = _graph_edges(graph=graph, edges=(temp_lead_edge, temp_trail_edge),
+                                 sep_rooms=sep_rooms, focus_node=focus_node, all_diag=False)
         else:
             raise NotImplementedError(f'{hospital.get_name()} has an illness, '
                                       f'{illness_obj.get_name()}, missing a treatment room.')
@@ -300,6 +286,21 @@ def enumerate_edges(graph: graphviz.dot.Digraph, sep_rooms: bool) -> Dict[str, i
 
 def room_menu(hospital: TPHHospital, sep_rooms: bool = False, engine: str = 'dot',
               graph_format: str = 'png') -> None:
+    """Execute the Two Point Science room menu.
+
+    Prompts the user for a room associated with hospital and then creates a graph of all edges
+    associate with that room.
+
+    Args:
+        hospital: TPHHospital object. (see: tph_hospital module)
+        sep_rooms: Optional; If true, multi-purpose rooms are separated into ' (diag)' and
+            ' (treat)' versions on the graph.
+        engine: Optional; Digraph build engine: [dot], neato, sfdp, fdp
+        graph_format: Optional; File format for Digraph: [png], pdf
+
+    Raises:
+        TypeError: Bad data type passed in.
+    """
     # LOCAL VARIABLES
     user_choice = ''        # User's room name selection
     local_room_menu = None  # Menu object for get_choice()
@@ -339,7 +340,7 @@ def _create_sep_room_dict(room_dict: dict) -> Dict[int, str]:
         raise TypeError(f'The room_dict argument must of type dict instead of {type(room_dict)}')
 
     # DO IT
-    for selection, room_name in room_dict.items():
+    for _, room_name in room_dict.items():
         try:
             if TPH_ROOM_DICT[room_name].purpose == 'Both':
                 new_dict[index] = room_name + ' (diag)'
@@ -354,6 +355,44 @@ def _create_sep_room_dict(room_dict: dict) -> Dict[int, str]:
 
     # DONE
     return new_dict
+
+
+def _graph_edges(graph: graphviz.dot.Digraph, edges: tuple(str, str),
+                 sep_rooms: bool, focus_node: str, all_diag: bool) -> graphviz.dot.Digraph:
+    """Adds edges to graph in a particular way on behalf of add_edges().
+
+    WARNING: Does not validate input!
+
+    A lot of assumptions are made in this function.  Most importantly are use cases:
+        (1) diag -> diag and (2) diag -> treat.  If all_diag is True, use case (1) is used.
+        Otherwise, (2).
+    """
+    # LOCAL VARIABLES
+    temp_lead_edge = edges[0]   # We might need to modify the leading edge
+    temp_trail_edge = edges[1]  # We might need to modify the trailing edge
+    diag_suffix = ' (diag)'     # If dual-use rooms are separate, diagnostic suffix
+    treat_suffix = ' (treat)'   # If dual-use rooms are separate, treatment suffix
+    trail_suffix = ''           # Determined by all_diag
+
+    # DO IT (and don't ask questions)
+    # Determine trailing suffix
+    if all_diag:
+        trail_suffix = diag_suffix
+    else:
+        trail_suffix = treat_suffix
+    # Graph the edge
+    if sep_rooms and temp_lead_edge in TPH_DUAL_PURPOSE_LIST:
+        temp_lead_edge = temp_lead_edge + diag_suffix
+    if sep_rooms and temp_trail_edge in TPH_DUAL_PURPOSE_LIST:
+        temp_trail_edge = temp_trail_edge + trail_suffix
+    if focus_node:
+        if focus_node in (temp_lead_edge, temp_trail_edge):
+            graph.edge(temp_lead_edge, temp_trail_edge)
+    else:
+        graph.edge(temp_lead_edge, temp_trail_edge)
+
+    # DONE
+    return graph
 
 
 def _validate_add_edges(hospital: TPHHospital, graph: graphviz.dot.Digraph,
