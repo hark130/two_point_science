@@ -20,7 +20,7 @@ from typing import Dict
 # Local
 from tps.tph_constants import TPH_DUAL_PURPOSE_LIST, TPH_ROOM_DICT, TPH_ROOM_LIST
 from tps.tph_hospital import TPHHospital
-from tps.menu import Menu
+from tps.menu import get_choice, Menu
 from tps.misc import print_edge_table
 
 
@@ -140,9 +140,20 @@ def create_graph(hospital: TPHHospital, sep_rooms: bool = False, engine: str = '
 
 def edge_menu(graph: graphviz.dot.Digraph, sep_rooms: bool) -> None:
     # LOCAL VARIABLES
-    edge_menu = Menu('EDGE MENU', {1: 'TD: DDN'})
+    sort_col = 'count'
+    sort_by_count = True
+    sort_dir = 'desc'
+    sort_desc = True
+    menu_title_template = 'EDGE MENU\nSorted by {} in a {} order\n'
+    menu_dict = {1: 'Print room connections', 2: 'Toggle Column', 3: 'Toggle Sort',
+                 999: 'Return to main menu'}
     user_input = 0  # User selection
     edge_dict = None  # Dictionary of room counts
+    clear_screen = True  # Clear the screen before printing a menu
+    max_chances = 3      # Maximum number of invalid inputs tolerated
+    curr_err = ''        # Temp variable which controls error handling
+    # Template error message for invalid selections
+    err_template = '\n*** ERROR: {}***\n'
 
     # INPUT VALIDATION
     # graph
@@ -152,11 +163,59 @@ def edge_menu(graph: graphviz.dot.Digraph, sep_rooms: bool) -> None:
     if not isinstance(sep_rooms, bool):
         raise TypeError(f'The sep_rooms argument must of type bool instead of {type(sep_rooms)}')
 
-    # GET DISPOSITION
-    edge_dict = enumerate_edges(graph, sep_rooms)
-    print_edge_table(edge_dict, TPH_ROOM_DICT)
+    # EDGE MENU
+    while True:
+        user_input = get_choice(tph_menu=Menu(menu_title_template.format(sort_col, sort_dir),
+                                              menu_dict),
+                                clear_screen=clear_screen, choice_type=int,
+                                max_chances=max_chances, return_choice=True)
+        clear_screen = True  # Reset temp variable
 
-    # DONE
+        # 1. Print Edges
+        if 1 == user_input:
+            if not edge_dict:
+                edge_dict = enumerate_edges(graph, sep_rooms)
+            if not edge_dict:
+                raise RuntimeError('Call to enumerate_edges() failed to return an object')
+            print_edge_table(edge_dict, TPH_ROOM_DICT, sort_by_count=sort_by_count,
+                             sort_desc=sort_desc)
+            clear_screen = False  # Let them see the table
+        # 2. Toggle Column
+        elif 2 == user_input:
+            if sort_col == 'count' and sort_by_count:
+                sort_col = 'room'
+                sort_by_count = False
+            elif sort_col == 'room' and not sort_by_count:
+                sort_col = 'count'
+                sort_by_count = True
+            else:
+                raise RuntimeError('Mismatch in edge menu column toggle settings')
+        # 3. Toggle Sort
+        elif 3 == user_input:
+            if sort_dir == 'desc' and sort_desc:
+                sort_dir = 'asc'
+                sort_desc = False
+            elif sort_dir == 'asc' and not sort_desc:
+                sort_dir = 'desc'
+                sort_desc = True
+            else:
+                raise RuntimeError('Mismatch in edge menu column toggle settings')
+        # 999. Exit
+        elif 999 == user_input:
+            return
+        else:
+            curr_err = err_template.format('INVALID SELECTION')
+
+        # Is there an error?
+        if curr_err:
+            max_chances = max_chances - 1
+            if max_chances < 1:
+                print(err_template.format('TOO MANY INVALID SELECTIONS'))
+                return
+            else:
+                print(curr_err)
+                clear_screen = False  # Let them see the mistake they've made
+                curr_err = ''
 
 
 def enumerate_edges(graph: graphviz.dot.Digraph, sep_rooms: bool) -> Dict[str,int]:
