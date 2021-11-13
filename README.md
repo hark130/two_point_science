@@ -43,7 +43,8 @@ See: [Usage](https://github.com/hark130/two_point_science/wiki/usage) wiki page
 | 10 | ❔ | ill_path | Plot all paths for a given illness |
 | 11 | ❔ | diag_path | Plot all paths to and from a given diagnostic room |
 | 12 | ✔️ | cli | Add support for CLI arguments (e.g., --distinct-rooms) |
-|   |  |  |
+| 13 | ❔ | edges | CLI menu option to display sorted and/or filtered list of rooms/purpose/number of edges |
+|   |  |  |  |
 
 ### Table Legend
 
