@@ -23,7 +23,7 @@ Menu = namedtuple('Menu', 'name dictionary')
 
 
 def get_choice(tph_menu: Menu, clear_screen: bool = True, choice_type: type = str,
-               max_chances: int = 3) -> Any:
+               max_chances: int = 3, return_choice: bool = False) -> Any:
     """Prints a menu, reads/converts user input, returns choice.
 
     Prints the name of the tph_menu and then a list of selections.  Reads user input, converts
@@ -37,6 +37,7 @@ def get_choice(tph_menu: Menu, clear_screen: bool = True, choice_type: type = st
         choice_type: Optional; The data type to convert the user's selection into.  PRO TIP: This
             should be the same data type as the keys in your tph_menu.dictionary.
         max_chances: Optional; Maximum number of inputs to accept from the user before it gives up.
+        return_choice: Optional; If true, return the choice instead of the tph_menu value.
 
     Returns:
         A value from tph_menu.dictionary that matches user input.
@@ -47,11 +48,11 @@ def get_choice(tph_menu: Menu, clear_screen: bool = True, choice_type: type = st
     # LOCAL VARIABLES
     user_choice = None  # User input
     num_attempts = 0    # Number of attempts at taking user input
-    dict_value = None   # Value associated with the user choice
+    ret_val = None      # Value associated with the user choice
 
     # INPUT VALIDATION
     _validate_get_choice(tph_menu=tph_menu, clear_screen=clear_screen, choice_type=choice_type,
-                         max_chances=max_chances)
+                         max_chances=max_chances, return_choice=return_choice)
 
     # DO IT
     # Clear Screen
@@ -67,13 +68,16 @@ def get_choice(tph_menu: Menu, clear_screen: bool = True, choice_type: type = st
         num_attempts += 1
         # Validate User Input
         try:
-            dict_value = tph_menu.dictionary[user_choice]
+            if return_choice:
+                ret_val = user_choice
+            else:
+                ret_val = tph_menu.dictionary[user_choice]
         except KeyError:
             if num_attempts >= max_chances:
                 raise RuntimeError('User failures exceeded maximum chances')
             print(f'{user_choice} is an invalid selection.  Try again.')
         else:
-            return dict_value
+            return ret_val
 
 
 def read_user_input(choice_type: type) -> Any:
@@ -115,7 +119,8 @@ def read_user_input(choice_type: type) -> Any:
     return user_choice
 
 
-def _validate_get_choice(tph_menu: Menu, clear_screen: bool, choice_type: type, max_chances: int):
+def _validate_get_choice(tph_menu: Menu, clear_screen: bool, choice_type: type, max_chances: int,
+                         return_choice: bool):
     """Validate input on behalf of get_choice()."""
     # INPUT VALIDATION
     # tph_menu
