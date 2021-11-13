@@ -14,7 +14,7 @@ Defines main() which will construct and print a graphy for one Two Point Hospita
 
 # Local
 from tps.arguments import parse_arguments, separate_rooms
-from tps.dgraph import create_graph, edge_menu
+from tps.dgraph import create_graph, edge_menu, room_menu
 from tps.menu import _check_for_error, get_choice, Menu
 from tps.tph_constants import TPH_HOSPITAL_LIST
 from tps.tph_hospital import TPHHospital
@@ -23,7 +23,8 @@ from tps.tph_hospital import TPHHospital
 # MACROS
 # Menus
 MAIN_MENU = Menu('TWO POINT SCIENCE', {1: 'Choose a hospital', 2: 'Graph hospital',
-                                       3: 'Print room connections', 999: 'EXIT'})
+                                       3: 'Graph room',
+                                       4: 'Print room connections', 999: 'EXIT'})
 
 HOSPITAL_MENU = Menu('TWO POINT HOSPITAL LIST', {i+1: TPH_HOSPITAL_LIST[i] for i in
                                                  range(0, len(TPH_HOSPITAL_LIST))})
@@ -75,8 +76,14 @@ def main_menu(sep_rooms: bool) -> None:
                 graph_obj.view()
             else:
                 curr_err = err_template.format('CHOOSE A HOSPITAL')
-        # 3. Count Edges
+        # 3. Graph Room
         elif user_input == 3:
+            if hospital_obj:
+                room_menu(hospital=hospital_obj, sep_rooms=sep_rooms)
+            else:
+                curr_err = err_template.format('CHOOSE A HOSPITAL')
+        # 4. Count Edges
+        elif user_input == 4:
             if not hospital_obj:
                 curr_err = err_template.format('CHOOSE A HOSPITAL')
             else:
