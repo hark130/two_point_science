@@ -54,6 +54,31 @@ class TPHHospital:
             raise NotImplementedError(f'Malformed dictionary entry for {self._hospital_name}')
         self._hospital_illness_objs = None  # Defined, if asked for by caller
 
+    def get_diag_room_list(self, sort_list: bool = True) -> List[str]:
+        """Return a list of all diagnostic rooms associated with this hospital."""
+        # LOCAL VARIABLES
+        ill_obj_list = []  # List of all illness objects for this hospital
+        room_list = []     # List of all diagnostic rooms in this hospital
+
+        # INPUT VALIDATION
+        if not isinstance(sort_list, bool):
+            raise TypeError(f'The sort_list must be of type bool instead of {type(sort_list)}')
+
+        # MAKE LIST
+        # Get illness objects
+        ill_obj_list = self.get_illness_objects()
+        # Build the list
+        for ill_obj in ill_obj_list:
+            for diag_room in ill_obj.get_diag():
+                if diag_room not in room_list:
+                    room_list.append(diag_room)
+        # Sort?
+        if sort_list:
+            room_list.sort()
+
+        # DONE
+        return room_list
+
     def get_illness_names(self) -> List[str]:
         """Retrieves the list of illnesses found in this hospital."""
         # LOCAL VARIABLES
@@ -98,6 +123,53 @@ class TPHHospital:
     def get_name(self) -> str:
         """Return the name of the hospital."""
         return self._hospital_name
+
+    def get_room_list(self, sort_list: bool = True) -> List[str]:
+        """Return a list of all rooms associated with this hospital."""
+        # LOCAL VARIABLES
+        room_list = []   # List of all rooms in this hospital
+
+        # INPUT VALIDATION
+        if not isinstance(sort_list, bool):
+            raise TypeError(f'The sort_list must be of type bool instead of {type(sort_list)}')
+
+        # GET LIST
+        # Diagnostic Rooms
+        room_list = self.get_diag_room_list(sort_list=sort_list)
+        # Treament Rooms
+        for room in self.get_treat_room_list(sort_list=sort_list):
+            if room not in room_list:
+                room_list.append(room)
+        # Sort?
+        if sort_list:
+            room_list.sort()
+
+        # DONE
+        return room_list
+
+    def get_treat_room_list(self, sort_list: bool = True) -> List[str]:
+        """Return a list of all treatment rooms associated with this hospital."""
+        # LOCAL VARIABLES
+        ill_obj_list = []  # List of all illness objects for this hospital
+        room_list = []     # List of all treatment rooms in this hospital
+
+        # INPUT VALIDATION
+        if not isinstance(sort_list, bool):
+            raise TypeError(f'The sort_list must be of type bool instead of {type(sort_list)}')
+
+        # MAKE LIST
+        # Get illness objects
+        ill_obj_list = self.get_illness_objects()
+        # Build the list
+        for ill_obj in ill_obj_list:
+            if ill_obj.get_treat() not in room_list:
+                room_list.append(ill_obj.get_treat())
+        # Sort?
+        if sort_list:
+            room_list.sort()
+
+        # DONE
+        return room_list
 
     def _build_illness_objects(self) -> None:
         """Builds _hospital_illness_objs list.
