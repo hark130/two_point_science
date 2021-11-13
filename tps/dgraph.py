@@ -12,13 +12,16 @@ Defines functionality to facilitate the creation of a directed graph based on a 
 """
 
 # Standard
+from typing import Dict
 
 # Third Party
 import graphviz
 
 # Local
-from tps.tph_constants import TPH_DUAL_PURPOSE_LIST
+from tps.tph_constants import TPH_DUAL_PURPOSE_LIST, TPH_ROOM_DICT, TPH_ROOM_LIST
 from tps.tph_hospital import TPHHospital
+from tps.menu import get_choice, Menu
+from tps.misc import print_edge_table
 
 
 def add_edges(hospital: TPHHospital, graph: graphviz.dot.Digraph,
@@ -135,6 +138,157 @@ def create_graph(hospital: TPHHospital, sep_rooms: bool = False, engine: str = '
     return graph_obj
 
 
+# pylint: disable=too-many-branches
+def edge_menu(graph: graphviz.dot.Digraph, sep_rooms: bool) -> None:
+    """Execute the Two Point Science edge (connection) menu.
+
+    This menu allows the user to print a table with room names, purpose, and an edge (connection)
+    count.  The menu also allows the user to sort the table by name or count as well as let the
+    user sort the table in ascending or descending order.
+
+    Args:
+        graph: Graph object to read the edges from.
+        sep_rooms: If true, multi-purpose rooms are separated into ' (diag)' and ' (treat)'
+            versions on the table.
+
+    Raises:
+        TypeError: Bad data type passed in.
+        RuntimeError: Mismatch in internal sort column or sort order variables
+    """
+    # LOCAL VARIABLES
+    sort_col = 'count'    # Print current sort column in the menu title
+    sort_by_count = True  # Converts user sort column choice to print_edge_table() kwarg
+    sort_dir = 'desc'     # Print current sort direction in the menu title
+    sort_desc = True      # Converts user sort order choice to print_edge_table() kwarg
+    user_input = 0        # User selection
+    edge_dict = None      # Dictionary of room counts
+    clear_screen = True   # Clear the screen before printing a menu
+    max_chances = 3       # Maximum number of invalid inputs tolerated
+    curr_err = ''         # Temp variable which controls error handling
+    # Template error message for invalid selections
+    err_template = '\n*** ERROR: {}***\n'
+    # Template menu title
+    menu_title_template = 'EDGE MENU\nSorted by {} in a {} order\n'
+    # Menu dictionary
+    menu_dict = {1: 'Print room connections', 2: 'Toggle Column', 3: 'Toggle Sort',
+                 999: 'Return to main menu'}
+
+    # INPUT VALIDATION
+    _validate_edge_menu(graph=graph, sep_rooms=sep_rooms)
+
+    # EDGE MENU
+    while True:
+        user_input = get_choice(tph_menu=Menu(menu_title_template.format(sort_col, sort_dir),
+                                              menu_dict),
+                                clear_screen=clear_screen, choice_type=int,
+                                max_chances=max_chances, return_choice=True)
+        clear_screen = True  # Reset temp variable
+
+        # 1. Print Edges
+        if user_input == 1:
+            edge_dict = enumerate_edges(graph, sep_rooms)
+            print_edge_table(edge_dict, TPH_ROOM_DICT, sort_by_count=sort_by_count,
+                             sort_desc=sort_desc)
+            clear_screen = False  # Let them see the table
+        # 2. Toggle Column
+        elif user_input == 2:
+            if sort_col == 'count' and sort_by_count:
+                sort_col = 'room'
+                sort_by_count = False
+            elif sort_col == 'room' and not sort_by_count:
+                sort_col = 'count'
+                sort_by_count = True
+            else:
+                raise RuntimeError('Mismatch in edge menu sort column toggle settings')
+        # 3. Toggle Sort
+        elif user_input == 3:
+            if sort_dir == 'desc' and sort_desc:
+                sort_dir = 'asc'
+                sort_desc = False
+            elif sort_dir == 'asc' and not sort_desc:
+                sort_dir = 'desc'
+                sort_desc = True
+            else:
+                raise RuntimeError('Mismatch in edge menu sort direction toggle settings')
+        # 999. Exit
+        elif user_input == 999:
+            return
+        else:
+            curr_err = err_template.format('INVALID SELECTION')
+
+        # Is there an error?
+        if curr_err:
+            max_chances = max_chances - 1
+            if max_chances < 1:
+                print(err_template.format('TOO MANY INVALID SELECTIONS'))
+                return
+            print(curr_err)
+            clear_screen = False  # Let them see the mistake they've made
+            curr_err = ''
+# pylint: enable=too-many-branches
+
+
+# pylint: disable=too-many-branches
+def enumerate_edges(graph: graphviz.dot.Digraph, sep_rooms: bool) -> Dict[str, int]:
+    """Execute the Two Point Science edge (connection) menu.
+
+    This menu allows the user to print a table with room names, purpose, and an edge (connection)
+    count.  The menu also allows the user to sort the table by name or count as well as let the
+    user sort the table in ascending or descending order.
+
+    Args:
+        graph: Graph object to read the edges from.
+        sep_rooms: If true, multi-purpose rooms are separated into ' (diag)' and ' (treat)'
+            versions on the table.
+
+    Raises:
+        TypeError: Bad data type passed in.
+        RuntimeError: Mismatch in internal sort column or sort order variables
+    """
+    # LOCAL VARIABLES
+    edge_counts = {}      # Rooms: Room Count
+    temp_room_names = []  # Temporary variable to help resolve dual use rooms
+
+    # INPUT VALIDATION
+    # graph
+    if not isinstance(graph, graphviz.dot.Digraph):
+        raise TypeError(f'The graph can not be of type {type(graph)}')
+    # sep_rooms
+    if not isinstance(sep_rooms, bool):
+        raise TypeError(f'The sep_rooms argument must of type bool instead of {type(sep_rooms)}')
+
+    # ENUMERATE IT
+    for part in graph.body:
+        for room in TPH_ROOM_LIST:
+            if room in part:
+                # List of room names to look for
+                if sep_rooms and TPH_ROOM_DICT[room].purpose == 'Both':
+                    temp_room_names.append(room + ' (diag)')
+                    temp_room_names.append(room + ' (treat)')
+                else:
+                    temp_room_names.append(room)
+                # Look for the room names
+                for temp_room_name in temp_room_names:
+                    if temp_room_name in edge_counts.keys():
+                        edge_counts[temp_room_name] = edge_counts[temp_room_name] + 1
+                    else:
+                        edge_counts[temp_room_name] = 1
+                # print(f'TEMP ROOM NAMES {temp_room_names}')
+                # Clear temp variables
+                temp_room_names = []
+
+    # VALIDATE RESULTS
+    for key, value in edge_counts.items():
+        if not isinstance(key, str):
+            raise TypeError('Invalid key type detected')
+        if not isinstance(value, int):
+            raise TypeError('Invalid value type detected')
+
+    # DONE
+    return edge_counts
+# pylint: enable=too-many-branches
+
+
 def _validate_add_edges(hospital: TPHHospital, graph: graphviz.dot.Digraph,
                         sep_rooms: bool) -> None:
     """Validate input on behalf of add_edges()."""
@@ -151,3 +305,14 @@ def _validate_add_edges(hospital: TPHHospital, graph: graphviz.dot.Digraph,
     # sep_rooms
     if not isinstance(sep_rooms, bool):
         raise TypeError(f'The sep_rooms can not be of type {type(sep_rooms)}')
+
+
+def _validate_edge_menu(graph: graphviz.dot.Digraph, sep_rooms: bool) -> None:
+    """Validate input on behalf of edge_menu()."""
+    # INPUT VALIDATION
+    # graph
+    if not isinstance(graph, graphviz.dot.Digraph):
+        raise TypeError(f'The graph can not be of type {type(graph)}')
+    # sep_rooms
+    if not isinstance(sep_rooms, bool):
+        raise TypeError(f'The sep_rooms argument must of type bool instead of {type(sep_rooms)}')

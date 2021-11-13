@@ -13,7 +13,6 @@ from collections import namedtuple
 # Third Party
 
 # Local
-from tps.menu import Menu
 
 
 # 1. DATA TYPES
@@ -339,8 +338,3 @@ TPH_ILLNESS_DICT = {
 }
 
 TPH_ILLNESS_LIST = list(TPH_ILLNESS_DICT.keys())
-
-# 3. MENUS
-
-HOSPITAL_MENU = Menu('TWO POINT HOSPITALS', {i+1: TPH_HOSPITAL_LIST[i] for i in
-                                             range(0, len(TPH_HOSPITAL_LIST))})
