@@ -99,6 +99,22 @@ def print_exception(error: Exception) -> str:
 
 def print_edge_table(edge_dict: dict, room_lookup: dict, sort_by_count: bool = True,
                      sort_desc: bool = True) -> None:
+    """Prints the room connection (edge) table.
+
+    For normal use cases, use enumerate_edges() from tps.dgraph to construct the edge_dict and
+    use TPH_ROOM_DICT from tps.tph_constants as the room_lookup.
+
+    Args:
+        edge_dict: Dictionary containing room names as keys and room counts as values.
+        room_lookup: Dictionary containing room names as keys and RoomDetails as values.
+        sort_by_count: Optional; If True, sort the table by room count.  Otherwise, sorts by name.
+        sort_desc: Optional; If True, sort the table in descending order.  Otherwise, table is
+            sorted in ascending order.
+
+    Raises:
+        TypeError: Bad data type passed in.
+        ValueError: Invalid value found in the arguments.
+    """
     # LOCAL VARIABLES
     local_dict = OrderedDict()  # List of sorted keys from edge_dict
     # temp_list = []            # List of sorted tuples formed from just the dictionary
@@ -107,6 +123,8 @@ def print_edge_table(edge_dict: dict, room_lookup: dict, sort_by_count: bool = T
     temp_room_purpose = ''      # Temporary RoomDetails.purpose
 
     # INPUT VALIDATION
+    # print(f'EDGE DICT: {edge_dict}')  # DEBUGGING
+    # print(f'ROOM LOOKUP: {room_lookup}')  # DEBUGGING
     # edge_dict
     if not isinstance(edge_dict, dict):
         raise TypeError(f'The edge_dict argument must of type dict instead of {type(edge_dict)}')
@@ -126,17 +144,13 @@ def print_edge_table(edge_dict: dict, room_lookup: dict, sort_by_count: bool = T
     # Sort dictionary
     if sort_by_count:
         if sort_desc:
-            local_dict = OrderedDict({key: value for key, value in sorted(edge_dict.items(),
-                                     reverse=False)})
+            local_dict = OrderedDict(sorted(edge_dict.items(), reverse=False))
         else:
-            local_dict = OrderedDict({key: value for key, value in sorted(edge_dict.items(),
-                                     reverse=True)})
-        local_dict = OrderedDict({key: value for key, value in
-                                 sorted(local_dict.items(), reverse=sort_desc,
-                                        key=lambda item: item[1])})
+            local_dict = OrderedDict(sorted(edge_dict.items(), reverse=True))
+        local_dict = OrderedDict(sorted(local_dict.items(), reverse=sort_desc,
+                                        key=lambda item: item[1]))
     else:
-        local_dict = OrderedDict({key: value for key, value in sorted(edge_dict.items(),
-                                 reverse=sort_desc)})
+        local_dict = OrderedDict(sorted(edge_dict.items(), reverse=sort_desc))
     # Form the list of tuples
     for key, value in local_dict.items():
         # Find the room purpose
@@ -150,6 +164,7 @@ def print_edge_table(edge_dict: dict, room_lookup: dict, sort_by_count: bool = T
             temp_room_purpose = 'Not Found'
         tuple_list.append(tuple((key, temp_room_purpose, value)))
     # 2. Print Table
+    # print(f'TUPLE LIST: {tuple_list}')  # DEBUGGING
     _print_table(tuple_list, tuple(('ROOM', 'PURPOSE', 'COUNT')))
 
 
@@ -183,27 +198,7 @@ def _print_table(tuple_list: list, col_headers: tuple) -> None:
     temp_line = ''    # Dynamically built string to print one line
 
     # INPUT VALIDATION
-    # tuple_list
-    if not isinstance(tuple_list, list):
-        raise TypeError(f'The tuple_list argument must of type list instead of {type(tuple_list)}')
-    if not tuple_list:
-        raise ValueError(f'The tuple_list argument can not be empty')
-    # tuple_list entries
-    num_columns = len(tuple_list[0])  # Check all entries against the length of the first
-    for entry in tuple_list:
-        if not isinstance(entry, tuple):
-            raise TypeError(f'Found an invalid tuple_list entry of type {type(entry)}')
-        if len(entry) != num_columns:
-            raise ValueError('Tuple entries are not a standard length')
-    # col_headers
-    if not isinstance(col_headers, tuple):
-        raise TypeError('The col_headers argument must of type tuple instead of '
-                        f'{type(col_headers)}')
-    for entry in col_headers:
-        if not isinstance(entry, str):
-            raise TypeError(f'Found an invalid col_headers entry of type {type(entry)}')
-    if len(col_headers) != num_columns:
-        raise ValueError('The col_headers argument does not match the length of the tuples')
+    num_columns = _validate_print_table(tuple_list=tuple_list, col_headers=col_headers)
 
     # SIZE IT
     # Column Widths
@@ -235,12 +230,37 @@ def _print_table(tuple_list: list, col_headers: tuple) -> None:
     for entry in tuple_list:
         temp_line = ''  # Reset temp variable
         for index in range(0, num_columns):
-            # print(f'ENTRY: {entry}')  # DEBUGGING
-            # print(f'INDEX: {index}')  # DEBUGGING
-            # print(f'NUM COLUMNS[INDEX]: {col_widths[index]}')  # DEBUGGING
-            # temp_line = temp_line + '{0: <num_columns[index]}'.format(entry[index])  # Invalid format specifier
-            # temp_line = temp_line + '{0: <f'{num_columns[index]}'}'.format(entry[index])  # SyntaxError: invalid syntax
-            # temp_line = temp_line + '{0: <{1}}'.format(entry[index], num_columns[index])  # TypeError: 'int' object is not subscriptable
-            # temp_line = temp_line + '{0: <{1}}'.format(entry[index], str(num_columns[index]))  # TypeError: 'int' object is not subscriptable
             temp_line = temp_line + '{0: <{width}}'.format(entry[index], width=col_widths[index])
         print(temp_line)
+
+
+def _validate_print_table(tuple_list: list, col_headers: tuple) -> int:
+    """Validate arguments on behalf of _print_table() and returns number of columns."""
+    # LOCAL VARIABLES
+    num_columns = 0   # Number of columns detected
+
+    # INPUT VALIDATION
+    # tuple_list
+    if not isinstance(tuple_list, list):
+        raise TypeError(f'The tuple_list argument must of type list instead of {type(tuple_list)}')
+    if not tuple_list:
+        raise ValueError('The tuple_list argument can not be empty')
+    # tuple_list entries
+    num_columns = len(tuple_list[0])  # Check all entries against the length of the first
+    for entry in tuple_list:
+        if not isinstance(entry, tuple):
+            raise TypeError(f'Found an invalid tuple_list entry of type {type(entry)}')
+        if len(entry) != num_columns:
+            raise ValueError('Tuple entries are not a standard length')
+    # col_headers
+    if not isinstance(col_headers, tuple):
+        raise TypeError('The col_headers argument must of type tuple instead of '
+                        f'{type(col_headers)}')
+    for entry in col_headers:
+        if not isinstance(entry, str):
+            raise TypeError(f'Found an invalid col_headers entry of type {type(entry)}')
+    if len(col_headers) != num_columns:
+        raise ValueError('The col_headers argument does not match the length of the tuples')
+
+    # DONE
+    return num_columns

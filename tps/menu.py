@@ -94,7 +94,6 @@ def read_user_input(choice_type: type) -> Any:
     Raises:
         TypeError: choice_type is not a valid data type
         RuntimeError: User input can not be converted to choice_type
-
     """
     # LOCAL VARIABLES
     user_input = None   # User input
@@ -119,8 +118,45 @@ def read_user_input(choice_type: type) -> Any:
     return user_choice
 
 
+def _check_for_error(curr_err: str, max_chances: int) -> (int, bool):
+    """Internal validation functionality for callers implementing a user menu.
+
+    Extricates duplicate code for internal modules implementing user menus.  If an error is
+    detected then max_chances is decremented, the error is printed, and clear_screen is returned
+    as False (so the user can read the printed error).
+
+    Args:
+        curr_err: A string which may or may not contain an error message.  Any content will be
+            treated as an error.
+        max_chances: Maximum number of invalid inputs tolerated.  Decremented for the return
+            value if an error is detected in curr_err.
+
+    Returns:
+        A tuple containing max_chances and a "clear_screen" boolean.  The max_chances value is
+            decremented if an error is detected.
+
+    Raises:
+        RuntimeWarning: If max_chances is decremented below 0.
+    """
+    # LOCAL VARIABLES
+    new_chances = max_chances  # Adjusted number of chances to return
+    clear_screen = True        # Caller can clear the screen because there's no error
+
+    # INPUT VALIDATION
+    if isinstance(curr_err, str):
+        if curr_err:
+            new_chances = new_chances - 1
+            if new_chances < 1:
+                raise RuntimeWarning('TOO MANY INVALID SELECTIONS')
+            print(curr_err)
+            clear_screen = False
+
+    # DONE
+    return tuple((new_chances, clear_screen))
+
+
 def _validate_get_choice(tph_menu: Menu, clear_screen: bool, choice_type: type, max_chances: int,
-                         return_choice: bool):
+                         return_choice: bool) -> None:
     """Validate input on behalf of get_choice()."""
     # INPUT VALIDATION
     # tph_menu
@@ -144,3 +180,7 @@ def _validate_get_choice(tph_menu: Menu, clear_screen: bool, choice_type: type, 
         raise TypeError(f'The max_chances argument can not be of type {type(max_chances)}')
     if max_chances < 1:
         raise ValueError(f'The max_chances value ({max_chances}) must be greater than zero')
+    # return_choice
+    if not isinstance(return_choice, bool):
+        raise TypeError('The return_choice argument must of type bool instead of '
+                        f'{type(return_choice)}')
