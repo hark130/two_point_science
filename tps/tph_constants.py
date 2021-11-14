@@ -119,6 +119,7 @@ TPH_TREATMENT_LIST = [room for room, value in TPH_ROOM_DICT.items()
 TPH_DUAL_PURPOSE_LIST = [room for room, value in TPH_ROOM_DICT.items() if value.purpose == 'Both']
 
 TPH_HOSPITAL_DICT = {
+    # Blighton
     TPH_NAME_HOSPITAL_BL:
     HospitalDetails(illness=['8-bitten', 'Animal Magnetism', 'Cubism', 'Decision Rash',
                              'Emperor Complex', 'Freudian Lips', 'Grey Anatomy', 'Gurning Loins',
@@ -129,6 +130,7 @@ TPH_HOSPITAL_DICT = {
                              'Touch of Midas', 'Turtle Head', TPH_NAME_DISEASE_VD]),
     'Camouflage Falls': HospitalDetails(illness=[]),
     'Chasm 24': HospitalDetails(illness=[]),
+    # Clockwise-above-Thyme
     TPH_NAME_HOSPITAL_CAT:
     HospitalDetails(illness=['Jest Infection', TPH_NAME_DISEASE_JRI, TPH_NAME_DISEASE_BE,
                              TPH_NAME_DISEASE_BY, TPH_NAME_DISEASE_HOT, 'Lightheadedness',
@@ -149,6 +151,7 @@ TPH_HOSPITAL_DICT = {
     'Flemington': HospitalDetails(illness=[]),
     'Flottering': HospitalDetails(illness=[]),
     'Goldpan': HospitalDetails(illness=[]),
+    # Grockle Bay
     # https://two-point-hospital.fandom.com/wiki/Grockle_Bay
     # TPH_NAME_HOSPITAL_GB:
     # HospitalDetails(illness=['Denim Genes', 'Leopard Skin', 'Touch of Midas', 'Broken Face',
@@ -170,6 +173,7 @@ TPH_HOSPITAL_DICT = {
     'Hogsport': HospitalDetails(illness=[]),
     'Lower Bullocks': HospitalDetails(illness=[]),
     'Melt Downs': HospitalDetails(illness=[]),
+    # Mitton University
     # Observed in game (see: res/Mitton_University-Illness_List-?.png)
     TPH_NAME_HOSPITAL_MU:
     HospitalDetails(illness=['Bogwarts', 'Misery Guts', 'Lazy Bones', 'Grey Anatomy',
@@ -185,13 +189,15 @@ TPH_HOSPITAL_DICT = {
     'Plywood Studios': HospitalDetails(illness=[]),
     'Roquefort Castle': HospitalDetails(illness=[]),
     'Rotting Hill': HospitalDetails(illness=[]),
-    # https://two-point-hospital.fandom.com/wiki/Sweaty_Palms
+    # Smogley
     TPH_NAME_HOSPITAL_SM:
     HospitalDetails(illness=['Grey Anatomy', 'Cross Bones', 'Humerus Injury', 'Hurty Leg',
                              'Turtle Head', 'Decision Rash', 'Mood Poisoning',
                              'Spontaneous Combustion', 'Pandemic', 'Animal Magnetism',
                              'Floppy Discs', 'Gurning Loins', 'Heart Throb', 'Pipe Organs',
                              'Spinal Bap', 'Bed Face', 'Jazz Hand', 'Portishead']),
+    # Sweaty Palms
+    # https://two-point-hospital.fandom.com/wiki/Sweaty_Palms
     TPH_NAME_HOSPITAL_SP:
     HospitalDetails(illness=['Grey Anatomy', 'Jest Infection', 'Premature Mummification',
                              'Headcrabedness', 'Lightheadedness', 'Denim Genes', 'Flumps',
