@@ -120,6 +120,7 @@ TPH_DUAL_PURPOSE_LIST = [room for room, value in TPH_ROOM_DICT.items() if value.
 
 TPH_HOSPITAL_DICT = {
     # Blighton
+    # https://two-point-hospital.fandom.com/wiki/Blighton
     TPH_NAME_HOSPITAL_BL:
     HospitalDetails(illness=['8-bitten', 'Animal Magnetism', 'Cubism', 'Decision Rash',
                              'Emperor Complex', 'Freudian Lips', 'Grey Anatomy', 'Gurning Loins',
@@ -145,7 +146,22 @@ TPH_HOSPITAL_DICT = {
                              'Monobrow', TPH_NAME_DISEASE_PT, 'Predestinitis']),
     'Clockwise-before-Thyme': HospitalDetails(illness=[]),
     'Clockwise-upon-Thyme': HospitalDetails(illness=[]),
-    'Croquembouche': HospitalDetails(illness=[]),
+    # Croquembouche
+    # https://two-point-hospital.fandom.com/wiki/Croquembouche
+    TPH_NAME_HOSPITAL_CR:
+    HospitalDetails(illness=['Grey Anatomy', 'Jest Infection', 'Premature Mummification',
+                             'Headcrabedness', 'Lightheadedness', 'Denim Genes', 'Flumps',
+                             'Jumbo DNA', 'Leopard Skin', 'Touch of Midas', 'Broken Face',
+                             'Cross Bones', 'Humerus Injury', 'Hurty Leg', 'Shattered',
+                             'Turtle Head', 'Decision Rash', 'Litter Bug', 'Mood Poisoning',
+                             'Pudding Blood', 'Rock Bottom', 'Spontaneous Combustion', 'Pandemic',
+                             'Animal Magnetism', 'Bogwarts', 'Lycanthropy', 'Misery Guts',
+                             'Potty Mouth', 'Verbal Diarrhoea', 'Boggled Mind', 'Emperor Complex',
+                             'Freudian Lips', 'Inflated Ego', 'Mime Crisis', 'Mock Star',
+                             'Night Fever', 'Cubism', '8-bitten', 'Shock Horror', 'Floppy Discs',
+                             'Gurning Loins', 'Heart Throb', 'Pipe Organs', 'Spinal Bap',
+                             'Bed Face', 'Jazz Hand', 'Lazy Bones', 'Monobrow', 'Mucky Feet',
+                             'Portishead']),
     'Duckworth-upon-Bilge': HospitalDetails(illness=[]),
     'Fitzpocket Academy': HospitalDetails(illness=[]),
     'Flemington': HospitalDetails(illness=[]),
@@ -185,10 +201,32 @@ TPH_HOSPITAL_DICT = {
     'Old Newpoint': HospitalDetails(illness=[]),
     'Overgrowth': HospitalDetails(illness=[]),
     'Pebberley Reef': HospitalDetails(illness=[]),
-    'Pelican Wharf': HospitalDetails(illness=[]),
+    # Pelican Wharf
+    # https://two-point-hospital.fandom.com/wiki/Pelican_Wharf
+    TPH_NAME_HOSPITAL_PW:
+    HospitalDetails(illness=['Grey Anatomy', 'Jest Infection', 'Premature Mummification',
+                             'Headcrabedness', 'Lightheadedness', 'Jumbo DNA', 'Leopard Skin',
+                             'Touch of Midas', 'Broken Face', 'Cross Bones', 'Shattered',
+                             'Turtle Head', 'Decision Rash', 'Litter Bug', 'Pudding Blood',
+                             'Rock Bottom', 'Spontaneous Combustion', 'Pandemic',
+                             'Animal Magnetism', 'Bogwarts', 'Lycanthropy', 'Misery Guts',
+                             'Potty Mouth', 'Boggled Mind', 'Emperor Complex', 'Inflated Ego',
+                             'Mock Star', 'Night Fever', 'Cubism', '8-bitten', 'Shock Horror',
+                             'Gurning Loins', 'Heart Throb', 'Pipe Organs', 'Jazz Hand',
+                             'Monobrow', 'Mucky Feet', 'Portishead']),
     'Plywood Studios': HospitalDetails(illness=[]),
     'Roquefort Castle': HospitalDetails(illness=[]),
-    'Rotting Hill': HospitalDetails(illness=[]),
+    # Rotting Hill
+    # https://two-point-hospital.fandom.com/wiki/Rotting_Hill
+    TPH_NAME_HOSPITAL_RH:
+    HospitalDetails(illness=['Grey Anatomy', 'Jest Infection', 'Premature Mummification',
+                             'Headcrabedness', 'Lightheadedness', 'Flumps', 'Jumbo DNA',
+                             'Humerus Injury', 'Hurty Leg', 'Shattered', 'Turtle Head',
+                             'Litter Bug', 'Mood Poisoning', 'Spontaneous Combustion', 'Pandemic',
+                             'Potty Mouth', 'Verbal Diarrhoea', 'Emperor Complex', 'Mock Star',
+                             'Night Fever', 'Cubism', 'Floppy Discs', 'Gurning Loins',
+                             'Pipe Organs', 'Bed Face', 'Lazy Bones', 'Monobrow', 'Mucky Feet',
+                             'Portishead']),
     # Smogley
     TPH_NAME_HOSPITAL_SM:
     HospitalDetails(illness=['Grey Anatomy', 'Cross Bones', 'Humerus Injury', 'Hurty Leg',
