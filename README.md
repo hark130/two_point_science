@@ -20,8 +20,11 @@ The `tps` package currently implements the following hospitals:
 
 - Blighton
 - Clockwise-above-Thyme
+- Croquembouche
 - Grockle Bay
 - Mitton University
+- Pelican Wharf
+- Rotting Hill
 - Smogley
 - Sweaty Palms
 
@@ -91,6 +94,8 @@ See: [Usage](https://github.com/hark130/two_point_science/wiki/usage) wiki page
 - [ ] Find a way to deconflict "public record" and observations when it comes to the illness list for a given hospital
 	- [X] Grockle Bay
 	- [X] Mitton University
+- [ ] Is exception.args[0] deprecated?  Yes or no, should I be using exception.msg instead?  (see: misc.print_exception()
+- [ ] Investigate mypy: replace isinstance() calls?, verify safe variable usage?
 
 ### BUGS
 
@@ -98,3 +103,6 @@ See: [Usage](https://github.com/hark130/two_point_science/wiki/usage) wiki page
 - [ ] Add quit feature to menu functionality.  Take care to avoid a dict.keys() collision.
 - [X] distinct-rooms CLI argument does nothing for printing room edge list.  It has to do with room edges are detected in the graph_obj.body.
 - [X] CLI menu vertical whitespacing could use some polish
+- [ ] Ward (treat) appears in the "room connection" table for Blighton (-d) but is not listed as a treatment on the graph (because there is no illness treated in a Ward at this hospital)
+- [ ] Ward connection counts are being shared by both (treat) and (diag) in the "room connection" table for Pelican Wharf (-d) even though the main graph doesn't support those numbers visually
+- [ ] "PELICAN WHARFROOM LIST"
