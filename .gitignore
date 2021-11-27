@@ -1,6 +1,7 @@
 # TWO POINT SCIENCE
 *.png
 *.pdf
+graphs/
 
 # PYTHON
 # Byte-compiled / optimized / DLL files

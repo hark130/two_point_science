@@ -13,6 +13,7 @@ Defines functionality to facilitate the creation of a directed graph based on a 
 
 # Standard
 from typing import Dict
+import os
 
 # Third Party
 import graphviz
@@ -85,8 +86,10 @@ def add_edges(hospital: TPHHospital, graph: graphviz.dot.Digraph,
     return graph
 
 
-def create_graph(hospital: TPHHospital, sep_rooms: bool = False, engine: str = 'dot',
-                 graph_format: str = 'png', focus_node: str = '') -> graphviz.dot.Digraph:
+# pylint: disable=too-many-arguments
+def create_graph(hospital: TPHHospital, graph_dir: str, sep_rooms: bool = False,
+                 engine: str = 'dot', graph_format: str = 'png',
+                 focus_node: str = '') -> graphviz.dot.Digraph:
     """Create a hospital Digraph using graphviz.
 
     Args:
@@ -110,8 +113,8 @@ def create_graph(hospital: TPHHospital, sep_rooms: bool = False, engine: str = '
     filename = ''      # Filename to save the graph
 
     # INPUT VALIDATION
-    _validate_graph_menu(hospital=hospital, sep_rooms=sep_rooms, engine=engine,
-                         graph_format=graph_format)
+    _validate_graph_menu(hospital=hospital, graph_dir=graph_dir, sep_rooms=sep_rooms,
+                         engine=engine, graph_format=graph_format)
     # focus_node
     if not isinstance(focus_node, str):
         raise TypeError(f'The focus_node argument must of type str instead of {type(focus_node)}')
@@ -123,7 +126,8 @@ def create_graph(hospital: TPHHospital, sep_rooms: bool = False, engine: str = '
         filename = filename + '_' + focus_node
     filename = filename + f' ({engine})'
     # Instantiate the object
-    graph_obj = graphviz.Digraph(name=hospital.get_name(), filename=filename,
+    graph_obj = graphviz.Digraph(name=hospital.get_name(),
+                                 filename=os.path.join(graph_dir, filename),
                                  engine=engine, format=graph_format)
     # Form the nodes/edges
     graph_obj = add_edges(hospital=hospital, graph=graph_obj, sep_rooms=sep_rooms,
@@ -131,6 +135,7 @@ def create_graph(hospital: TPHHospital, sep_rooms: bool = False, engine: str = '
 
     # DONE
     return graph_obj
+# pylint: enable=too-many-arguments
 
 
 # pylint: disable=too-many-branches
@@ -284,7 +289,7 @@ def enumerate_edges(graph: graphviz.dot.Digraph, sep_rooms: bool) -> Dict[str, i
 # pylint: enable=too-many-branches
 
 
-def room_menu(hospital: TPHHospital, sep_rooms: bool = False, engine: str = 'dot',
+def room_menu(hospital: TPHHospital, graph_dir: str, sep_rooms: bool = False, engine: str = 'dot',
               graph_format: str = 'png') -> None:
     """Execute the Two Point Science room menu.
 
@@ -309,8 +314,8 @@ def room_menu(hospital: TPHHospital, sep_rooms: bool = False, engine: str = 'dot
     room_list = []          # List of all the rooms in hospital
 
     # INPUT VALIDATION
-    _validate_graph_menu(hospital=hospital, sep_rooms=sep_rooms, engine=engine,
-                         graph_format=graph_format)
+    _validate_graph_menu(hospital=hospital, graph_dir=graph_dir, sep_rooms=sep_rooms,
+                         engine=engine, graph_format=graph_format)
 
     # GET ROOM
     # Trim the dictionary
@@ -324,8 +329,8 @@ def room_menu(hospital: TPHHospital, sep_rooms: bool = False, engine: str = 'dot
     user_choice = get_choice(local_room_menu, clear_screen=True, choice_type=int)
 
     # MAKE GRAPH
-    graph_obj = create_graph(hospital=hospital, sep_rooms=sep_rooms, engine=engine,
-                             graph_format=graph_format, focus_node=user_choice)
+    graph_obj = create_graph(hospital=hospital, graph_dir=graph_dir, sep_rooms=sep_rooms,
+                             engine=engine, graph_format=graph_format, focus_node=user_choice)
     print(f"Creating a directed graph of {hospital.get_name()}'s {user_choice} room...")
     graph_obj.view()
 
@@ -427,13 +432,16 @@ def _validate_edge_menu(graph: graphviz.dot.Digraph, sep_rooms: bool) -> None:
         raise TypeError(f'The sep_rooms argument must of type bool instead of {type(sep_rooms)}')
 
 
-def _validate_graph_menu(hospital: TPHHospital, sep_rooms: bool, engine: str,
+def _validate_graph_menu(hospital: TPHHospital, graph_dir: str, sep_rooms: bool, engine: str,
                          graph_format: str) -> None:
     """Validate input on behalf of functions that create graphs."""
     # INPUT VALIDATION
     # hospital
     if not isinstance(hospital, TPHHospital):
         raise TypeError(f'The hospital can not be of type {type(hospital)}')
+    # graph_dir
+    if not isinstance(graph_dir, str):
+        raise TypeError(f'The graph_dir argument must of type str instead of {type(graph_dir)}')
     # sep_rooms
     if not isinstance(sep_rooms, bool):
         raise TypeError(f'The sep_rooms can not be of type {type(sep_rooms)}')

@@ -1,6 +1,8 @@
 """Defines and parses Two Point Science package arguments.
 
-Functionality parses arguments and answers questions about defined arguments: -d/--distinct-rooms
+Functionality parses arguments and answers questions about defined arguments:
+    -d/--distinct-rooms
+    -g/--graph-dir
 
     Typical usage example:
 
@@ -14,10 +16,34 @@ Functionality parses arguments and answers questions about defined arguments: -d
 
 # Standard
 import argparse
+import os
 
 # Third Party
 
 # Local
+
+
+def graph_directory(args: argparse.Namespace) -> bool:
+    """Determine what directory to store graph files in.
+
+    Returns the directory from the arguments, cwd otherwise.
+    """
+    # LOCAL VARIABLES
+    graph_dir = os.getcwd()  # Graph file storage directory
+
+    # INPUT VALIDATION
+    if not isinstance(args, argparse.Namespace):
+        raise TypeError(f'The args parameter can not be of type {type(args)}')
+
+    # CHECK IT
+    try:
+        if args.graph_dir:
+            graph_dir = args.graph_dir
+    except AttributeError:
+        pass
+
+    # DONE
+    return graph_dir
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -26,6 +52,7 @@ def parse_arguments() -> argparse.Namespace:
         description='Create a directed graph of rooms for a Two Point Hospital hospital')
     parser.add_argument('-d', '--distinct-rooms', action='store_true', default=False,
                         help='Separate dual-purpose rooms on the directed graph')
+    parser.add_argument('-g', '--graph-dir', help='Directed graph storage directory')
     args = parser.parse_args()
 
     # DONE
