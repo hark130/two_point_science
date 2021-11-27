@@ -4,7 +4,13 @@ Defines types and values used by the entire package.
 
     Typical usage example:
 
-    from tps.tph_constants import (TPH_ROOM_DICT, TPH_ROOM_LIST)
+    from tps.tph_constants import (MISSING_DATA, TPH_ILLNESS_DICT, TPH_NAME_DISEASE_8B)
+
+    eight_bit = TPH_ILLNESS_DICT[TPH_NAME_DISEASE_8B]
+    if eight_bit.health == MISSING_DATA:
+        print('We still need to extricate this data point from Two Point Hospital')
+    else:
+        print(f"{TPH_NAME_DISEASE_8B}'s health constant is {eight_bit.health}"')
 """
 
 # Standard
@@ -13,6 +19,7 @@ from collections import namedtuple
 # Third Party
 
 # Local
+from tps.missing_data import MissingData
 
 
 # 1. DATA TYPES
@@ -22,6 +29,8 @@ IllnessDetails = namedtuple('IllnessDetails', 'diagnostic treatment')
 RoomDetails = namedtuple('RoomDetails', 'purpose')
 
 # 2. MACROS
+# This macro indicates some game data is missing
+MISSING_DATA = MissingData("TO DO: DON'T DO NOW... Get this data")
 
 # DISEASE NAMES
 # NOTE: Disease macro names were truncated to represent the acronym (for names with more than
