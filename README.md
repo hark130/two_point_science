@@ -56,7 +56,7 @@ See: [Usage](https://github.com/hark130/two_point_science/wiki/usage) wiki page
 | 18 | ❔ | table_banner | Add a fancy banner about table headers |
 | 19 | ❔ | sep_suffix | There's a dangerous amount of hard-coded suffix strings.  SPOT it! |
 | 20 | ✔️ | graph_dir | CLI argument to specify a directory to save graph filenames |
-| 21 | ❔ | danger | Add menu functionality to rank the treat rooms by (avg. and worst) danger (e.g., illness difficulty * rate of decline) |
+| 21 | 🚧 | danger | Add menu functionality to rank the treat rooms by (avg. and worst) danger (e.g., illness difficulty * rate of decline) |
 |   |  |  |  |
 
 ### Table Legend
