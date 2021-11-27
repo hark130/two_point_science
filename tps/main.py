@@ -13,7 +13,7 @@ Defines main() which will construct and print a graphy for one Two Point Hospita
 # Third Party
 
 # Local
-from tps.arguments import parse_arguments, separate_rooms
+from tps.arguments import parse_arguments, graph_directory, separate_rooms
 from tps.dgraph import create_graph, edge_menu, room_menu
 from tps.menu import _check_for_error, get_choice, Menu
 from tps.tph_constants import TPH_HOSPITAL_LIST
@@ -31,7 +31,7 @@ HOSPITAL_MENU = Menu('TWO POINT HOSPITAL LIST', {i+1: TPH_HOSPITAL_LIST[i] for i
 
 
 # pylint: disable=too-many-branches
-def main_menu(sep_rooms: bool) -> None:
+def main_menu(sep_rooms: bool, graph_dir: str) -> None:
     """Execute the Two Point Science top-level menu.
 
     Args:
@@ -52,8 +52,12 @@ def main_menu(sep_rooms: bool) -> None:
     err_template = '\n*** ERROR: {}***\n'
 
     # INPUT VALIDATION
+    # sep_rooms
     if not isinstance(sep_rooms, bool):
         raise TypeError(f'The sep_rooms argument must of type bool instead of {type(sep_rooms)}')
+    # graph_dir
+    if not isinstance(graph_dir, str):
+        raise TypeError(f'The graph_dir argument must of type str instead of {type(graph_dir)}')
 
     # DO IT
     while True:
@@ -71,7 +75,8 @@ def main_menu(sep_rooms: bool) -> None:
         # 2. Graph Hospital
         elif user_input == 2:
             if hospital_obj:
-                graph_obj = create_graph(hospital=hospital_obj, sep_rooms=sep_rooms)
+                graph_obj = create_graph(hospital=hospital_obj, graph_dir=graph_dir,
+                                         sep_rooms=sep_rooms)
                 print(f'Creating a directed graph of {hospital_obj.get_name()}...')
                 graph_obj.view()
             else:
@@ -79,7 +84,7 @@ def main_menu(sep_rooms: bool) -> None:
         # 3. Graph Room
         elif user_input == 3:
             if hospital_obj:
-                room_menu(hospital=hospital_obj, sep_rooms=sep_rooms)
+                room_menu(hospital=hospital_obj, graph_dir=graph_dir, sep_rooms=sep_rooms)
             else:
                 curr_err = err_template.format('CHOOSE A HOSPITAL')
         # 4. Count Edges
@@ -87,7 +92,8 @@ def main_menu(sep_rooms: bool) -> None:
             if not hospital_obj:
                 curr_err = err_template.format('CHOOSE A HOSPITAL')
             else:
-                graph_obj = create_graph(hospital=hospital_obj, sep_rooms=sep_rooms)
+                graph_obj = create_graph(hospital=hospital_obj, graph_dir=graph_dir,
+                                         sep_rooms=sep_rooms)
                 edge_menu(graph_obj, sep_rooms=sep_rooms)
                 clear_screen = False  # I need to see it
                 # print(f'SEP ROOMS: {sep_rooms}')  # DEBUGGING
@@ -112,13 +118,13 @@ def main() -> None:
     """Constructs and prints a graph for a hospital."""
     # LOCAL VARIABLES
     tps_args = parse_arguments()  # Arguments parsed from sys.argv
-
-    # PARSE ARGS
     # Separate Rooms?
     sep_rooms = separate_rooms(tps_args)
+    # Directory to store the graph files in
+    graph_dir = graph_directory(tps_args)
 
     # MAIN MENU
-    main_menu(sep_rooms=sep_rooms)
+    main_menu(sep_rooms=sep_rooms, graph_dir=graph_dir)
 
 
 if __name__ == '__main__':
