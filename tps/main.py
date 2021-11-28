@@ -14,7 +14,7 @@ Defines main() which will construct and print a graphy for one Two Point Hospita
 
 # Local
 from tps.arguments import parse_arguments, graph_directory, separate_rooms
-from tps.dgraph import create_graph, edge_menu, room_menu
+from tps.dgraph import create_graph, edge_menu, illness_menu, room_menu
 from tps.menu import _check_for_error, danger_menu, get_choice, Menu
 from tps.tph_constants import TPH_HOSPITAL_LIST
 from tps.tph_hospital import TPHHospital
@@ -23,8 +23,8 @@ from tps.tph_hospital import TPHHospital
 # MACROS
 # Menus
 MAIN_MENU = Menu('TWO POINT SCIENCE', {1: 'Choose a hospital', 2: 'Graph hospital',
-                                       3: 'Graph room',
-                                       4: 'Print room connections', 5: 'Print illness danger',
+                                       3: 'Graph illness', 4: 'Graph room',
+                                       5: 'Print room connections', 6: 'Print illness danger',
                                        999: 'EXIT'})
 
 HOSPITAL_MENU = Menu('TWO POINT HOSPITAL LIST', {i+1: TPH_HOSPITAL_LIST[i] for i in
@@ -83,14 +83,20 @@ def main_menu(sep_rooms: bool, graph_dir: str) -> None:
                 graph_obj.view()
             else:
                 curr_err = err_template.format('CHOOSE A HOSPITAL')
-        # 3. Graph Room
+        # 3. Graph Illness
         elif user_input == 3:
+            if hospital_obj:
+                illness_menu(hospital=hospital_obj, graph_dir=graph_dir, sep_rooms=sep_rooms)
+            else:
+                curr_err = err_template.format('CHOOSE A HOSPITAL')
+        # 4. Graph Room
+        elif user_input == 4:
             if hospital_obj:
                 room_menu(hospital=hospital_obj, graph_dir=graph_dir, sep_rooms=sep_rooms)
             else:
                 curr_err = err_template.format('CHOOSE A HOSPITAL')
-        # 4. Count Edges
-        elif user_input == 4:
+        # 5. Count Edges
+        elif user_input == 5:
             if not hospital_obj:
                 curr_err = err_template.format('CHOOSE A HOSPITAL')
             else:
@@ -98,8 +104,8 @@ def main_menu(sep_rooms: bool, graph_dir: str) -> None:
                                          sep_rooms=sep_rooms)
                 edge_menu(graph_obj, sep_rooms=sep_rooms)
                 clear_screen = False  # User needs to see it
-        # 5. Calculate Danger
-        elif user_input == 5:
+        # 6. Calculate Danger
+        elif user_input == 6:
             if not hospital_obj:
                 curr_err = err_template.format('CHOOSE A HOSPITAL')
             else:
