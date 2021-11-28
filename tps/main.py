@@ -115,7 +115,6 @@ def main_menu(sep_rooms: bool, graph_dir: str) -> None:
             max_chances, clear_screen = _check_for_error(curr_err=curr_err,
                                                          max_chances=max_chances)
         except RuntimeWarning as err:
-            print(f'EXCEPTION {repr(err)}')  # DEBUGGING
             print(err_template.format(err.args[0]))
             return
 # pylint: enable=too-many-branches

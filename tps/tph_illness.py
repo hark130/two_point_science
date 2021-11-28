@@ -229,14 +229,10 @@ class TPHIllness:
         illness_treat = None  # Treatment room
 
         # INTERNAL VALIDATION
-        # print(f'ILLNESS TREATMENT ROOM: {self._illness_treat}')  # DEBUGGING
         if isinstance(self._illness_treat, str) and self._illness_treat in self.treat_room_list:
             illness_treat = self._illness_treat
 
         # DONE
-        # print(f'{self._illness_name} is diff: {self.get_difficulty_str()}')  # DEBUGGING
-        # print(f'{self._illness_name} is death: {self.get_death_str()}')  # DEBUGGING
-        # print(f'{self._illness_name} is decline: {self.get_decline_str()}')  # DEBUGGING
         return illness_treat
 
     def _validate_attributes(self) -> None:

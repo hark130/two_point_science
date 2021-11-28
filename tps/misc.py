@@ -35,7 +35,6 @@ def clear_screen() -> None:
     os_name = platform.system()  # Operating system name
 
     # CLEAR IT
-    # return  # DEBUGGING
     if os_name in ('Linux', 'Darwin'):
         command = 'clear'
     elif os_name == 'Windows':
@@ -125,8 +124,6 @@ def print_edge_table(edge_dict: dict, room_lookup: dict, sort_by_count: bool = T
     temp_room_purpose = ''      # Temporary RoomDetails.purpose
 
     # INPUT VALIDATION
-    # print(f'EDGE DICT: {edge_dict}')  # DEBUGGING
-    # print(f'ROOM LOOKUP: {room_lookup}')  # DEBUGGING
     # edge_dict
     if not isinstance(edge_dict, dict):
         raise TypeError(f'The edge_dict argument must of type dict instead of {type(edge_dict)}')
@@ -163,7 +160,6 @@ def print_edge_table(edge_dict: dict, room_lookup: dict, sort_by_count: bool = T
             temp_room_purpose = 'Not Found'
         tuple_list.append(tuple((key, temp_room_purpose, value)))
     # 2. Print Table
-    # print(f'TUPLE LIST: {tuple_list}')  # DEBUGGING
     _print_table(tuple_list, tuple(('ROOM', 'PURPOSE', 'COUNT')))
 
 
@@ -216,14 +212,12 @@ def print_danger_table(hospital: TPHHospital, sort_by_col: int, agg_strat: int,
         sort_list = sorted(sort_list, key=lambda item: item[1], reverse=not sort_desc)
     sort_list = sorted(sort_list, key=lambda item: item[sort_by_col], reverse=sort_desc)
     # Create Real List
-    # print(f'SORT LIST: {sort_list}')  # DEBUGGING
     for illness_entry in sort_list:
         illness_obj = illness_entry[0]
         tuple_list.append(tuple((illness_obj.get_name(), illness_obj.get_treat(),
                                  illness_obj.get_difficulty_str(), illness_obj.get_death_str(),
                                  illness_obj.get_decline_str(),
                                  illness_obj.get_aggregate_str(agg_strat))))
-    # print(f'TUPLE LIST: {tuple_list}')  # DEBUGGING
 
     # PRINT TABLE
     _print_table(tuple_list, tuple(('ILLNESS', 'TREATMENT', 'DIFFICULTY  ', 'DEATH CHANCE  ',
