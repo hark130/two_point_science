@@ -360,92 +360,264 @@ TPH_HOSPITAL_DICT = {
 TPH_HOSPITAL_LIST = list(TPH_HOSPITAL_DICT.keys())
 
 TPH_ILLNESS_DICT = {
-    TPH_NAME_DISEASE_8B: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_RL, difficulty=0.5, death=.5, decline=1),
-    TPH_NAME_DISEASE_AM: IllnessDetails(diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_PC, difficulty=0.4, death=.25, decline=0.75),
-    TPH_NAME_DISEASE_AI: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, TPH_NAME_ROOM_WA], treatment=TPH_NAME_ROOM_PSY, difficulty=0.7, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_BEF: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_WA, difficulty=0.2, death=.1, decline=0.5),
-    TPH_NAME_DISEASE_BE: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_DLC, difficulty=0.2, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_BP: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_SU, difficulty=0.6, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_BOA: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_IR, difficulty=0.4, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_BM: IllnessDetails(diagnostic=[TPH_NAME_ROOM_WA, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_PSY, difficulty=0.6, death=0, decline=0.1),
-    TPH_NAME_DISEASE_BO: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_PH, difficulty=0.4, death=.2, decline=1),
-    TPH_NAME_DISEASE_BH: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_SU, difficulty=0.4, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_BRF: IllnessDetails(diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_FA], treatment=TPH_NAME_ROOM_FW, difficulty=0.5, death=.3, decline=1),
-    TPH_NAME_DISEASE_BY: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_DLC, difficulty=0.2, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_CAR: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PH, difficulty=0.5, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_CLA: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PH, difficulty=0.1, death=0, decline=0.75),
-    TPH_NAME_DISEASE_CLO: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_FW, difficulty=0.4, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_CP: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PH, difficulty=0.4, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_CB: IllnessDetails(diagnostic=[TPH_NAME_ROOM_PSY, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_FW, difficulty=0.6, death=.3, decline=1),
-    TPH_NAME_DISEASE_CU: IllnessDetails(diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_RR, difficulty=0.5, death=1, decline=1),
-    TPH_NAME_DISEASE_DR: IllnessDetails(diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_IR, difficulty=0.6, death=.4, decline=1),
-    TPH_NAME_DISEASE_DG: IllnessDetails(diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_DL, difficulty=0.4, death=1, decline=1),
-    TPH_NAME_DISEASE_DS: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_IR, difficulty=0.5, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_EC: IllnessDetails(diagnostic=[TPH_NAME_ROOM_DL, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_PSY, difficulty=0.7, death=0, decline=0.1),
-    TPH_NAME_DISEASE_FD: IllnessDetails(diagnostic=[TPH_NAME_ROOM_XR, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_SU, difficulty=0.4, death=.5, decline=1),
-    TPH_NAME_DISEASE_FLU: IllnessDetails(diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_DL, difficulty=0.5, death=1, decline=1),
-    TPH_NAME_DISEASE_FS: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PSY, difficulty=0.6, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_FO: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PSY, difficulty=0.3, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_FE: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, TPH_NAME_ROOM_DL], treatment=TPH_NAME_ROOM_DL, difficulty=0.5, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_FT: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_FW, difficulty=0.5, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_FL: IllnessDetails(diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_PSY], treatment=TPH_NAME_ROOM_PSY, difficulty=0.3, death=0, decline=0.1),
-    TPH_NAME_DISEASE_FU: IllnessDetails(diagnostic=[TPH_NAME_ROOM_DL, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_RR, difficulty=0.5, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_GD: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, TPH_NAME_ROOM_WA], treatment=TPH_NAME_ROOM_FW, difficulty=0.8, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_GA: IllnessDetails(diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_CH, difficulty=0.4, death=0, decline=0.75),
-    TPH_NAME_DISEASE_GR: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PH, difficulty=0, death=0, decline=0.5),
-    TPH_NAME_DISEASE_GL: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_SU, difficulty=0.8, death=.5, decline=1),
-    TPH_NAME_DISEASE_HC: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_IR, difficulty=0.6, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_HE: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_DLC, difficulty=0.2, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_HT: IllnessDetails(diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_FA], treatment=TPH_NAME_ROOM_SU, difficulty=0.6, death=.5, decline=1),
-    TPH_NAME_DISEASE_HL: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PSY, difficulty=0.6, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_HOL: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_PH, difficulty=0.7, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_HOT: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_DLC, difficulty=0.2, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_HI: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_WA], treatment=TPH_NAME_ROOM_FW, difficulty=0.2, death=.3, decline=1),
-    TPH_NAME_DISEASE_HUL: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_FW, difficulty=0.3, death=.3, decline=1),
-    TPH_NAME_DISEASE_IE: IllnessDetails(diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_GD], treatment=TPH_NAME_ROOM_PSY, difficulty=0.5, death=0, decline=0.1),
-    TPH_NAME_DISEASE_JH: IllnessDetails(diagnostic=[TPH_NAME_ROOM_XR, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_WA, difficulty=0.7, death=.1, decline=1),
-    TPH_NAME_DISEASE_JI: IllnessDetails(diagnostic=[TPH_NAME_ROOM_PSY, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_CL, difficulty=0.4, death=0, decline=0.1),
-    TPH_NAME_DISEASE_JRI: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_CL, difficulty=0.4, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_JD: IllnessDetails(diagnostic=[TPH_NAME_ROOM_MS, TPH_NAME_ROOM_FA], treatment=TPH_NAME_ROOM_DL, difficulty=0.7, death=1, decline=1),
-    TPH_NAME_DISEASE_LAB: IllnessDetails(diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_GD], treatment=TPH_NAME_ROOM_WA, difficulty=0.5, death=.1, decline=0.75),
-    TPH_NAME_DISEASE_LS: IllnessDetails(diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_DL, difficulty=0.6, death=1, decline=1),
-    TPH_NAME_DISEASE_LI: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_DLC, difficulty=0.2, death=1, decline=0.75),
-    TPH_NAME_DISEASE_FR: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_DLC, difficulty=0.2, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_LIB: IllnessDetails(diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_IR, difficulty=0.5, death=.4, decline=1),
-    TPH_NAME_DISEASE_LO: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_WA, difficulty=0.6, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_LY: IllnessDetails(diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_FA], treatment=TPH_NAME_ROOM_PH, difficulty=0.7, death=.2, decline=1),
-    TPH_NAME_DISEASE_MC: IllnessDetails(diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_PSY], treatment=TPH_NAME_ROOM_PSY, difficulty=0.4, death=0, decline=0.1),
-    TPH_NAME_DISEASE_MG: IllnessDetails(diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_FA], treatment=TPH_NAME_ROOM_PH, difficulty=0.5, death=.2, decline=1),
-    TPH_NAME_DISEASE_ML: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_FW, difficulty=0.6, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_MS: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_PSY, difficulty=0.2, death=0, decline=0.1),
-    TPH_NAME_DISEASE_MO: IllnessDetails(diagnostic=[TPH_NAME_ROOM_WA, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_WA, difficulty=0.5, death=.1, decline=1),
-    TPH_NAME_DISEASE_MP: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_IR, difficulty=0.3, death=.4, decline=1.5),
-    TPH_NAME_DISEASE_MF: IllnessDetails(diagnostic=[TPH_NAME_ROOM_DL, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_WA, difficulty=0.6, death=.1, decline=1),
-    TPH_NAME_DISEASE_NF: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_PSY], treatment=TPH_NAME_ROOM_PSY, difficulty=0.5, death=0, decline=0.1),
-    TPH_NAME_DISEASE_PAN: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_PL, difficulty=0.3, death=.25, decline=0.75),
-    TPH_NAME_DISEASE_PAR: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PH, difficulty=0.6, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_PO: IllnessDetails(diagnostic=[TPH_NAME_ROOM_XR, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_SU, difficulty=0.5, death=.5, decline=1),
-    TPH_NAME_DISEASE_PT: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_WA, difficulty=0.6, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_POR: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_WA, difficulty=0.4, death=.1, decline=1),
-    TPH_NAME_DISEASE_PM: IllnessDetails(diagnostic=[TPH_NAME_ROOM_WA, TPH_NAME_ROOM_FA], treatment=TPH_NAME_ROOM_PH, difficulty=0.6, death=.2, decline=1),
-    TPH_NAME_DISEASE_PR: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_WA, difficulty=0.7, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_PRM: IllnessDetails(diagnostic=[TPH_NAME_ROOM_PSY, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_CR, difficulty=0.5, death=.25, decline=1),
-    TPH_NAME_DISEASE_PB: IllnessDetails(diagnostic=[TPH_NAME_ROOM_PSY, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_IR, difficulty=0.7, death=.4, decline=1),
-    TPH_NAME_DISEASE_RD: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PSY, difficulty=0.4, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_RB: IllnessDetails(diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_DL], treatment=TPH_NAME_ROOM_IR, difficulty=0.4, death=.4, decline=1),
-    TPH_NAME_DISEASE_RKS: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PSY, difficulty=0.2, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_RGS: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_SU, difficulty=0.3, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_SHA: IllnessDetails(diagnostic=[TPH_NAME_ROOM_WA, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_FW, difficulty=0.8, death=.3, decline=1),
-    TPH_NAME_DISEASE_SH: IllnessDetails(diagnostic=[TPH_NAME_ROOM_WA, TPH_NAME_ROOM_FA], treatment=TPH_NAME_ROOM_SC, difficulty=0.5, death=.5, decline=1),
-    TPH_NAME_DISEASE_SL: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_WA, difficulty=0.4, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_SB: IllnessDetails(diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_FA], treatment=TPH_NAME_ROOM_SU, difficulty=0.3, death=.5, decline=1),
-    TPH_NAME_DISEASE_SC: IllnessDetails(diagnostic=[TPH_NAME_ROOM_MS, TPH_NAME_ROOM_DL], treatment=TPH_NAME_ROOM_IR, difficulty=0.8, death=.4, decline=1),
-    TPH_NAME_DISEASE_TP: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PH, difficulty=0.5, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_TW: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_DL, difficulty=0.4, death=MISSING_DATA, decline=MISSING_DATA),
-    TPH_NAME_DISEASE_TOM: IllnessDetails(diagnostic=[TPH_NAME_ROOM_DL, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_DL, difficulty=0.8, death=1, decline=1),
-    TPH_NAME_DISEASE_TH: IllnessDetails(diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_HO, difficulty=0.5, death=.5, decline=1),
-    TPH_NAME_DISEASE_VD: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GD, ], treatment=TPH_NAME_ROOM_PH, difficulty=0.2, death=.2, decline=0.75),
-    TPH_NAME_DISEASE_WMM: IllnessDetails(diagnostic=[TPH_NAME_ROOM_GP, TPH_NAME_ROOM_WA], treatment=TPH_NAME_ROOM_DL, difficulty=0.6, death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_8B: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_RL,
+        difficulty=0.5, death=.5, decline=1),
+    TPH_NAME_DISEASE_AM: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_PC,
+        difficulty=0.4, death=.25, decline=0.75),
+    TPH_NAME_DISEASE_AI: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, TPH_NAME_ROOM_WA], treatment=TPH_NAME_ROOM_PSY,
+        difficulty=0.7, death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_BEF: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_WA,
+        difficulty=0.2, death=.1, decline=0.5),
+    TPH_NAME_DISEASE_BE: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_DLC, difficulty=0.2,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_BP: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_SU,
+        difficulty=0.6, death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_BOA: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_IR, difficulty=0.4,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_BM: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_WA, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_PSY,
+        difficulty=0.6, death=0, decline=0.1),
+    TPH_NAME_DISEASE_BO: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_PH,
+        difficulty=0.4, death=.2, decline=1),
+    TPH_NAME_DISEASE_BH: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_SU, difficulty=0.4,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_BRF: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_FA], treatment=TPH_NAME_ROOM_FW,
+        difficulty=0.5, death=.3, decline=1),
+    TPH_NAME_DISEASE_BY: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_DLC, difficulty=0.2,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_CAR: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PH, difficulty=0.5,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_CLA: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PH, difficulty=0.1,
+        death=0, decline=0.75),
+    TPH_NAME_DISEASE_CLO: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_FW, difficulty=0.4,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_CP: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PH, difficulty=0.4,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_CB: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_PSY, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_FW,
+        difficulty=0.6, death=.3, decline=1),
+    TPH_NAME_DISEASE_CU: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_RR,
+        difficulty=0.5, death=1, decline=1),
+    TPH_NAME_DISEASE_DR: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_IR,
+        difficulty=0.6, death=.4, decline=1),
+    TPH_NAME_DISEASE_DG: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_DL,
+        difficulty=0.4, death=1, decline=1),
+    TPH_NAME_DISEASE_DS: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_IR, difficulty=0.5,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_EC: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_DL, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_PSY,
+        difficulty=0.7, death=0, decline=0.1),
+    TPH_NAME_DISEASE_FD: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_XR, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_SU,
+        difficulty=0.4, death=.5, decline=1),
+    TPH_NAME_DISEASE_FLU: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_DL,
+        difficulty=0.5, death=1, decline=1),
+    TPH_NAME_DISEASE_FS: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PSY, difficulty=0.6,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_FO: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PSY, difficulty=0.3,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_FE: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, TPH_NAME_ROOM_DL], treatment=TPH_NAME_ROOM_DL,
+        difficulty=0.5, death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_FT: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_FW, difficulty=0.5,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_FL: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_PSY], treatment=TPH_NAME_ROOM_PSY,
+        difficulty=0.3, death=0, decline=0.1),
+    TPH_NAME_DISEASE_FU: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_DL, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_RR,
+        difficulty=0.5, death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_GD: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, TPH_NAME_ROOM_WA], treatment=TPH_NAME_ROOM_FW,
+        difficulty=0.8, death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_GA: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_CH,
+        difficulty=0.4, death=0, decline=0.75),
+    TPH_NAME_DISEASE_GR: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PH, difficulty=0, death=0,
+        decline=0.5),
+    TPH_NAME_DISEASE_GL: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_SU,
+        difficulty=0.8, death=.5, decline=1),
+    TPH_NAME_DISEASE_HC: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_IR, difficulty=0.6,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_HE: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_DLC, difficulty=0.2,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_HT: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_FA], treatment=TPH_NAME_ROOM_SU,
+        difficulty=0.6, death=.5, decline=1),
+    TPH_NAME_DISEASE_HL: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PSY, difficulty=0.6,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_HOL: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_PH,
+        difficulty=0.7, death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_HOT: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_DLC, difficulty=0.2,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_HI: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_WA], treatment=TPH_NAME_ROOM_FW,
+        difficulty=0.2, death=.3, decline=1),
+    TPH_NAME_DISEASE_HUL: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_FW,
+        difficulty=0.3, death=.3, decline=1),
+    TPH_NAME_DISEASE_IE: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_GD], treatment=TPH_NAME_ROOM_PSY,
+        difficulty=0.5, death=0, decline=0.1),
+    TPH_NAME_DISEASE_JH: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_XR, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_WA,
+        difficulty=0.7, death=.1, decline=1),
+    TPH_NAME_DISEASE_JI: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_PSY, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_CL,
+        difficulty=0.4, death=0, decline=0.1),
+    TPH_NAME_DISEASE_JRI: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_CL, difficulty=0.4,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_JD: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_MS, TPH_NAME_ROOM_FA], treatment=TPH_NAME_ROOM_DL,
+        difficulty=0.7, death=1, decline=1),
+    TPH_NAME_DISEASE_LAB: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_GD], treatment=TPH_NAME_ROOM_WA,
+        difficulty=0.5, death=.1, decline=0.75),
+    TPH_NAME_DISEASE_LS: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_DL,
+        difficulty=0.6, death=1, decline=1),
+    TPH_NAME_DISEASE_LI: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_DLC,
+        difficulty=0.2, death=1, decline=0.75),
+    TPH_NAME_DISEASE_FR: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_DLC,
+        difficulty=0.2, death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_LIB: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_IR,
+        difficulty=0.5, death=.4, decline=1),
+    TPH_NAME_DISEASE_LO: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_WA, difficulty=0.6,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_LY: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_FA], treatment=TPH_NAME_ROOM_PH,
+        difficulty=0.7, death=.2, decline=1),
+    TPH_NAME_DISEASE_MC: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_PSY], treatment=TPH_NAME_ROOM_PSY,
+        difficulty=0.4, death=0, decline=0.1),
+    TPH_NAME_DISEASE_MG: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_FA], treatment=TPH_NAME_ROOM_PH,
+        difficulty=0.5, death=.2, decline=1),
+    TPH_NAME_DISEASE_ML: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_FW,
+        difficulty=0.6, death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_MS: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_PSY,
+        difficulty=0.2, death=0, decline=0.1),
+    TPH_NAME_DISEASE_MO: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_WA, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_WA,
+        difficulty=0.5, death=.1, decline=1),
+    TPH_NAME_DISEASE_MP: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_IR,
+        difficulty=0.3, death=.4, decline=1.5),
+    TPH_NAME_DISEASE_MF: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_DL, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_WA,
+        difficulty=0.6, death=.1, decline=1),
+    TPH_NAME_DISEASE_NF: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_PSY], treatment=TPH_NAME_ROOM_PSY,
+        difficulty=0.5, death=0, decline=0.1),
+    TPH_NAME_DISEASE_PAN: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_PL,
+        difficulty=0.3, death=.25, decline=0.75),
+    TPH_NAME_DISEASE_PAR: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PH, difficulty=0.6,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_PO: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_XR, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_SU,
+        difficulty=0.5, death=.5, decline=1),
+    TPH_NAME_DISEASE_PT: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_WA, difficulty=0.6,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_POR: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_WA,
+        difficulty=0.4, death=.1, decline=1),
+    TPH_NAME_DISEASE_PM: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_WA, TPH_NAME_ROOM_FA], treatment=TPH_NAME_ROOM_PH,
+        difficulty=0.6, death=.2, decline=1),
+    TPH_NAME_DISEASE_PR: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_WA, difficulty=0.7,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_PRM: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_PSY, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_CR,
+        difficulty=0.5, death=.25, decline=1),
+    TPH_NAME_DISEASE_PB: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_PSY, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_IR,
+        difficulty=0.7, death=.4, decline=1),
+    TPH_NAME_DISEASE_RD: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PSY, difficulty=0.4,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_RB: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_DL], treatment=TPH_NAME_ROOM_IR,
+        difficulty=0.4, death=.4, decline=1),
+    TPH_NAME_DISEASE_RKS: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PSY, difficulty=0.2,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_RGS: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_SU, difficulty=0.3,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_SHA: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_WA, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_FW,
+        difficulty=0.8, death=.3, decline=1),
+    TPH_NAME_DISEASE_SH: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_WA, TPH_NAME_ROOM_FA], treatment=TPH_NAME_ROOM_SC,
+        difficulty=0.5, death=.5, decline=1),
+    TPH_NAME_DISEASE_SL: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_WA, difficulty=0.4,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_SB: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_FA], treatment=TPH_NAME_ROOM_SU,
+        difficulty=0.3, death=.5, decline=1),
+    TPH_NAME_DISEASE_SC: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_MS, TPH_NAME_ROOM_DL], treatment=TPH_NAME_ROOM_IR,
+        difficulty=0.8, death=.4, decline=1),
+    TPH_NAME_DISEASE_TP: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PH, difficulty=0.5,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_TW: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_DL, difficulty=0.4,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_TOM: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_DL, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_DL,
+        difficulty=0.8, death=1, decline=1),
+    TPH_NAME_DISEASE_TH: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_HO,
+        difficulty=0.5, death=.5, decline=1),
+    TPH_NAME_DISEASE_VD: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GD, ], treatment=TPH_NAME_ROOM_PH, difficulty=0.2,
+        death=.2, decline=0.75),
+    TPH_NAME_DISEASE_WMM: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, TPH_NAME_ROOM_WA], treatment=TPH_NAME_ROOM_DL,
+        difficulty=0.6, death=MISSING_DATA, decline=MISSING_DATA),
 }
 
 TPH_ILLNESS_LIST = list(TPH_ILLNESS_DICT.keys())
