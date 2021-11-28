@@ -218,11 +218,11 @@ def edge_menu(graph: graphviz.dot.Digraph, sep_rooms: bool) -> None:
 
         # Is there an error?
         if curr_err:
+            print(curr_err)
             max_chances = max_chances - 1
             if max_chances < 1:
                 print(err_template.format('TOO MANY INVALID SELECTIONS'))
                 return
-            print(curr_err)
             clear_screen = False  # Let them see the mistake they've made
             curr_err = ''
 # pylint: enable=too-many-branches
@@ -324,7 +324,7 @@ def room_menu(hospital: TPHHospital, graph_dir: str, sep_rooms: bool = False, en
     # Separate rooms
     if sep_rooms:
         new_dict = _create_sep_room_dict(new_dict)
-    local_room_menu = Menu(hospital.get_name().upper() + 'ROOM LIST', new_dict)
+    local_room_menu = Menu(hospital.get_name().upper() + ' ROOM LIST', new_dict)
     # Get user input
     user_choice = get_choice(local_room_menu, clear_screen=True, choice_type=int)
 
