@@ -11,13 +11,13 @@ TPHIllness class validates and parses one illness from the game Two Point Hospit
 """
 
 # Standard
-from typing import List
+from typing import Any, List
 
 # Third Party
 
 # Local
-from tps.tph_constants import (TPH_DIAGNOSTIC_LIST, TPH_ILLNESS_DICT, TPH_ILLNESS_LIST,
-                               TPH_NAME_ROOM_GP, TPH_TREATMENT_LIST)
+from tps.tph_constants import (MISSING_DATA, TPH_DIAGNOSTIC_LIST, TPH_ILLNESS_DICT,
+                               TPH_ILLNESS_LIST, TPH_NAME_ROOM_GP, TPH_TREATMENT_LIST)
 
 
 class TPHIllness:
@@ -50,10 +50,126 @@ class TPHIllness:
         # INSTANCE ATTRIBUTES
         self._illness_name = illness_name  # Name of the illness
         try:
-            self._illness_diag = self.illness_dict[self._illness_name].diagnostic  # Diag rooms
-            self._illness_treat = self.illness_dict[self._illness_name].treatment  # Treatment room
+            self._illness_diag = self.illness_dict[self._illness_name].diagnostic        # Diag rooms
+            self._illness_treat = self.illness_dict[self._illness_name].treatment        # Treatment room
+            self._illness_difficulty = self.illness_dict[self._illness_name].difficulty  # Illness difficulty
+            self._illness_death = self.illness_dict[self._illness_name].death            # Chance of death
+            self._illness_decline = self.illness_dict[self._illness_name].decline        # Health loss severity
         except (AttributeError, KeyError):
             raise NotImplementedError(f'Malformed dictionary entry for {self._illness_name}')
+        self._validate_attributes()
+
+    def get_aggregate_value(self, strategy: int = 2) -> Any:
+        """Return the illness danger aggregate value.
+
+        Aggregate value is determined by strategy.  The source values are difficulty,
+        chance of death, and health decline rate.  Any values of MISSING_DATA are calculated as 1.
+
+        Args:
+            strategy: Optional; If 1, return the product of the source values.  If 2, return
+                the average of the source values.  If 3, return the average of strategy 1 and 2.
+
+        Raises:
+            TypeError: Bad data type
+            ValueError: Invalid strategy value
+        """
+        # LOCAL VARIABLES
+        # Aggregate source values
+        val_list = [self.get_difficulty_value(), self.get_death_value(), self.get_decline_value()]
+        product = 0    # Strategy 1
+        average = 0    # Strategy 2
+        aggregate = 0  # Calculated aggregate value
+
+        # INPUT VALIDATION
+        if not isinstance(strategy, int):
+            raise TypeError(f'The strategy argument can not be of type {type(strategy)}')
+        if strategy not in (1, 2, 3):
+            raise ValueError(f'The strategy selection of {strategy} is invalid')
+
+        # GET IT
+        # Validate aggregate source values
+        for index in range(0, len(val_list)):
+            if val_list[index] == MISSING_DATA:
+                val_list[index] = 1  # Missing data is a mathematical pass
+        # Calculate values
+        product = val_list[0] * val_list[1] * val_list[2]
+        average = (val_list[0] + val_list[1] + val_list[2]) / 3
+        if strategy == 1:
+            aggregate = product
+        elif strategy == 2:
+            aggregate = average
+        elif strategy == 3:
+            aggregate = (product + average) / 2
+        else:
+            raise NotImplementedError(f'Strategy value {strategy} passed validation?!')
+
+        # DONE
+        return aggregate
+
+    def get_aggregate_str(self, strategy: int = 2) -> str:
+        """Convert aggregate value to a percent string.
+
+        Aggregate value is determined by strategy.  The source values are difficulty,
+        chance of death, and health decline rate.  Any values of MISSING_DATA are calculated as 1.
+
+        Args:
+            strategy: Optional; If 1, return the product of the source values.  If 2, return
+                the average of the source values.  If 3, return the average of strategy 1 and 2.
+
+        Raises:
+            TypeError: Bad data type
+            ValueError: Invalid strategy value
+        """
+        # LOCAL VARIABLES
+        ag_percent = ''                              # Convert aggregate to a string here
+        ag_val = self.get_aggregate_value(strategy)  # Store aggregate value here
+
+        # DO IT
+        if ag_val == MISSING_DATA:
+            ag_percent = 'MISSING DATA'  # This should never happen
+        else:
+            ag_percent = str(int(ag_val * 100)) + '%'
+
+        # DONE
+        return ag_percent
+
+    def get_death_value(self) -> Any:
+        """Return the chance of death."""
+        return self._illness_death
+
+    def get_death_str(self) -> str:
+        """Convert death chance to a percent string."""
+        # LOCAL VARIABLES
+        death_percent = ''                 # Convert difficulty to a string here
+        death_val = self.get_death_value()  # Store difficulty value here
+
+        # DO IT
+        if death_val == MISSING_DATA:
+            death_percent = 'MISSING DATA'
+        else:
+            death_percent = str(int(death_val * 100)) + '%'
+
+        # DONE
+        return death_percent
+
+    def get_decline_value(self) -> Any:
+        """Return the health loss severity."""
+        return self._illness_decline
+
+    def get_decline_str(self) -> str:
+        """Convert health loss severity to a percent string."""
+        # LOCAL VARIABLES
+        decline_percent = ''                 # Convert difficulty to a string here
+        decline_val = self.get_decline_value()  # Store difficulty value here
+
+        # DO IT
+        if decline_val == MISSING_DATA:
+            decline_percent = 'MISSING DATA'
+        else:
+            decline_percent = str(int(decline_val * 100)) + '%'
+
+        # DONE
+        return decline_percent
 
     def get_diag(self) -> List[str]:
         """Retrieves the list of diagnostic rooms for the illness.
@@ -84,6 +200,25 @@ class TPHIllness:
         # DONE
         return illness_diag
 
+    def get_difficulty_value(self) -> Any:
+        """Return the difficulty."""
+        return self._illness_difficulty
+
+    def get_difficulty_str(self) -> str:
+        """Convert difficulty to a percent string."""
+        # LOCAL VARIABLES
+        diff_percent = ''                       # Convert difficulty to a string here
+        diff_val = self.get_difficulty_value()  # Store difficulty value here
+
+        # DO IT
+        if diff_val == MISSING_DATA:
+            diff_percent = 'MISSING DATA'
+        else:
+            diff_percent = str(int(diff_val * 100)) + '%'
+
+        # DONE
+        return diff_percent
+
     def get_name(self) -> str:
         """Return the name of the illness."""
         return self._illness_name
@@ -99,4 +234,23 @@ class TPHIllness:
             illness_treat = self._illness_treat
 
         # DONE
+        # print(f'{self._illness_name} is diff: {self.get_difficulty_str()}')  # DEBUGGING
+        # print(f'{self._illness_name} is death: {self.get_death_str()}')  # DEBUGGING
+        # print(f'{self._illness_name} is decline: {self.get_decline_str()}')  # DEBUGGING
         return illness_treat
+
+    def _validate_attributes(self) -> None:
+        # self._illness_diag
+        # self._illness_treat
+        self._validate_num(self._illness_difficulty)
+        self._validate_num(self._illness_death)
+        self._validate_num(self._illness_decline)
+
+    def _validate_num(self, num: Any) -> None:
+        """Validate number value as percentage."""
+        if num == MISSING_DATA:
+            pass  # Undefined data.  Let it ride.
+        elif not isinstance(num, int) and not isinstance(num, float):
+            raise TypeError(f'Value {num}, of type {type(num)}, is not a valid number type')
+        elif num < 0:
+            raise ValueError(f'Value {num} is not valid as a percentage')
