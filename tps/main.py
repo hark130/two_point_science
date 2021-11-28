@@ -32,6 +32,7 @@ HOSPITAL_MENU = Menu('TWO POINT HOSPITAL LIST', {i+1: TPH_HOSPITAL_LIST[i] for i
 
 
 # pylint: disable=too-many-branches
+# pylint: disable=too-many-statements
 def main_menu(sep_rooms: bool, graph_dir: str) -> None:
     """Execute the Two Point Science top-level menu.
 
@@ -118,6 +119,7 @@ def main_menu(sep_rooms: bool, graph_dir: str) -> None:
             print(err_template.format(err.args[0]))
             return
 # pylint: enable=too-many-branches
+# pylint: enable=too-many-statements
 
 
 def main() -> None:
