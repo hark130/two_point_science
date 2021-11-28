@@ -19,7 +19,8 @@ import os
 import graphviz
 
 # Local
-from tps.tph_constants import TPH_DUAL_PURPOSE_LIST, TPH_ROOM_DICT, TPH_ROOM_LIST
+from tps.tph_constants import (TPH_DUAL_PURPOSE_LIST, TPH_ILLNESS_DICT, TPH_ILLNESS_LIST,
+                               TPH_NAME_ROOM_GP, TPH_ROOM_DICT, TPH_ROOM_LIST)
 from tps.tph_hospital import TPHHospital
 from tps.menu import get_choice, Menu
 from tps.misc import print_edge_table
@@ -89,16 +90,21 @@ def add_edges(hospital: TPHHospital, graph: graphviz.dot.Digraph,
 # pylint: disable=too-many-arguments
 def create_graph(hospital: TPHHospital, graph_dir: str, sep_rooms: bool = False,
                  engine: str = 'dot', graph_format: str = 'png',
-                 focus_node: str = '') -> graphviz.dot.Digraph:
-    """Create a hospital Digraph using graphviz.
+                 focus_node: str = '', suffix_override: str = '') -> graphviz.dot.Digraph:
+    """Create a hospital-based Digraph using graphviz.
 
     Args:
         hospital: TPHHospital object. (see: tph_hospital module)
+        graph_dir: Directory in which to create files
         sep_rooms: Optional; If true, multi-purpose rooms are separated into ' (diag)' and
             ' (treat)' versions on the graph.
         engine: Optional; Digraph build engine: [dot], neato, sfdp, fdp
         graph_format: Optional; File format for Digraph: [png], pdf
-        focus_node: Optional; Create a graph based on a specific room instead of the hospital
+        focus_node: Optional; Create a graph based on a specific room instead of the hospital.
+            This string will be appended to the end of all filenames associated with this graph
+            unless suffix_override is defined.
+        suffix_override: Optional; If defined, will override focus_node to append a string to the
+            end of the on-disk filenames
 
     Returns:
         Directed graph, complete with room edges, based on hospital.
@@ -110,7 +116,6 @@ def create_graph(hospital: TPHHospital, graph_dir: str, sep_rooms: bool = False,
     """
     # LOCAL VARIABLES
     graph_obj = None   # graphviz Digraph
-    filename = ''      # Filename to save the graph
 
     # INPUT VALIDATION
     _validate_graph_menu(hospital=hospital, graph_dir=graph_dir, sep_rooms=sep_rooms,
@@ -118,20 +123,111 @@ def create_graph(hospital: TPHHospital, graph_dir: str, sep_rooms: bool = False,
     # focus_node
     if not isinstance(focus_node, str):
         raise TypeError(f'The focus_node argument must of type str instead of {type(focus_node)}')
+    # suffix_override
+    if not isinstance(suffix_override, str):
+        raise TypeError(
+            f'The suffix_override argument must of type str instead of {type(suffix_override)}')
 
-    # DO IT
-    # Form the filename
-    filename = hospital.get_name()
-    if focus_node:
-        filename = filename + '_' + focus_node
-    filename = filename + f' ({engine})'
-    # Instantiate the object
-    graph_obj = graphviz.Digraph(name=hospital.get_name(),
-                                 filename=os.path.join(graph_dir, filename),
-                                 engine=engine, format=graph_format)
-    # Form the nodes/edges
+    # CREATE GRAPH
+    graph_obj = _create_graph(hospital=hospital, graph_dir=graph_dir, engine=engine,
+                              graph_format=graph_format, focus_node=focus_node,
+                              suffix_override=suffix_override)
+
+    # ADD NODES/EDGES
     graph_obj = add_edges(hospital=hospital, graph=graph_obj, sep_rooms=sep_rooms,
                           focus_node=focus_node)
+
+    # DONE
+    return graph_obj
+# pylint: enable=too-many-arguments
+
+
+# pylint: disable=too-many-arguments
+def create_illness_graph(hospital: TPHHospital, graph_dir: str, ill_name: str,
+                         sep_rooms: bool = False, engine: str = 'dot', graph_format: str = 'png',
+                         suffix_override: str = '') -> graphviz.dot.Digraph:
+    """Create a hospital-based Digraph using graphviz.
+
+    Args:
+        hospital: TPHHospital object. (see: tph_hospital module)
+        graph_dir: Directory in which to create files
+        sep_rooms: Optional; If true, multi-purpose rooms are separated into ' (diag)' and
+            ' (treat)' versions on the graph.
+        engine: Optional; Digraph build engine: [dot], neato, sfdp, fdp
+        graph_format: Optional; File format for Digraph: [png], pdf
+        focus_node: Optional; Create a graph based on a specific room instead of the hospital.
+            This string will be appended to the end of all filenames associated with this graph
+            unless suffix_override is defined.
+        suffix_override: Optional; If defined, will override focus_node to append a string to the
+            end of the on-disk filenames
+
+    Returns:
+        Directed graph, complete with room edges, based on hospital.
+
+    Raises:
+        TypeError: Bad data type passed in.
+        NotImplementedError: hospital does not contain any illnesses or contains a misconfigured
+            illness.
+    """
+    # LOCAL VARIABLES
+    graph_obj = None      # graphviz Digraph
+    ill_obj = None        # TPHIllness object
+    diag_list = []        # List of diagnosis rooms for ill_obj
+    treat_room = ''       # Treatment room for ill_obj
+    temp_lead_edge = ''   # Temporary leading edge
+    temp_trail_edge = ''  # Temporary trailing edge
+
+    # INPUT VALIDATION
+    _validate_graph_menu(hospital=hospital, graph_dir=graph_dir, sep_rooms=sep_rooms,
+                         engine=engine, graph_format=graph_format)
+    # ill_name
+    if not isinstance(ill_name, str):
+        raise TypeError(f'The ill_name argument must of type str instead of {type(ill_name)}')
+    if ill_name not in TPH_ILLNESS_LIST:
+        raise ValueError(f'Unknown illness name: {ill_name}')
+    # suffix_override
+    if not isinstance(suffix_override, str):
+        raise TypeError(
+            f'The suffix_override argument must of type str instead of {type(suffix_override)}')
+
+    # CREATE GRAPH
+    graph_obj = _create_graph(hospital=hospital, graph_dir=graph_dir, engine=engine,
+                              graph_format=graph_format, focus_node='',
+                              suffix_override=suffix_override)
+
+    # GET ILLNESS OBJECT
+    for hospital_illness in hospital.get_illness_objects():
+        if hospital_illness.get_name() == ill_name:
+            ill_obj = hospital_illness
+            break
+    if not ill_obj:
+        raise RuntimeError(f'Illness "{ill_name}" passed validation but could not be found '
+                           f'in {hospital.get_name()}')
+
+    # ADD NODES/EDGES
+    # Diag
+    diag_list = ill_obj.get_diag()
+    if diag_list and TPH_NAME_ROOM_GP not in diag_list:
+        diag_list = [TPH_NAME_ROOM_GP] + diag_list
+    elif not diag_list:
+        raise NotImplementedError(f'{hospital.get_name()} has an illness, '
+                                  f'{ill_obj.get_name()}, missing a list of diagnostic rooms.')
+    for index in range(0, len(diag_list) - 1):
+        temp_lead_edge = diag_list[index]
+        temp_trail_edge = diag_list[index + 1]
+        graph_obj = _graph_edges(graph=graph_obj, edges=tuple((temp_lead_edge, temp_trail_edge)),
+                                 sep_rooms=sep_rooms, focus_node='', all_diag=True)
+
+    # Treat
+    treat_room = ill_obj.get_treat()
+    if treat_room:
+        temp_lead_edge = diag_list[len(diag_list) - 1]
+        temp_trail_edge = treat_room
+        graph_obj = _graph_edges(graph=graph_obj, edges=tuple((temp_lead_edge, temp_trail_edge)),
+                                 sep_rooms=sep_rooms, focus_node='', all_diag=False)
+    else:
+        raise NotImplementedError(f'{hospital.get_name()} has an illness, '
+                                  f'{ill_obj.get_name()}, missing a treatment room.')
 
     # DONE
     return graph_obj
@@ -289,6 +385,55 @@ def enumerate_edges(graph: graphviz.dot.Digraph, sep_rooms: bool) -> Dict[str, i
 # pylint: enable=too-many-branches
 
 
+def illness_menu(hospital: TPHHospital, graph_dir: str, sep_rooms: bool = False,
+                 engine: str = 'dot', graph_format: str = 'png') -> None:
+    """Execute the Two Point Science illness menu.
+
+    Prompts the user for an illness associated with hospital and then creates a graph of all edges
+    associate with that illness.
+
+    Args:
+        hospital: TPHHospital object. (see: tph_hospital module)
+        sep_rooms: Optional; If true, multi-purpose rooms are separated into ' (diag)' and
+            ' (treat)' versions on the graph.
+        engine: Optional; Digraph build engine: [dot], neato, sfdp, fdp
+        graph_format: Optional; File format for Digraph: [png], pdf
+
+    Raises:
+        TypeError: Bad data type passed in.
+    """
+    # LOCAL VARIABLES
+    ill_name = ''          # User's illness name selection
+    treat_name = ''        # Treatment room associated with ill_name
+    local_ill_menu = None  # Menu object for get_choice()
+    new_dict = {}          # Create a dictionary based on hospital illness list
+    graph_obj = None       # graphviz.dot.Digraph returned by create_graph()
+    ill_list = []          # List of all the illnesses in hospital
+
+    # INPUT VALIDATION
+    _validate_graph_menu(hospital=hospital, graph_dir=graph_dir, sep_rooms=sep_rooms,
+                         engine=engine, graph_format=graph_format)
+
+    # GET ROOM
+    # Create the dictionary
+    ill_list = hospital.get_illness_names()
+    ill_list.sort()
+    new_dict = {i+1: ill_list[i] for i in range(0, len(ill_list))}
+    local_ill_menu = Menu(hospital.get_name().upper() + ' ILLNESS LIST', new_dict)
+    # Get user input
+    ill_name = get_choice(local_ill_menu, clear_screen=True, choice_type=int)
+    treat_name = TPH_ILLNESS_DICT[ill_name].treatment
+    if sep_rooms and TPH_ROOM_DICT[treat_name].purpose == 'Both':
+        treat_name = treat_name + ' (treat)'
+
+    # MAKE GRAPH
+    graph_obj = create_illness_graph(hospital=hospital, graph_dir=graph_dir, ill_name=ill_name,
+                                     sep_rooms=sep_rooms, engine=engine, graph_format=graph_format,
+                                     suffix_override='Illness - ' + ill_name)
+    print(f"Creating a directed graph of {hospital.get_name()}'s {ill_name} illness...")
+    graph_obj.view()
+
+
 def room_menu(hospital: TPHHospital, graph_dir: str, sep_rooms: bool = False, engine: str = 'dot',
               graph_format: str = 'png') -> None:
     """Execute the Two Point Science room menu.
@@ -330,9 +475,56 @@ def room_menu(hospital: TPHHospital, graph_dir: str, sep_rooms: bool = False, en
 
     # MAKE GRAPH
     graph_obj = create_graph(hospital=hospital, graph_dir=graph_dir, sep_rooms=sep_rooms,
-                             engine=engine, graph_format=graph_format, focus_node=user_choice)
+                             engine=engine, graph_format=graph_format, focus_node=user_choice,
+                             suffix_override='Room - ' + user_choice)
     print(f"Creating a directed graph of {hospital.get_name()}'s {user_choice} room...")
     graph_obj.view()
+
+
+# pylint: disable=too-many-arguments
+def _create_graph(hospital: TPHHospital, graph_dir: str, engine: str = 'dot',
+                  graph_format: str = 'png', focus_node: str = '',
+                  suffix_override: str = '') -> graphviz.dot.Digraph:
+    """Create a hospital-based Digraph, sans edges, using graphviz.
+
+    Does not validate input.  This functionality was extricated from create_graph() to help
+    modularize DRY functionality in support of creating directed graphs focused on illness
+    treatment rooms in addition to room-focused directed graphs.
+
+    Args:
+        hospital: TPHHospital object. (see: tph_hospital module)
+        graph_dir: Directory in which to create files
+        engine: Optional; Digraph build engine: [dot], neato, sfdp, fdp
+        graph_format: Optional; File format for Digraph: [png], pdf
+        focus_node: Optional; Create a graph based on a specific room instead of the hospital.
+            This string will be appended to the end of all filenames associated with this graph
+            unless suffix_override is defined.
+        suffix_override: Optional; If defined, will override focus_node to append a string to the
+            end of the on-disk filenames
+
+    Returns:
+        Directed graph, without edges, based on hospital.
+    """
+    # LOCAL VARIABLES
+    graph_obj = None   # graphviz Digraph
+    filename = ''      # Filename to save the graph
+
+    # DO IT
+    # Form the filename
+    filename = hospital.get_name()
+    if suffix_override:
+        filename = filename + ' - ' + suffix_override
+    elif focus_node:
+        filename = filename + ' - ' + focus_node
+    filename = filename + f' ({engine})'
+    # Instantiate the object
+    graph_obj = graphviz.Digraph(name=hospital.get_name(),
+                                 filename=os.path.join(graph_dir, filename),
+                                 engine=engine, format=graph_format)
+
+    # DONE
+    return graph_obj
+# pylint: enable=too-many-arguments
 
 
 def _create_sep_room_dict(room_dict: dict) -> Dict[int, str]:
