@@ -80,12 +80,17 @@ class TPHHospital:
         return room_list
 
     def get_illness_names(self) -> List[str]:
-        """Retrieves the list of illnesses found in this hospital."""
+        """Retrieves the list of illnesses found in this hospital.
+
+        Raises:
+            TypeError: A non-string illness name was found
+            ValueError: An unknown illness was found
+            RuntimeError: A duplicate illness was found or no illnesses were found
+        """
         # LOCAL VARIABLES
         illness_list = None  # List of illnesses
 
         # INTERNAL VALIDATION
-        # print(self._hospital_illnesses)  # DEBUGGING
         if isinstance(self._hospital_illnesses, list):
             illness_list = self._hospital_illnesses
         elif isinstance(self._hospital_illnesses, str):
@@ -93,13 +98,15 @@ class TPHHospital:
         if illness_list:
             for illness in illness_list:
                 if not isinstance(illness, str):
-                    print(f'INVALID ILLNESS: {illness}')  # DEBUGGING
-                    illness_list = None
-                    break
+                    raise TypeError(f'Invalid illness data type of {type(illness)} found in '
+                                    f'{self._hospital_name}')
                 if illness not in self.illness_list:
-                    print(f'INVALID ILLNESS: {illness}')  # DEBUGGING
-                    illness_list = None
-                    break
+                    raise ValueError(f'Invalid illness "{illness}" found in {self._hospital_name}')
+                if illness_list.count(illness) > 1:
+                    raise RuntimeError(f'Duplicate entry {illness} detected in '
+                                       f'{self._hospital_name}')
+        else:
+            raise RuntimeError(f'No illnesses configured for {self._hospital_name}')
 
         # DONE
         return illness_list
