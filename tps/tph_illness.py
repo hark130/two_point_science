@@ -50,11 +50,16 @@ class TPHIllness:
         # INSTANCE ATTRIBUTES
         self._illness_name = illness_name  # Name of the illness
         try:
-            self._illness_diag = self.illness_dict[self._illness_name].diagnostic        # Diag rooms
-            self._illness_treat = self.illness_dict[self._illness_name].treatment        # Treatment room
-            self._illness_difficulty = self.illness_dict[self._illness_name].difficulty  # Illness difficulty
-            self._illness_death = self.illness_dict[self._illness_name].death            # Chance of death
-            self._illness_decline = self.illness_dict[self._illness_name].decline        # Health loss severity
+            # Diag rooms
+            self._illness_diag = self.illness_dict[self._illness_name].diagnostic
+            # Treatment room
+            self._illness_treat = self.illness_dict[self._illness_name].treatment
+            # Illness difficulty
+            self._illness_difficulty = self.illness_dict[self._illness_name].difficulty
+            # Chance of death
+            self._illness_death = self.illness_dict[self._illness_name].death
+            # Health loss severity
+            self._illness_decline = self.illness_dict[self._illness_name].decline
         except (AttributeError, KeyError):
             raise NotImplementedError(f'Malformed dictionary entry for {self._illness_name}')
         self._validate_attributes()
@@ -88,8 +93,8 @@ class TPHIllness:
 
         # GET IT
         # Validate aggregate source values
-        for index in range(0, len(val_list)):
-            if val_list[index] == MISSING_DATA:
+        for index, value in enumerate(val_list):
+            if value == MISSING_DATA:
                 val_list[index] = 1  # Missing data is a mathematical pass
         # Calculate values
         product = val_list[0] * val_list[1] * val_list[2]
@@ -238,15 +243,15 @@ class TPHIllness:
     def _validate_attributes(self) -> None:
         # self._illness_diag
         # self._illness_treat
-        self._validate_num(self._illness_difficulty)
-        self._validate_num(self._illness_death)
-        self._validate_num(self._illness_decline)
+        _validate_num(self._illness_difficulty)
+        _validate_num(self._illness_death)
+        _validate_num(self._illness_decline)
 
-    def _validate_num(self, num: Any) -> None:
-        """Validate number value as percentage."""
-        if num == MISSING_DATA:
-            pass  # Undefined data.  Let it ride.
-        elif not isinstance(num, int) and not isinstance(num, float):
-            raise TypeError(f'Value {num}, of type {type(num)}, is not a valid number type')
-        elif num < 0:
-            raise ValueError(f'Value {num} is not valid as a percentage')
+def _validate_num(num: Any) -> None:
+    """Validate number value as percentage."""
+    if num == MISSING_DATA:
+        pass  # Undefined data.  Let it ride.
+    elif not isinstance(num, int) and not isinstance(num, float):
+        raise TypeError(f'Value {num}, of type {type(num)}, is not a valid number type')
+    elif num < 0:
+        raise ValueError(f'Value {num} is not valid as a percentage')
