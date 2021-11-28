@@ -116,7 +116,6 @@ def create_graph(hospital: TPHHospital, graph_dir: str, sep_rooms: bool = False,
     """
     # LOCAL VARIABLES
     graph_obj = None   # graphviz Digraph
-    filename = ''      # Filename to save the graph
 
     # INPUT VALIDATION
     _validate_graph_menu(hospital=hospital, graph_dir=graph_dir, sep_rooms=sep_rooms,
@@ -482,6 +481,7 @@ def room_menu(hospital: TPHHospital, graph_dir: str, sep_rooms: bool = False, en
     graph_obj.view()
 
 
+# pylint: disable=too-many-arguments
 def _create_graph(hospital: TPHHospital, graph_dir: str, engine: str = 'dot',
                   graph_format: str = 'png', focus_node: str = '',
                   suffix_override: str = '') -> graphviz.dot.Digraph:
@@ -524,6 +524,7 @@ def _create_graph(hospital: TPHHospital, graph_dir: str, engine: str = 'dot',
 
     # DONE
     return graph_obj
+# pylint: enable=too-many-arguments
 
 
 def _create_sep_room_dict(room_dict: dict) -> Dict[int, str]:
