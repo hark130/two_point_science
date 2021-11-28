@@ -21,7 +21,8 @@ from typing import Any
 import platform
 
 # Local Imports
-# from tps.tph_constants import TPH_ROOM_DICT
+from tps.tph_constants import MISSING_DATA
+from tps.tph_hospital import TPHHospital
 
 
 def clear_screen() -> None:
@@ -34,6 +35,7 @@ def clear_screen() -> None:
     os_name = platform.system()  # Operating system name
 
     # CLEAR IT
+    # return  # DEBUGGING
     if os_name in ('Linux', 'Darwin'):
         command = 'clear'
     elif os_name == 'Windows':
@@ -143,10 +145,7 @@ def print_edge_table(edge_dict: dict, room_lookup: dict, sort_by_count: bool = T
     # 1. Form Table Entries
     # Sort dictionary
     if sort_by_count:
-        if sort_desc:
-            local_dict = OrderedDict(sorted(edge_dict.items(), reverse=False))
-        else:
-            local_dict = OrderedDict(sorted(edge_dict.items(), reverse=True))
+        local_dict = OrderedDict(sorted(edge_dict.items(), reverse=not sort_desc))
         local_dict = OrderedDict(sorted(local_dict.items(), reverse=sort_desc,
                                         key=lambda item: item[1]))
     else:
@@ -166,6 +165,69 @@ def print_edge_table(edge_dict: dict, room_lookup: dict, sort_by_count: bool = T
     # 2. Print Table
     # print(f'TUPLE LIST: {tuple_list}')  # DEBUGGING
     _print_table(tuple_list, tuple(('ROOM', 'PURPOSE', 'COUNT')))
+
+
+def print_danger_table(hospital: TPHHospital, sort_by_col: int, agg_strat: int,
+                       sort_desc: bool = True) -> None:
+    """Prints the illness danger table.
+
+    Prints a table of all illnesses listed in hospital with the following headers:
+        Illness, Treatment Room, Difficulty, Chance of Death, and Health Decline Rate
+
+    Args:
+        hospital: TPHHospital object. (see: tph_hospital module)
+        sort_by_col: Listed data point to sort the table by.
+        agg_strat: Aggregate calculation strategy to use; see: tps.TPHIllness.get_aggregate_*()
+        sort_desc: Optional; If True, sort the table in descending order.  Otherwise, table is
+            sorted in ascending order.
+
+    Raises:
+        TypeError: Bad data type passed in.
+        ValueError: Invalid value found in the arguments.
+    """
+    # LOCAL VARIABLES
+    sort_list = []   # List of lists containing raw data to sort by
+    tuple_list = []  # List of sorted tuples formed from the hospital illness list
+
+    # INPUT VALIDATION
+    # hospital
+    if not isinstance(hospital, TPHHospital):
+        raise TypeError(f'The hospital can not be of type {type(hospital)}')
+    # sort_by_col
+    if not isinstance(sort_by_col, int):
+        raise TypeError(f'The sort_by_col argument must of type int instead of {type(sort_by_col)}')
+    # agg_strat
+    if not isinstance(agg_strat, int):
+        raise TypeError(f'The agg_strat argument must of type int instead of {type(agg_strat)}')
+    # sort_desc
+    if not isinstance(sort_desc, bool):
+        raise TypeError(f'The sort_desc argument must of type bool instead of {type(sort_desc)}')
+
+    # CREATE LIST
+    # Create List (to sort)
+    for illness_obj in hospital.get_illness_objects():
+        # Make sort list entry
+        sort_list.append([illness_obj, illness_obj.get_name(), illness_obj.get_treat(),
+                          illness_obj.get_difficulty_value(), illness_obj.get_death_value(),
+                          illness_obj.get_decline_value(),
+                          illness_obj.get_aggregate_value(agg_strat)])
+    # Sort List
+    if sort_by_col != 1:
+        sort_list = sorted(sort_list, key=lambda item: item[1], reverse=not sort_desc)
+    sort_list = sorted(sort_list, key=lambda item: item[sort_by_col], reverse=sort_desc)
+    # Create Real List
+    # print(f'SORT LIST: {sort_list}')  # DEBUGGING
+    for illness_entry in sort_list:
+        illness_obj = illness_entry[0]
+        tuple_list.append(tuple((illness_obj.get_name(), illness_obj.get_treat(),
+                                 illness_obj.get_difficulty_str(), illness_obj.get_death_str(),
+                                 illness_obj.get_decline_str(),
+                                 illness_obj.get_aggregate_str(agg_strat))))
+    # print(f'TUPLE LIST: {tuple_list}')  # DEBUGGING
+
+    # PRINT TABLE
+    _print_table(tuple_list, tuple(('ILLNESS', 'TREATMENT', 'DIFFICULTY  ', 'DEATH CHANCE  ',
+                                    'RATE OF DECLINE  ', 'AGGREGATE')))
 
 
 def _loose_lookup(haystack: dict, needle: str) -> Any:
