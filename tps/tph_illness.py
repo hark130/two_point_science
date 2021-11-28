@@ -247,6 +247,7 @@ class TPHIllness:
         _validate_num(self._illness_death)
         _validate_num(self._illness_decline)
 
+
 def _validate_num(num: Any) -> None:
     """Validate number value as percentage."""
     if num == MISSING_DATA:
