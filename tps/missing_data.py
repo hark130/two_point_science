@@ -15,7 +15,7 @@ from typing import Any
 # Local Imports
 
 
-class MissingData(object):
+class MissingData():
     """Intended for use as an UNDEFINED macro.
 
     Typical usage example:
@@ -30,6 +30,10 @@ class MissingData(object):
     def __init__(self, data: Any = None) -> None:
         """MissingData class ctor."""
         self._data = data  # Internal data
+
+    def get_data(self) -> Any:
+        """Return internal data."""
+        return self._data
 
     def __eq__(self, other) -> bool:
         """Override the == operator."""
