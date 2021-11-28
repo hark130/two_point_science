@@ -15,7 +15,6 @@ from collections import namedtuple
 
 # Third Party Imports
 from typing import Any
-import graphviz
 
 # Local Imports
 from tps.misc import clear_screen as clr_screen, print_danger_table
@@ -24,6 +23,7 @@ from tps.tph_hospital import TPHHospital
 Menu = namedtuple('Menu', 'name dictionary')
 
 
+# pylint: disable=too-many-branches
 def danger_menu(hospital: TPHHospital) -> None:
     """Execute the Two Point Science danger table menu.
 
@@ -116,6 +116,7 @@ def danger_menu(hospital: TPHHospital) -> None:
                 return
             clear_screen = False  # Let them see the mistake they've made
             curr_err = ''
+# pylint: enable=too-many-branches
 
 
 def get_choice(tph_menu: Menu, clear_screen: bool = True, choice_type: type = str,
