@@ -162,9 +162,9 @@ def edge_menu(graph: graphviz.dot.Digraph, sep_rooms: bool) -> None:
     sort_desc = True      # Converts user sort order choice to print_edge_table() kwarg
     user_input = 0        # User selection
     edge_dict = None      # Dictionary of room counts
-    clear_screen = True   # Clear the screen before printing a menu
+    clear_scr = True      # Clear the screen before printing a menu
     max_chances = 3       # Maximum number of invalid inputs tolerated
-    curr_err = ''         # Temp variable which controls error handling
+    current_err = ''      # Temp variable which controls error handling
     # Template error message for invalid selections
     err_template = '\n*** ERROR: {}***\n'
     # Template menu title
@@ -180,16 +180,16 @@ def edge_menu(graph: graphviz.dot.Digraph, sep_rooms: bool) -> None:
     while True:
         user_input = get_choice(tph_menu=Menu(menu_title_template.format(sort_col, sort_dir),
                                               menu_dict),
-                                clear_screen=clear_screen, choice_type=int,
+                                clear_screen=clear_scr, choice_type=int,
                                 max_chances=max_chances, return_choice=True)
-        clear_screen = True  # Reset temp variable
+        clear_scr = True  # Reset temp variable
 
         # 1. Print Edges
         if user_input == 1:
             edge_dict = enumerate_edges(graph, sep_rooms)
             print_edge_table(edge_dict, TPH_ROOM_DICT, sort_by_count=sort_by_count,
                              sort_desc=sort_desc)
-            clear_screen = False  # Let them see the table
+            clear_scr = False  # Let them see the table
         # 2. Toggle Column
         elif user_input == 2:
             if sort_col == 'count' and sort_by_count:
@@ -202,29 +202,29 @@ def edge_menu(graph: graphviz.dot.Digraph, sep_rooms: bool) -> None:
                 raise RuntimeError('Mismatch in edge menu sort column toggle settings')
         # 3. Toggle Sort
         elif user_input == 3:
-            if sort_dir == 'desc' and sort_desc:
-                sort_dir = 'asc'
-                sort_desc = False
-            elif sort_dir == 'asc' and not sort_desc:
+            if sort_dir == 'asc' and not sort_desc:
                 sort_dir = 'desc'
                 sort_desc = True
+            elif sort_dir == 'desc' and sort_desc:
+                sort_dir = 'asc'
+                sort_desc = False
             else:
                 raise RuntimeError('Mismatch in edge menu sort direction toggle settings')
         # 999. Exit
         elif user_input == 999:
             return
         else:
-            curr_err = err_template.format('INVALID SELECTION')
+            current_err = err_template.format('INVALID SELECTION')
 
         # Is there an error?
-        if curr_err:
-            print(curr_err)
+        if current_err:
+            print(current_err)
             max_chances = max_chances - 1
             if max_chances < 1:
                 print(err_template.format('TOO MANY INVALID SELECTIONS'))
                 return
-            clear_screen = False  # Let them see the mistake they've made
-            curr_err = ''
+            clear_scr = False  # Let them see the mistake they've made
+            current_err = ''
 # pylint: enable=too-many-branches
 
 
