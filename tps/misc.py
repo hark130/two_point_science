@@ -208,7 +208,7 @@ def print_danger_table(hospital: TPHHospital, sort_by_col: int, agg_strat: int,
                           illness_obj.get_aggregate_value(agg_strat)])
     # Sort List
     if sort_by_col != 1:
-        sort_list = sorted(sort_list, key=lambda item: item[1], reverse=not sort_desc)
+        sort_list = sorted(sort_list, key=lambda item: item[1])
     sort_list = sorted(sort_list, key=lambda item: item[sort_by_col], reverse=sort_desc)
     # Create Real List
     for illness_entry in sort_list:
