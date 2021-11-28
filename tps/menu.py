@@ -17,9 +17,106 @@ from collections import namedtuple
 from typing import Any
 
 # Local Imports
-from tps.misc import clear_screen as clr_screen
+from tps.misc import clear_screen as clr_screen, print_danger_table
+from tps.tph_hospital import TPHHospital
 
 Menu = namedtuple('Menu', 'name dictionary')
+
+
+# pylint: disable=too-many-branches
+def danger_menu(hospital: TPHHospital) -> None:
+    """Execute the Two Point Science danger table menu.
+
+    This menu allows the user to print a table with hospital's illnesses and their treatment rooms
+    associated with their difficulty, chance of death, and rate of health decline.  The numeric
+    factors are presented as an aggregate column.  The menu also allows the user to sort the table
+    by column as well as let the user sort the table in ascending or descending order.
+
+    Args:
+        hospital: TPHHospital object. (see: tph_hospital module)
+
+    Raises:
+        TypeError: Bad data type passed in.
+        RuntimeError: Mismatch in internal sort column or sort order variables
+    """
+    # LOCAL VARIABLES
+    sort_col = 6          # Column to sort the Illness Danger Table
+    agg_strat = 2         # Aggregate strategy choice
+    sort_dir = 'desc'     # Print current sort direction in the menu title
+    sort_desc = True      # Converts user sort order choice to print_edge_table() kwarg
+    user_input = 0        # User selection
+    clear_screen = True   # Clear the screen before printing a menu
+    max_chances = 3       # Maximum number of invalid inputs tolerated
+    curr_err = ''         # Temp variable which controls error handling
+    # Dictionary of sort options
+    sort_dict = {1: 'Illness', 2: 'Treatment Room', 3: 'Difficulty', 4: 'Death Chance',
+                 5: 'Health Decline', 6: 'Aggregate'}
+    # Dictionary of aggregate strategy options
+    aggregate_dict = {1: 'Product', 2: 'Average', 3: 'Product & Average Mean'}
+    # Template error message for invalid selections
+    err_template = '\n*** ERROR: {}***\n'
+    # Template menu title
+    menu_title_template = \
+        'ILLNESS DANGER MENU\nSorted by {} in a {} order\nAggregate strategy: {}\n'
+    # Menu dictionary
+    menu_dict = {1: 'Print illness danger table', 2: 'Change Column', 3: 'Toggle Sort',
+                 4: 'Change aggregate strategy', 999: 'Return to main menu'}
+
+    # INPUT VALIDATION
+    # hospital
+    if not isinstance(hospital, TPHHospital):
+        raise TypeError(f'The hospital can not be of type {type(hospital)}')
+
+    # EDGE MENU
+    while True:
+        user_input = get_choice(
+            tph_menu=Menu(menu_title_template.format(sort_dict[sort_col].lower(), sort_dir,
+                                                     aggregate_dict[agg_strat]), menu_dict),
+            clear_screen=clear_screen, choice_type=int, max_chances=max_chances,
+            return_choice=True)
+        clear_screen = True  # Reset temp variable
+
+        # 1. Print Table
+        if user_input == 1:
+            print_danger_table(hospital, sort_by_col=sort_col, agg_strat=agg_strat,
+                               sort_desc=sort_desc)
+            clear_screen = False  # Let them see the table
+        # 2. Change Column
+        elif user_input == 2:
+            sort_col = get_choice(tph_menu=Menu('CHANGE SORT COLUMN', sort_dict),
+                                  clear_screen=False, choice_type=int, max_chances=max_chances,
+                                  return_choice=True)
+        # 3. Toggle Sort
+        elif user_input == 3:
+            if sort_dir == 'desc' and sort_desc:
+                sort_dir = 'asc'
+                sort_desc = False
+            elif sort_dir == 'asc' and not sort_desc:
+                sort_dir = 'desc'
+                sort_desc = True
+            else:
+                raise RuntimeError('Mismatch in danger menu sort direction toggle settings')
+        # 4. Change Aggregate Strategy
+        elif user_input == 4:
+            agg_strat = get_choice(tph_menu=Menu('CHANGE AGGREGATE STRATEGY', aggregate_dict),
+                                   clear_screen=False, choice_type=int, max_chances=max_chances,
+                                   return_choice=True)
+        # 999. Exit
+        elif user_input == 999:
+            return
+        else:
+            curr_err = err_template.format('INVALID SELECTION')
+
+        # Is there an error?
+        if curr_err:
+            print(curr_err)
+            max_chances = max_chances - 1
+            if max_chances < 1:
+                print(err_template.format('TOO MANY INVALID SELECTIONS'))
+                return
+            clear_screen = False  # Let them see the mistake they've made
+            curr_err = ''
+# pylint: enable=too-many-branches
 
 
 def get_choice(tph_menu: Menu, clear_screen: bool = True, choice_type: type = str,
@@ -43,7 +140,8 @@ def get_choice(tph_menu: Menu, clear_screen: bool = True, choice_type: type = st
         A value from tph_menu.dictionary that matches user input.
 
     Raises:
-        TypeError: error is not an Exception (or inherited from) type.
+        TypeError: An argument was the wrong data type
+        RuntimeError: User's invalid selections exceeded max_chances
     """
     # LOCAL VARIABLES
     user_choice = None  # User input
@@ -69,7 +167,10 @@ def get_choice(tph_menu: Menu, clear_screen: bool = True, choice_type: type = st
         # Validate User Input
         try:
             if return_choice:
-                ret_val = user_choice
+                if user_choice in tph_menu.dictionary.keys():
+                    ret_val = user_choice
+                else:
+                    raise KeyError("User's choice of {user_choice} is not valid")
             else:
                 ret_val = tph_menu.dictionary[user_choice]
         except KeyError:

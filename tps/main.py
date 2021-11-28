@@ -15,7 +15,7 @@ Defines main() which will construct and print a graphy for one Two Point Hospita
 # Local
 from tps.arguments import parse_arguments, graph_directory, separate_rooms
 from tps.dgraph import create_graph, edge_menu, room_menu
-from tps.menu import _check_for_error, get_choice, Menu
+from tps.menu import _check_for_error, danger_menu, get_choice, Menu
 from tps.tph_constants import TPH_HOSPITAL_LIST
 from tps.tph_hospital import TPHHospital
 
@@ -24,13 +24,15 @@ from tps.tph_hospital import TPHHospital
 # Menus
 MAIN_MENU = Menu('TWO POINT SCIENCE', {1: 'Choose a hospital', 2: 'Graph hospital',
                                        3: 'Graph room',
-                                       4: 'Print room connections', 999: 'EXIT'})
+                                       4: 'Print room connections', 5: 'Print illness danger',
+                                       999: 'EXIT'})
 
 HOSPITAL_MENU = Menu('TWO POINT HOSPITAL LIST', {i+1: TPH_HOSPITAL_LIST[i] for i in
                                                  range(0, len(TPH_HOSPITAL_LIST))})
 
 
 # pylint: disable=too-many-branches
+# pylint: disable=too-many-statements
 def main_menu(sep_rooms: bool, graph_dir: str) -> None:
     """Execute the Two Point Science top-level menu.
 
@@ -95,8 +97,14 @@ def main_menu(sep_rooms: bool, graph_dir: str) -> None:
                 graph_obj = create_graph(hospital=hospital_obj, graph_dir=graph_dir,
                                          sep_rooms=sep_rooms)
                 edge_menu(graph_obj, sep_rooms=sep_rooms)
-                clear_screen = False  # I need to see it
-                # print(f'SEP ROOMS: {sep_rooms}')  # DEBUGGING
+                clear_screen = False  # User needs to see it
+        # 5. Calculate Danger
+        elif user_input == 5:
+            if not hospital_obj:
+                curr_err = err_template.format('CHOOSE A HOSPITAL')
+            else:
+                danger_menu(hospital=hospital_obj)
+                clear_screen = False  # User needs to see it
         # 999. Exit
         elif user_input == 999:
             return
@@ -108,10 +116,10 @@ def main_menu(sep_rooms: bool, graph_dir: str) -> None:
             max_chances, clear_screen = _check_for_error(curr_err=curr_err,
                                                          max_chances=max_chances)
         except RuntimeWarning as err:
-            print(f'EXCEPTION {repr(err)}')  # DEBUGGING
             print(err_template.format(err.args[0]))
             return
 # pylint: enable=too-many-branches
+# pylint: enable=too-many-statements
 
 
 def main() -> None:

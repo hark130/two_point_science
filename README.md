@@ -56,7 +56,7 @@ See: [Usage](https://github.com/hark130/two_point_science/wiki/usage) wiki page
 | 18 | ❔ | table_banner | Add a fancy banner about table headers |
 | 19 | ❔ | sep_suffix | There's a dangerous amount of hard-coded suffix strings.  SPOT it! |
 | 20 | ✔️ | graph_dir | CLI argument to specify a directory to save graph filenames |
-| 21 | 🚧 | danger | Add menu functionality to rank the treat rooms by (avg. and worst) danger (e.g., illness difficulty * rate of decline) |
+| 21 | ✔️ | danger | Add menu functionality to rank the treat rooms by (avg. and worst) danger (e.g., illness difficulty * rate of decline) |
 |   |  |  |  |
 
 ### Table Legend
@@ -97,6 +97,8 @@ See: [Usage](https://github.com/hark130/two_point_science/wiki/usage) wiki page
 	- [X] Mitton University
 - [ ] Is exception.args[0] deprecated?  Yes or no, should I be using exception.msg instead?  (see: misc.print_exception()
 - [ ] Investigate mypy: replace isinstance() calls?, verify safe variable usage?
+- [ ] Extricate *_menu() functions into a separate tps.menus.py (or the menu.py) module
+- [ ] Extricate print_*_table() functions into a separate tps.tables.py module (or make a class?)
 
 ### BUGS
 
@@ -106,5 +108,5 @@ See: [Usage](https://github.com/hark130/two_point_science/wiki/usage) wiki page
 - [X] CLI menu vertical whitespacing could use some polish
 - [ ] Ward (treat) appears in the "room connection" table for Blighton (-d) but is not listed as a treatment on the graph (because there is no illness treated in a Ward at this hospital)
 - [ ] Ward connection counts are being shared by both (treat) and (diag) in the "room connection" table for Pelican Wharf (-d) even though the main graph doesn't support those numbers visually
-- [ ] "PELICAN WHARFROOM LIST"
+- [X] "PELICAN WHARFROOM LIST"
 - [ ] Consider shortening dgraph.create_graph() protoptype with a Class or NameTuple (then remove the pylint disable)
