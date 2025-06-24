@@ -173,9 +173,9 @@ def get_choice(tph_menu: Menu, clear_screen: bool = True, choice_type: type = st
                     raise KeyError("User's choice of {user_choice} is not valid")
             else:
                 ret_val = tph_menu.dictionary[user_choice]
-        except KeyError:
+        except KeyError as err:
             if num_attempts >= max_chances:
-                raise RuntimeError('User failures exceeded maximum chances')
+                raise RuntimeError('User failures exceeded maximum chances') from err
             print(f'{user_choice} is an invalid selection.  Try again.')
         else:
             return ret_val
@@ -212,8 +212,8 @@ def read_user_input(choice_type: type) -> Any:
     # CONVERT IT
     try:
         user_choice = choice_type(user_input)
-    except ValueError:
-        raise RuntimeError(f'Unable to convert user input "{user_input}" to {choice_type}')
+    except ValueError as err:
+        raise RuntimeError(f'Unable to convert user input "{user_input}" to {choice_type}') from err
 
     # DONE
     return user_choice

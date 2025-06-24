@@ -365,7 +365,7 @@ def enumerate_edges(graph: graphviz.Digraph, sep_rooms: bool) -> Dict[str, int]:
                     temp_room_names.append(room)
                 # Look for the room names
                 for temp_room_name in temp_room_names:
-                    if temp_room_name in edge_counts.keys():
+                    if temp_room_name in edge_counts.items():
                         edge_counts[temp_room_name] = edge_counts[temp_room_name] + 1
                     else:
                         edge_counts[temp_room_name] = 1
