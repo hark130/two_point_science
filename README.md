@@ -4,7 +4,7 @@ An attempt at applying analytical science to the game Two Point Hospital.
 
 ## BACKGROUND
 
-[Two Point Hospital](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwig1p_w0v3zAhWObc0KHWpMAfoQFnoECAQQAQ&url=http%3A%2F%2Fwww.twopointhospital.com%2F&usg=AOvVaw3GGa9E7TMAXQYTby7TBfyd) is a humurous business simulation game focused on hospital management.  With all the DLC, there are 33 hospitals to manage each with its own unique layout, environmental considerations, and (most importantly) a unique list of ailments to diagnose and treat.
+[Two Point Hospital](https://www.twopointstudios.com/en/games/two-point-hospital) is a humurous business simulation game focused on hospital management.  With all the DLC, there are 33 hospitals to manage each with its own unique layout, environmental considerations, and (most importantly) a unique list of ailments to diagnose and treat.
 
 ## GOAL
 
