@@ -26,8 +26,8 @@ from tps.menu import get_choice, Menu
 from tps.misc import print_edge_table
 
 
-def add_edges(hospital: TPHHospital, graph: graphviz.dot.Digraph,
-              sep_rooms: bool = False, focus_node: str = '') -> graphviz.dot.Digraph:
+def add_edges(hospital: TPHHospital, graph: graphviz.Digraph,
+              sep_rooms: bool = False, focus_node: str = '') -> graphviz.Digraph:
     """Adds edges to graph based on the illnesses found in hospital.
 
     Args:
@@ -90,7 +90,7 @@ def add_edges(hospital: TPHHospital, graph: graphviz.dot.Digraph,
 # pylint: disable=too-many-arguments
 def create_graph(hospital: TPHHospital, graph_dir: str, sep_rooms: bool = False,
                  engine: str = 'dot', graph_format: str = 'png',
-                 focus_node: str = '', suffix_override: str = '') -> graphviz.dot.Digraph:
+                 focus_node: str = '', suffix_override: str = '') -> graphviz.Digraph:
     """Create a hospital-based Digraph using graphviz.
 
     Args:
@@ -148,7 +148,7 @@ def create_graph(hospital: TPHHospital, graph_dir: str, sep_rooms: bool = False,
 # pylint: disable=too-many-arguments
 def create_illness_graph(hospital: TPHHospital, graph_dir: str, ill_name: str,
                          sep_rooms: bool = False, engine: str = 'dot', graph_format: str = 'png',
-                         suffix_override: str = '') -> graphviz.dot.Digraph:
+                         suffix_override: str = '') -> graphviz.Digraph:
     """Create a hospital-based Digraph using graphviz.
 
     Args:
@@ -238,7 +238,7 @@ def create_illness_graph(hospital: TPHHospital, graph_dir: str, ill_name: str,
 
 
 # pylint: disable=too-many-branches
-def edge_menu(graph: graphviz.dot.Digraph, sep_rooms: bool) -> None:
+def edge_menu(graph: graphviz.Digraph, sep_rooms: bool) -> None:
     """Execute the Two Point Science edge (connection) menu.
 
     This menu allows the user to print a table with room names, purpose, and an edge (connection)
@@ -328,7 +328,7 @@ def edge_menu(graph: graphviz.dot.Digraph, sep_rooms: bool) -> None:
 
 
 # pylint: disable=too-many-branches
-def enumerate_edges(graph: graphviz.dot.Digraph, sep_rooms: bool) -> Dict[str, int]:
+def enumerate_edges(graph: graphviz.Digraph, sep_rooms: bool) -> Dict[str, int]:
     """Execute the Two Point Science edge (connection) menu.
 
     This menu allows the user to print a table with room names, purpose, and an edge (connection)
@@ -350,7 +350,7 @@ def enumerate_edges(graph: graphviz.dot.Digraph, sep_rooms: bool) -> Dict[str, i
 
     # INPUT VALIDATION
     # graph
-    if not isinstance(graph, graphviz.dot.Digraph):
+    if not isinstance(graph, graphviz.Digraph):
         raise TypeError(f'The graph can not be of type {type(graph)}')
     # sep_rooms
     if not isinstance(sep_rooms, bool):
@@ -410,7 +410,7 @@ def illness_menu(hospital: TPHHospital, graph_dir: str, sep_rooms: bool = False,
     treat_name = ''        # Treatment room associated with ill_name
     local_ill_menu = None  # Menu object for get_choice()
     new_dict = {}          # Create a dictionary based on hospital illness list
-    graph_obj = None       # graphviz.dot.Digraph returned by create_graph()
+    graph_obj = None       # graphviz.Digraph returned by create_graph()
     ill_list = []          # List of all the illnesses in hospital
 
     # INPUT VALIDATION
@@ -458,7 +458,7 @@ def room_menu(hospital: TPHHospital, graph_dir: str, sep_rooms: bool = False, en
     user_choice = ''        # User's room name selection
     local_room_menu = None  # Menu object for get_choice()
     new_dict = {}           # Create a dictionary based on hospital room list
-    graph_obj = None        # graphviz.dot.Digraph returned by create_graph()
+    graph_obj = None        # graphviz.Digraph returned by create_graph()
     room_list = []          # List of all the rooms in hospital
 
     # INPUT VALIDATION
@@ -487,7 +487,7 @@ def room_menu(hospital: TPHHospital, graph_dir: str, sep_rooms: bool = False, en
 # pylint: disable=too-many-arguments
 def _create_graph(hospital: TPHHospital, graph_dir: str, engine: str = 'dot',
                   graph_format: str = 'png', focus_node: str = '',
-                  suffix_override: str = '') -> graphviz.dot.Digraph:
+                  suffix_override: str = '') -> graphviz.Digraph:
     """Create a hospital-based Digraph, sans edges, using graphviz.
 
     Does not validate input.  This functionality was extricated from create_graph() to help
@@ -557,8 +557,8 @@ def _create_sep_room_dict(room_dict: dict) -> Dict[int, str]:
     return new_dict
 
 
-def _graph_edges(graph: graphviz.dot.Digraph, edges: tuple,
-                 sep_rooms: bool, focus_node: str, all_diag: bool) -> graphviz.dot.Digraph:
+def _graph_edges(graph: graphviz.Digraph, edges: tuple,
+                 sep_rooms: bool, focus_node: str, all_diag: bool) -> graphviz.Digraph:
     """Adds edges to graph in a particular way on behalf of add_edges().
 
     WARNING: Does not validate input!
@@ -595,7 +595,7 @@ def _graph_edges(graph: graphviz.dot.Digraph, edges: tuple,
     return graph
 
 
-def _validate_add_edges(hospital: TPHHospital, graph: graphviz.dot.Digraph,
+def _validate_add_edges(hospital: TPHHospital, graph: graphviz.Digraph,
                         sep_rooms: bool, focus_node: str) -> None:
     """Validate input on behalf of add_edges()."""
     # INPUT VALIDATION
@@ -606,7 +606,7 @@ def _validate_add_edges(hospital: TPHHospital, graph: graphviz.dot.Digraph,
     if not illness_obj_list:
         raise NotImplementedError(f'{hospital.get_name()} does not appear to be defined')
     # graph
-    if not isinstance(graph, graphviz.dot.Digraph):
+    if not isinstance(graph, graphviz.Digraph):
         raise TypeError(f'The graph can not be of type {type(graph)}')
     # sep_rooms
     if not isinstance(sep_rooms, bool):
@@ -616,11 +616,11 @@ def _validate_add_edges(hospital: TPHHospital, graph: graphviz.dot.Digraph,
         raise TypeError(f'The focus_node argument must of type str instead of {type(focus_node)}')
 
 
-def _validate_edge_menu(graph: graphviz.dot.Digraph, sep_rooms: bool) -> None:
+def _validate_edge_menu(graph: graphviz.Digraph, sep_rooms: bool) -> None:
     """Validate input on behalf of edge_menu()."""
     # INPUT VALIDATION
     # graph
-    if not isinstance(graph, graphviz.dot.Digraph):
+    if not isinstance(graph, graphviz.Digraph):
         raise TypeError(f'The graph can not be of type {type(graph)}')
     # sep_rooms
     if not isinstance(sep_rooms, bool):
