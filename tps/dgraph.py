@@ -137,6 +137,9 @@ def create_graph(hospital: TPHHospital, graph_dir: str, sep_rooms: bool = False,
     graph_obj = add_edges(hospital=hospital, graph=graph_obj, sep_rooms=sep_rooms,
                           focus_node=focus_node)
 
+    # MAKE IT
+    graph_obj.view()
+
     # DONE
     return graph_obj
 # pylint: enable=too-many-arguments
