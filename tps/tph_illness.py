@@ -60,8 +60,9 @@ class TPHIllness:
             self._illness_death = self.illness_dict[self._illness_name].death
             # Health loss severity
             self._illness_decline = self.illness_dict[self._illness_name].decline
-        except (AttributeError, KeyError):
-            raise NotImplementedError(f'Malformed dictionary entry for {self._illness_name}')
+        except (AttributeError, KeyError) as err:
+            raise NotImplementedError(
+                f'Malformed dictionary entry for {self._illness_name}') from err
         self._validate_attributes()
 
     def get_aggregate_value(self, strategy: int = 2) -> Any:

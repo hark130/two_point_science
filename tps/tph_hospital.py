@@ -50,8 +50,9 @@ class TPHHospital:
         self._hospital_name = hospital_name  # Name of the hospital
         try:
             self._hospital_illnesses = self.hospital_dict[self._hospital_name].illness
-        except (AttributeError, KeyError):
-            raise NotImplementedError(f'Malformed dictionary entry for {self._hospital_name}')
+        except (AttributeError, KeyError) as err:
+            raise NotImplementedError(
+                f'Malformed dictionary entry for {self._hospital_name}') from err
         self._hospital_illness_objs = None  # Defined, if asked for by caller
 
     def get_diag_room_list(self, sort_list: bool = True) -> List[str]:
