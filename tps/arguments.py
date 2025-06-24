@@ -21,6 +21,7 @@ import os
 # Third Party
 
 # Local
+from tps import __name__ as pkg_name
 
 
 def graph_directory(args: argparse.Namespace) -> bool:
@@ -49,6 +50,7 @@ def graph_directory(args: argparse.Namespace) -> bool:
 def parse_arguments() -> argparse.Namespace:
     """Parse the arguments on behalf of Two Point Science."""
     parser = argparse.ArgumentParser(
+        prog=pkg_name,
         description='Create a directed graph of rooms for a Two Point Hospital hospital')
     parser.add_argument('-d', '--distinct-rooms', action='store_true', default=False,
                         help='Separate dual-purpose rooms on the directed graph')
