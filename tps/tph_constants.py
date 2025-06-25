@@ -702,7 +702,7 @@ TPH_ILLNESS_DICT = {
         diagnostic=[TPH_NAME_ROOM_GD, ], treatment=TPH_NAME_ROOM_PH, difficulty=0.2,
         death=.2, decline=0.75),
     TPH_NAME_DISEASE_WB: IllnessDetails(
-        diagnostic=[TPH_NAME_ROOM_GP, TPH_NAME_ROOM_FA ], treatment=TPH_NAME_ROOM_PSY,
+        diagnostic=[TPH_NAME_ROOM_GP, TPH_NAME_ROOM_FA, ], treatment=TPH_NAME_ROOM_PSY,
         difficulty=0.5, death=MISSING_DATA, decline=MISSING_DATA),
     TPH_NAME_DISEASE_WM: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_FW,
