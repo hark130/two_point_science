@@ -32,8 +32,11 @@ RoomDetails = namedtuple('RoomDetails', 'purpose')
 MISSING_DATA = MissingData("TO DO: DON'T DO NOW... Get this data")
 
 # DISEASE NAMES
-# NOTE: Disease macro names were truncated to represent the acronym (for names with more than
-#   one word) or just enough letters of the name to be unique (min: 2).
+# NOTES:
+#   - Disease macro names were truncated to represent the acronym (for names with more than
+#     one word) or just enough letters of the name to be unique (min: 2).
+#   - Entries are ordered by string, not macro
+#
 TPH_NAME_DISEASE_8B = '8-bitten'
 TPH_NAME_DISEASE_AM = 'Animal Magnetism'
 TPH_NAME_DISEASE_AI = 'Artificial Intelligence'
@@ -41,26 +44,35 @@ TPH_NAME_DISEASE_BEF = 'Bed Face'
 TPH_NAME_DISEASE_BE = 'Beheadedness'
 TPH_NAME_DISEASE_BP = 'Bionic Plague'
 TPH_NAME_DISEASE_BOA = 'Bloat of Arms'
+TPH_NAME_DISEASE_BB = 'Blue Blood'
 TPH_NAME_DISEASE_BM = 'Boggled Mind'
 TPH_NAME_DISEASE_BO = 'Bogwarts'
 TPH_NAME_DISEASE_BH = 'Bone Head'
+TPH_NAME_DISEASE_BRL = 'Broken Leg'
 TPH_NAME_DISEASE_BRF = 'Broken Face'
 TPH_NAME_DISEASE_BY = 'Byteheadedness'
+TPH_NAME_DISEASE_CAN = 'Canapains'
 TPH_NAME_DISEASE_CAR = 'Chewed a Rose'
 TPH_NAME_DISEASE_CLA = 'Clamp'
 TPH_NAME_DISEASE_CLO = 'Clockjaw'
+TPH_NAME_DISEASE_CON = 'Concertoes'
 TPH_NAME_DISEASE_CP = 'Cod Piece'
+TPH_NAME_DISEASE_CF = 'Corrupt Footage'
 TPH_NAME_DISEASE_CB = 'Cross Bones'
 TPH_NAME_DISEASE_CU = 'Cubism'
 TPH_NAME_DISEASE_DR = 'Decision Rash'
 TPH_NAME_DISEASE_DG = 'Denim Genes'
 TPH_NAME_DISEASE_DS = 'Dino Sores'
+TPH_NAME_DISEASE_DIG = "Director's Gut"
+TPH_NAME_DISEASE_DP = 'Dramatic Paws'
 TPH_NAME_DISEASE_EC = 'Emperor Complex'
+TPH_NAME_DISEASE_FB = 'Flash Back'
 TPH_NAME_DISEASE_FD = 'Floppy Discs'
 TPH_NAME_DISEASE_FLU = 'Flumps'
 TPH_NAME_DISEASE_FS = 'Fomo Sapiens'
 TPH_NAME_DISEASE_FO = 'Forefraught'
 TPH_NAME_DISEASE_FE = 'Fossil Eyes'
+TPH_NAME_DISEASE_FP = 'Fourthwall Problem'
 TPH_NAME_DISEASE_FT = 'Fractured Timeline'
 TPH_NAME_DISEASE_FL = 'Freudian Lips'
 TPH_NAME_DISEASE_FU = 'Futurism'
@@ -77,6 +89,7 @@ TPH_NAME_DISEASE_HOT = 'Hotheadedness'
 TPH_NAME_DISEASE_HI = 'Humerus Injury'
 TPH_NAME_DISEASE_HUL = 'Hurty Leg'
 TPH_NAME_DISEASE_IE = 'Inflated Ego'
+TPH_NAME_DISEASE_INB = 'Inbagneato'
 TPH_NAME_DISEASE_JH = 'Jazz Hand'
 TPH_NAME_DISEASE_JI = 'Jest Infection'
 TPH_NAME_DISEASE_JRI = 'Jester Infection'
@@ -85,6 +98,7 @@ TPH_NAME_DISEASE_LAB = 'Lazy Bones'
 TPH_NAME_DISEASE_LS = 'Leopard Skin'
 TPH_NAME_DISEASE_LI = 'Lightheadedness'
 TPH_NAME_DISEASE_FR = 'Lightheadedness (Frightheadedness)'
+TPH_NAME_DISEASE_LIM = 'Limelit'
 TPH_NAME_DISEASE_LIB = 'Litter Bug'
 TPH_NAME_DISEASE_LO = 'Loopy'
 TPH_NAME_DISEASE_LY = 'Lycanthropy'
@@ -94,6 +108,7 @@ TPH_NAME_DISEASE_ML = 'Missing Link'
 TPH_NAME_DISEASE_MS = 'Mock Star'
 TPH_NAME_DISEASE_MO = 'Monobrow'
 TPH_NAME_DISEASE_MP = 'Mood Poisoning'
+TPH_NAME_DISEASE_MOS = 'Motion Sickness'
 TPH_NAME_DISEASE_MF = 'Mucky Feet'
 TPH_NAME_DISEASE_NF = 'Night Fever'
 TPH_NAME_DISEASE_PAN = 'Pandemic'
@@ -104,6 +119,7 @@ TPH_NAME_DISEASE_POR = 'Portishead'
 TPH_NAME_DISEASE_PM = 'Potty Mouth'
 TPH_NAME_DISEASE_PR = 'Predestinitis'
 TPH_NAME_DISEASE_PRM = 'Premature Mummification'
+TPH_NAME_DISEASE_PRO = 'Protagony'
 TPH_NAME_DISEASE_PB = 'Pudding Blood'
 TPH_NAME_DISEASE_RD = 'Reptile Dysfunction'
 TPH_NAME_DISEASE_RB = 'Rock Bottom'
@@ -111,15 +127,21 @@ TPH_NAME_DISEASE_RKS = 'Rock Star'
 TPH_NAME_DISEASE_RGS = 'Rolling Stones'
 TPH_NAME_DISEASE_SHA = 'Shattered'
 TPH_NAME_DISEASE_SH = 'Shock Horror'
+TPH_NAME_DISEASE_SIN = 'Sinewment'
 TPH_NAME_DISEASE_SL = 'Slackbladder'
+TPH_NAME_DISEASE_SNT = 'Snot Twist'
 TPH_NAME_DISEASE_SB = 'Spinal Bap'
 TPH_NAME_DISEASE_SC = 'Spontaneous Combustion'
+TPH_NAME_DISEASE_SE = 'Square Eyes'
+TPH_NAME_DISEASE_ST = 'Stunt Trouble'
 TPH_NAME_DISEASE_TP = 'Tarred Pits'
 TPH_NAME_DISEASE_TW = 'Time Warts'
 TPH_NAME_DISEASE_TOM = 'Touch of Midas'
 TPH_NAME_DISEASE_TH = 'Turtle Head'
 TPH_NAME_DISEASE_VD = 'Verbal Diarrhoea'
+TPH_NAME_DISEASE_WM = 'Wardrobe Malfunction'
 TPH_NAME_DISEASE_WMM = 'Woolly Man-Mouth'
+TPH_NAME_DISEASE_WB = "Writer's Block"
 
 
 # HOSPITAL NAMES
@@ -166,6 +188,7 @@ TPH_NAME_ROOM_CL = 'Clown Clinic'
 TPH_NAME_ROOM_CR = 'Cryptology'
 TPH_NAME_ROOM_DLC = 'De-Lux Clinic'
 TPH_NAME_ROOM_DL = 'DNA Lab'
+TPH_NAME_ROOM_DZ = 'Danger Zone'
 TPH_NAME_ROOM_FA = 'Fluid Analysis'
 TPH_NAME_ROOM_FW = 'Fracture Ward'
 TPH_NAME_ROOM_GD = 'General Diagnosis'
@@ -190,6 +213,7 @@ TPH_ROOM_DICT = {
     'Chromatherapy': RoomDetails(purpose='Treatment'),
     'Clown Clinic': RoomDetails(purpose='Treatment'),
     TPH_NAME_ROOM_CR: RoomDetails(purpose='Treatment'),
+    TPH_NAME_ROOM_DZ: RoomDetails(purpose='Treatment'),
     'De-Lux Clinic': RoomDetails(purpose='Treatment'),
     'DNA Lab': RoomDetails(purpose='Both'),
     'Fluid Analysis': RoomDetails(purpose='Diagnostic'),
@@ -317,7 +341,18 @@ TPH_HOSPITAL_DICT = {
                              'Mock Star', 'Night Fever', 'Cubism', '8-bitten', 'Shock Horror',
                              'Gurning Loins', 'Heart Throb', 'Pipe Organs', 'Jazz Hand',
                              'Monobrow', 'Mucky Feet', 'Portishead']),
-    'Plywood Studios': HospitalDetails(illness=[]),
+    # Plywood Studios
+    # https://two-point-hospital.fandom.com/wiki/Plywood_Studios
+    TPH_NAME_HOSPITAL_PS:
+    HospitalDetails(illness=[TPH_NAME_DISEASE_GA, TPH_NAME_DISEASE_JI, TPH_NAME_DISEASE_ST,
+                             TPH_NAME_DISEASE_HE, TPH_NAME_DISEASE_LI, TPH_NAME_DISEASE_BRL,
+                             TPH_NAME_DISEASE_CF, TPH_NAME_DISEASE_WM, TPH_NAME_DISEASE_TH,
+                             TPH_NAME_DISEASE_DP, TPH_NAME_DISEASE_SIN, TPH_NAME_DISEASE_PAN,
+                             TPH_NAME_DISEASE_AM, TPH_NAME_DISEASE_BB, TPH_NAME_DISEASE_DIG,
+                             TPH_NAME_DISEASE_SNT, TPH_NAME_DISEASE_SE, TPH_NAME_DISEASE_FP,
+                             TPH_NAME_DISEASE_PRO, TPH_NAME_DISEASE_WB, TPH_NAME_DISEASE_SH,
+                             TPH_NAME_DISEASE_CAN, TPH_NAME_DISEASE_FB, TPH_NAME_DISEASE_LIM,
+                             TPH_NAME_DISEASE_CON, TPH_NAME_DISEASE_INB, TPH_NAME_DISEASE_MOS]),
     'Roquefort Castle': HospitalDetails(illness=[]),
     # Rotting Hill
     # https://two-point-hospital.fandom.com/wiki/Rotting_Hill
@@ -369,6 +404,9 @@ TPH_ILLNESS_DICT = {
     TPH_NAME_DISEASE_AI: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_GP, TPH_NAME_ROOM_WA], treatment=TPH_NAME_ROOM_PSY,
         difficulty=0.7, death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_BB: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PH,
+        difficulty=0.7, death=MISSING_DATA, decline=MISSING_DATA),
     TPH_NAME_DISEASE_BEF: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_WA,
         difficulty=0.2, death=.1, decline=0.5),
@@ -393,17 +431,29 @@ TPH_ILLNESS_DICT = {
     TPH_NAME_DISEASE_BRF: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_FA], treatment=TPH_NAME_ROOM_FW,
         difficulty=0.5, death=.3, decline=1),
+    TPH_NAME_DISEASE_BRL: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP], treatment=TPH_NAME_ROOM_FW,
+        difficulty=0.5, death=MISSING_DATA, decline=MISSING_DATA),
     TPH_NAME_DISEASE_BY: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_DLC, difficulty=0.2,
         death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_CAN: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_SU, difficulty=0.5,
+        death=MISSING_DATA, decline=MISSING_DATA),
     TPH_NAME_DISEASE_CAR: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PH, difficulty=0.5,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_CF: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_FW, difficulty=0.6,
         death=MISSING_DATA, decline=MISSING_DATA),
     TPH_NAME_DISEASE_CLA: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PH, difficulty=0.1,
         death=0, decline=0.75),
     TPH_NAME_DISEASE_CLO: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_FW, difficulty=0.4,
+        death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_CON: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_WA, difficulty=0.3,
         death=MISSING_DATA, decline=MISSING_DATA),
     TPH_NAME_DISEASE_CP: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PH, difficulty=0.4,
@@ -414,24 +464,36 @@ TPH_ILLNESS_DICT = {
     TPH_NAME_DISEASE_CU: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_RR,
         difficulty=0.5, death=1, decline=1),
+    TPH_NAME_DISEASE_DIG: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PH,
+        difficulty=0.5, death=MISSING_DATA, decline=MISSING_DATA),
     TPH_NAME_DISEASE_DR: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_IR,
         difficulty=0.6, death=.4, decline=1),
     TPH_NAME_DISEASE_DG: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_DL,
         difficulty=0.4, death=1, decline=1),
+    TPH_NAME_DISEASE_DP: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_IR, difficulty=0.3,
+        death=MISSING_DATA, decline=MISSING_DATA),
     TPH_NAME_DISEASE_DS: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_IR, difficulty=0.5,
         death=MISSING_DATA, decline=MISSING_DATA),
     TPH_NAME_DISEASE_EC: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_DL, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_PSY,
         difficulty=0.7, death=0, decline=0.1),
+    TPH_NAME_DISEASE_FB: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_SU,
+        difficulty=0.4, death=MISSING_DATA, decline=MISSING_DATA),
     TPH_NAME_DISEASE_FD: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_XR, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_SU,
         difficulty=0.4, death=.5, decline=1),
     TPH_NAME_DISEASE_FLU: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_CA, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_DL,
         difficulty=0.5, death=1, decline=1),
+    TPH_NAME_DISEASE_FP: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PSY,
+        difficulty=0.7, death=MISSING_DATA, decline=MISSING_DATA),
     TPH_NAME_DISEASE_FS: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PSY, difficulty=0.6,
         death=MISSING_DATA, decline=MISSING_DATA),
@@ -489,6 +551,9 @@ TPH_ILLNESS_DICT = {
     TPH_NAME_DISEASE_IE: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_FA, TPH_NAME_ROOM_GD], treatment=TPH_NAME_ROOM_PSY,
         difficulty=0.5, death=0, decline=0.1),
+    TPH_NAME_DISEASE_INB: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_WA,
+        difficulty=0.5, death=MISSING_DATA, decline=MISSING_DATA),
     TPH_NAME_DISEASE_JH: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_XR, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_WA,
         difficulty=0.7, death=.1, decline=1),
@@ -510,6 +575,9 @@ TPH_ILLNESS_DICT = {
     TPH_NAME_DISEASE_LI: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_DLC,
         difficulty=0.2, death=1, decline=0.75),
+    TPH_NAME_DISEASE_LIM: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_SU,
+        difficulty=0.3, death=MISSING_DATA, decline=MISSING_DATA),
     TPH_NAME_DISEASE_FR: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_DLC,
         difficulty=0.2, death=MISSING_DATA, decline=MISSING_DATA),
@@ -537,6 +605,9 @@ TPH_ILLNESS_DICT = {
     TPH_NAME_DISEASE_MO: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_WA, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_WA,
         difficulty=0.5, death=.1, decline=1),
+    TPH_NAME_DISEASE_MOS: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, TPH_NAME_ROOM_MS, TPH_NAME_ROOM_XR],
+        treatment=TPH_NAME_ROOM_WA, difficulty=0.7, death=MISSING_DATA, decline=MISSING_DATA),
     TPH_NAME_DISEASE_MP: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_GD, TPH_NAME_ROOM_CA], treatment=TPH_NAME_ROOM_IR,
         difficulty=0.3, death=.4, decline=1.5),
@@ -555,6 +626,9 @@ TPH_ILLNESS_DICT = {
     TPH_NAME_DISEASE_PO: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_XR, TPH_NAME_ROOM_MS], treatment=TPH_NAME_ROOM_SU,
         difficulty=0.5, death=.5, decline=1),
+    TPH_NAME_DISEASE_PRO: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PSY,
+        difficulty=0.4, death=MISSING_DATA, decline=MISSING_DATA),
     TPH_NAME_DISEASE_PT: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_WA, difficulty=0.6,
         death=MISSING_DATA, decline=MISSING_DATA),
@@ -585,6 +659,9 @@ TPH_ILLNESS_DICT = {
     TPH_NAME_DISEASE_RGS: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_SU, difficulty=0.3,
         death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_SE: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PH,
+        difficulty=0.6, death=MISSING_DATA, decline=MISSING_DATA),
     TPH_NAME_DISEASE_SHA: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_WA, TPH_NAME_ROOM_XR], treatment=TPH_NAME_ROOM_FW,
         difficulty=0.8, death=.3, decline=1),
@@ -599,7 +676,16 @@ TPH_ILLNESS_DICT = {
         difficulty=0.3, death=.5, decline=1),
     TPH_NAME_DISEASE_SC: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_MS, TPH_NAME_ROOM_DL], treatment=TPH_NAME_ROOM_IR,
-        difficulty=0.8, death=.4, decline=1),
+        difficulty=0.8, death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_SIN: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_IR,
+        difficulty=0.6, death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_SNT: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PH,
+        difficulty=0.25, death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_ST: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, TPH_NAME_ROOM_MS, TPH_NAME_ROOM_XR],
+        treatment=TPH_NAME_ROOM_DZ, difficulty=0.45, death=MISSING_DATA, decline=MISSING_DATA),
     TPH_NAME_DISEASE_TP: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_PH, difficulty=0.5,
         death=MISSING_DATA, decline=MISSING_DATA),
@@ -615,6 +701,12 @@ TPH_ILLNESS_DICT = {
     TPH_NAME_DISEASE_VD: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_GD, ], treatment=TPH_NAME_ROOM_PH, difficulty=0.2,
         death=.2, decline=0.75),
+    TPH_NAME_DISEASE_WB: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, TPH_NAME_ROOM_FA, ], treatment=TPH_NAME_ROOM_PSY,
+        difficulty=0.5, death=MISSING_DATA, decline=MISSING_DATA),
+    TPH_NAME_DISEASE_WM: IllnessDetails(
+        diagnostic=[TPH_NAME_ROOM_GP, ], treatment=TPH_NAME_ROOM_FW,
+        difficulty=0.3, death=MISSING_DATA, decline=MISSING_DATA),
     TPH_NAME_DISEASE_WMM: IllnessDetails(
         diagnostic=[TPH_NAME_ROOM_GP, TPH_NAME_ROOM_WA], treatment=TPH_NAME_ROOM_DL,
         difficulty=0.6, death=MISSING_DATA, decline=MISSING_DATA),
