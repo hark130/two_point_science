@@ -24,6 +24,7 @@ The `tps` package currently implements the following hospitals:
 - Grockle Bay
 - Mitton University
 - Pelican Wharf
+- [Plywood Studios](https://two-point-hospital.fandom.com/wiki/Plywood_Studios)
 - Rotting Hill
 - Smogley
 - Sweaty Palms
